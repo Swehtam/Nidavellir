@@ -3,58 +3,92 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
+    
 
-    private Rigidbody myRB;
     public float moveSpeed;
-	public float range;
+	public float maxRange;
+    public float minRange;
 	private bool seeker = false;
 	private Animator anim;
-	private Vector3 moveInput;
 	private bool enemyMoving;
-	private Vector2 lastMove;
-
+	private Vector2 direction;
+    private float step;
 
 	private PlayerControl thePlayer;
 	// Use this for initialization
 
 	void Start () {  
-		myRB = GetComponent<Rigidbody>();
 		thePlayer = FindObjectOfType<PlayerControl>();
 		anim = GetComponent<Animator>();
-
 	}
 
     private void FixedUpdate()
     {
-		if (Vector3.Distance(thePlayer.transform.position, transform.position) <= range || seeker) {
-			seeker = true;
-			
-			myRB.velocity = transform.forward * moveSpeed;
-		}
+        if (enemyMoving)
+        {
+            step = moveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z), step);
+        }
+        
     }
 
     // Update is called once per frame
     void Update () {
-		if (seeker) {
+        enemyMoving = false;
 
-			enemyMoving = false;
+        //se o personagem entrar na area de ameaça do inimigo, o inimigo irá segui-lo
+        if (Vector3.Distance(thePlayer.transform.position, transform.position) <= maxRange || seeker){
+            seeker = true;
+            enemyMoving = true;
 
-			moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-			moveInput = moveInput * moveSpeed;
+            //vetor para saber qual a posição do inimigo para o player
+            direction = new Vector2((thePlayer.transform.position.x - transform.position.x), (thePlayer.transform.position.z - transform.position.z));
 
+            //saber se o inimigo olha pra esquerda ou pra direita,
+            //se for perto de 0, então desconsidera o x e só considera a posição z (do eixo do mundo)
+            if (direction.x >= -0.5f && direction.x <= 0.5f)
+            {
+                direction.x = 0f;
+            }
+            else if (direction.x >= 0.5f)
+            {
+                direction.x = 1.0f;
+            }
+            else
+            {
+                direction.x = -1.0f;
+            }
 
-			if (moveInput.x != 0 || moveInput.z != 0)
-			{
-				enemyMoving = true;
-				lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-			}
-			anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
-			anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+            //saber se o inimigo olha pra cima ou pra baixo,
+            //se for perto de 0, então desconsidera o z (do eixo do mundo) e só considera a posição x 
+            if (direction.y > -1.0f && direction.y < 1.0f)
+            {
+                direction.y = 0f;
+            }
+            else if (direction.y >= 0.5f)
+            {
+                direction.y = 1.0f;
+            }
+            else
+            {
+                direction.y = -1.0f;
+            }
+
+            //caso o inimigo fique muito proximo, faço o parar na frente do player e olhar na direção dele
+            //isso aqui foi feito para o inimigo n ficar empurrando o player para fora do mapa
+            if (Vector3.Distance(thePlayer.transform.position, transform.position) <= minRange){
+                enemyMoving = false;
+
+                anim.SetFloat("LastMoveX", direction.x);
+                anim.SetFloat("LastMoveY", direction.y);
+            }
+            else
+            {
+                anim.SetFloat("MoveX", direction.x);
+                anim.SetFloat("MoveY", direction.y);
+            }	
+            
 			anim.SetBool("EnemyMoving", enemyMoving);
-			anim.SetFloat("LastMoveX", lastMove.x);
-			anim.SetFloat("LastMoveY", lastMove.y);
-
-			transform.LookAt (new Vector3 (thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z));
-		}
+        }
 	}
 }
