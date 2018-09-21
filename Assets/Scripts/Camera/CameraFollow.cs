@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
     public Vector3 offset;
 
 	void FixedUpdate () {
-        Vector3 desirePosition = target.position + offset;
+		Vector3 desirePosition = target.position + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desirePosition, smoothSpeed * Time.deltaTime);
         transform.position = smoothedPosition;
 	}

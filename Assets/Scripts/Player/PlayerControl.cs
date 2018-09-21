@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour {
 
     public float moveSpeed;
-    private Rigidbody myRB;
+    private Rigidbody2D myRB;
     private Vector3 moveInput;
      
     private Animator anim;
@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        myRB = GetComponent<Rigidbody>();
+        myRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 	}
 	
@@ -22,10 +22,10 @@ public class PlayerControl : MonoBehaviour {
 	void Update () {
         playerMoving = false;
 
-        moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveInput = moveInput * moveSpeed;
        
-        if (moveInput.x != 0 || moveInput.z !=0)
+        if (moveInput.x != 0 || moveInput.y !=0)
         {
             playerMoving = true;
             lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -39,6 +39,6 @@ public class PlayerControl : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        myRB.velocity = moveInput;
+		myRB.velocity = moveInput;
     }
 }
