@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
-    
 
-    public float moveSpeed;
+
+	
+	public float moveSpeed;
 	public float maxRange;
     public float minRange;
 	private bool seeker = false;
@@ -13,11 +14,15 @@ public class EnemyController : MonoBehaviour {
 	private bool enemyMoving;
 	private Vector2 direction;
     private float step;
+	private Rigidbody2D myRB;
+	private float xDir;
+	private float yDir;
 
 	private PlayerControl thePlayer;
 	// Use this for initialization
 
-	void Start () {  
+	void Start () {
+		myRB = GetComponent<Rigidbody2D>();
 		thePlayer = FindObjectOfType<PlayerControl>();
 		anim = GetComponent<Animator>();
 	}
@@ -27,7 +32,8 @@ public class EnemyController : MonoBehaviour {
         if (enemyMoving)
         {
             step = moveSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z), step);
+			//myRB.velocity = direction;
+			transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, step);
         }
         
     }
@@ -37,16 +43,17 @@ public class EnemyController : MonoBehaviour {
         enemyMoving = false;
 
         //se o personagem entrar na area de ameaça do inimigo, o inimigo irá segui-lo
-        if (Vector3.Distance(thePlayer.transform.position, transform.position) <= maxRange || seeker){
+        if (Vector2.Distance(thePlayer.transform.position, transform.position) <= maxRange || seeker){
             seeker = true;
             enemyMoving = true;
 
-            //vetor para saber qual a posição do inimigo para o player
-            direction = new Vector2((thePlayer.transform.position.x - transform.position.x), (thePlayer.transform.position.z - transform.position.z));
-
-            //saber se o inimigo olha pra esquerda ou pra direita,
-            //se for perto de 0, então desconsidera o x e só considera a posição z (do eixo do mundo)
-            if (direction.x >= -0.5f && direction.x <= 0.5f)
+			//vetor para saber qual a posição do inimigo para o player
+			xDir = thePlayer.transform.position.x - transform.position.x;
+			yDir = thePlayer.transform.position.y - transform.position.y;
+			/*
+			//saber se o inimigo olha pra esquerda ou pra direita,
+			//se for perto de 0, então desconsidera o x e só considera a posição z (do eixo do mundo)
+			if (direction.x >= -0.5f && direction.x <= 0.5f)
             {
                 direction.x = 0f;
             }
@@ -73,19 +80,19 @@ public class EnemyController : MonoBehaviour {
             {
                 direction.y = -1.0f;
             }
-
+			*/
             //caso o inimigo fique muito proximo, faço o parar na frente do player e olhar na direção dele
             //isso aqui foi feito para o inimigo n ficar empurrando o player para fora do mapa
-            if (Vector3.Distance(thePlayer.transform.position, transform.position) <= minRange){
+            if (Vector2.Distance(thePlayer.transform.position, transform.position) <= minRange){
                 enemyMoving = false;
 
-                anim.SetFloat("LastMoveX", direction.x);
-                anim.SetFloat("LastMoveY", direction.y);
+                anim.SetFloat("LastMoveX", xDir);
+                anim.SetFloat("LastMoveY", yDir);
             }
             else
-            {
-                anim.SetFloat("MoveX", direction.x);
-                anim.SetFloat("MoveY", direction.y);
+            {				
+				anim.SetFloat("MoveX", xDir);
+                anim.SetFloat("MoveY", yDir);
             }	
             
 			anim.SetBool("EnemyMoving", enemyMoving);
