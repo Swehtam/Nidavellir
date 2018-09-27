@@ -95,6 +95,7 @@ public class EnemyController : MonoBehaviour
 			}
 			else
 			{
+
 				anim.SetFloat("MoveX", xDir);
 				anim.SetFloat("MoveY", yDir);
 			}
