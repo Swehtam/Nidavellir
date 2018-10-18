@@ -3,8 +3,8 @@ tags:
 colorID: 0
 position: 540,261
 ---
-Dwarf: Temos que abrir o portão, então teremos quer ser cautelosos,
-Dwarf: precisamos encontrar a chave para que ele seja aberto!
-Beowulf: Abrir o portão? Deixa comigo! 
-Dwarf: A
+Volstagg: Temos que abrir o portão, então teremos quer ser cautelosos,
+Volstagg: precisamos encontrar a chave para que ele seja aberto!
+Rök: Abrir o portão? Deixa comigo! 
+Volstagg: A
 ===
