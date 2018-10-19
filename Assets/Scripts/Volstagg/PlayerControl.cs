@@ -14,7 +14,7 @@ namespace Yarn.Unity.Example
         private Animator anim;
         private bool playerMoving;
         private Vector2 lastMove;
-        private float attackTime = 0.6f;
+        private float attackTime = 1.0f;
         private float attackCoolDown;
         private bool playerAttacking;
 
@@ -45,14 +45,14 @@ namespace Yarn.Unity.Example
                 lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0))
             {
                 attackCoolDown = attackTime;
                 playerAttacking = true;
-                
+
             }
 
-            if(attackCoolDown > 0)
+            if (attackCoolDown > 0)
             {
                 attackCoolDown -= Time.deltaTime;
             }
