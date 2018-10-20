@@ -17,6 +17,7 @@ namespace Yarn.Unity.Example
         private float attackTime = 1.0f;
         private float attackCoolDown;
         private bool playerAttacking;
+        public AnimationClip a;
 
         // Use this for initialization
         void Start()
@@ -78,6 +79,28 @@ namespace Yarn.Unity.Example
                 return;
             }
             myRB.velocity = moveInput;
+        }
+
+        //Metodo para rodas as animações de Volstagg de acordo com dialogo
+        [YarnCommand("setAnimation")]
+        public void PlayAnimation(string animationName)
+        {
+            if(animationName == "FaceLeft")
+            {
+                anim.SetFloat("LastMoveX", -1.0f);
+                Debug.Log("olhou pra esquerda");
+            }else if (animationName == "FaceRight")
+            {
+                anim.SetFloat("LastMoveX", 1.0f);
+                Debug.Log("olhou pra direita");
+            }
+            else if (animationName == "FaceDown")
+            {
+                anim.SetFloat("LastMoveY", -1.0f);
+                Debug.Log("olhou pra baixo");
+            }
+
+            //anim.CrossFade(animationName, 0, -1,);
         }
     }
 }

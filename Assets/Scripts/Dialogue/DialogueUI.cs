@@ -77,8 +77,8 @@ namespace Yarn.Unity.Example
         public override IEnumerator RunLine(Yarn.Line line)
         {
             string[] lineArray = line.text.Split(':');
-            line.text = lineArray[1];
             character = GameObject.Find(lineArray[0]);
+            line.text = lineArray[1];
             if (character != null)
             {
                 balloon = character.transform.Find("Canvas/Balloon").gameObject;
@@ -89,7 +89,6 @@ namespace Yarn.Unity.Example
             text.gameObject.SetActive(true);
 
             // Show the text
-
             if (textSpeed > 0.0f)
             {
                 // Display the line one character at a time
@@ -180,6 +179,13 @@ namespace Yarn.Unity.Example
         {
             // "Perform" the command
             Debug.Log("Command: " + command.text);
+            string[] commandArray = command.text.Split(' ');
+            if (commandArray[0] == "wait")
+            {
+                float time = float.Parse(commandArray[1]);
+                yield return new WaitForSeconds(time);
+            }
+            
 
             yield break;
         }

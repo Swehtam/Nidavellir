@@ -6,5 +6,16 @@ position: 540,261
 Volstagg: Temos que abrir o portão, então teremos quer ser cautelosos,
 Volstagg: precisamos encontrar a chave para que ele seja aberto!
 Rök: Abrir o portão? Deixa comigo! 
-Volstagg: A
+<<moveTo Rök GoTo>>
+<<wait 3>>
+<<setAnimation Volstagg FaceLeft>>
+<<wait 0.5>>
+<<setAnimation Volstagg FaceRight>>
+<<wait 0.5>>
+<<setAnimation Volstagg FaceDown>>
+Volstagg: A...
+Volstagg: Okay Volstagg, você consegue, você não precisa de um humano
+Volstagg: você é um anão forte e independente.
+<<wait 1>>
+Volstagg: forte...
 ===

@@ -384,7 +384,7 @@ MonoBehaviour:
   variableStorage: {fileID: 592820529}
   dialogueUI: {fileID: 592820530}
   startNode: Start
-  startAutomatically: 0
+  startAutomatically: 1
   automaticCommands: 1
 --- !u!1001 &671816716
 Prefab:
@@ -468,6 +468,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &801284735
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 801284729}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: b34f549fda6c3824ea2485e760d1c0db, type: 2}
+  - {fileID: 7400000, guid: 36b9384de50682a4e9b749ee60db8fb8, type: 2}
+  - {fileID: 7400000, guid: 46af404a1f1aa5d498ae9808b9fdf8d0, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!4 &1176807650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4109822243898550, guid: f9074ae22c968a349ae05398ca3c8c71,
@@ -537,6 +554,49 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212526947505586404, guid: 7bf022e0b07739d469da3f3e40b1320f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ef29337cb2632ba4b9138eed16d4acde,
+        type: 3}
+    - target: {fileID: 4584679068849492, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.006000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584679068849492, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.054
+      objectReference: {fileID: 0}
+    - target: {fileID: 212791734678597704, guid: 7bf022e0b07739d469da3f3e40b1320f,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245916204218150, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584679068849492, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584679068849492, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584679068849492, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584679068849492, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584679068849492, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114815442765542788, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
     - {fileID: 95698928152237372, guid: 7bf022e0b07739d469da3f3e40b1320f, type: 2}
@@ -603,6 +663,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114540998123616842, guid: e855b22286ec3a343b9534434ccdb4f1,
+        type: 2}
+      propertyPath: pointsToMove.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4285646104158682, guid: e855b22286ec3a343b9534434ccdb4f1, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.08
@@ -649,6 +714,16 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 114540998123616842, guid: e855b22286ec3a343b9534434ccdb4f1,
+        type: 2}
+      propertyPath: pointsToMove.Array.data[0].moveTo
+      value: 
+      objectReference: {fileID: 1918098892}
+    - target: {fileID: 114540998123616842, guid: e855b22286ec3a343b9534434ccdb4f1,
+        type: 2}
+      propertyPath: pointsToMove.Array.data[0].name
+      value: GoTo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e855b22286ec3a343b9534434ccdb4f1, type: 2}
