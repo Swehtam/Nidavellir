@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: 4a5be0a76e5255943acd125ecee35ebe
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Dialog Box_0
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -82,7 +83,27 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Dialog Box_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 217
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71c2a2e865a54c64da688142193a6c3d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

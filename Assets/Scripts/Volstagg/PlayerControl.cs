@@ -14,10 +14,10 @@ namespace Yarn.Unity.Example
         private Animator anim;
         private bool playerMoving;
         private Vector2 lastMove;
+
         private float attackTime = 1.0f;
         private float attackCoolDown;
         private bool playerAttacking;
-        public AnimationClip a;
 
         // Use this for initialization
         void Start()

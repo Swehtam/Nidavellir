@@ -9,6 +9,7 @@ namespace Yarn.Unity.Example
         public float moveSpeed;
         public float maxRange;
         public float minRange;
+        public float attackCoolDown;
 
         private bool seeker = false;
         private float xDir;
@@ -19,12 +20,19 @@ namespace Yarn.Unity.Example
         private Animator anim;
         private PlayerControl thePlayer;
 
+        private float attackTime = 1.0f;
+        private float coolDown;
+        private float attackTimeCoolDown;
+        private bool enemyAttacking;
+
         // Use this for initialization
         void Start()
         {
             enemyRB = GetComponent<Rigidbody2D>();
             thePlayer = FindObjectOfType<PlayerControl>();
             anim = GetComponent<Animator>();
+            coolDown = 0f;
+            enemyAttacking = false;
         }
 
         private void FixedUpdate()
@@ -50,35 +58,59 @@ namespace Yarn.Unity.Example
             {
                 return;
             }
+
             enemyMoving = false;
-
-            //se o personagem entrar na area de ameaça do inimigo, o inimigo irá segui-lo
-            if (Vector2.Distance(thePlayer.transform.position, transform.position) <= maxRange || seeker)
+            
+            if (!enemyAttacking)
             {
-                seeker = true;
-                enemyMoving = true;
-
-                //coordenadas para saber a direção que o player se encontra do inimigo
-                xDir = thePlayer.transform.position.x - transform.position.x;
-                yDir = thePlayer.transform.position.y - transform.position.y;
-
-                //caso o inimigo fique muito proximo, faço o parar na frente do player e olhar na direção dele
-                //isso aqui foi feito para o inimigo n ficar empurrando o player para fora do mapa
-                if (Vector2.Distance(thePlayer.transform.position, transform.position) <= minRange)
+                //se o personagem entrar na area de ameaça do inimigo, o inimigo irá segui-lo
+                if (Vector2.Distance(thePlayer.transform.position, transform.position) <= maxRange || seeker)
                 {
-                    enemyMoving = false;
+                    seeker = true;
+                    enemyMoving = true;
 
-                    anim.SetFloat("LastMoveX", xDir);
-                    anim.SetFloat("LastMoveY", yDir);
-                }
-                else
-                {
-                    anim.SetFloat("MoveX", xDir);
-                    anim.SetFloat("MoveY", yDir);
-                }
+                    //coordenadas para saber a direção que o player se encontra do inimigo
+                    xDir = thePlayer.transform.position.x - transform.position.x;
+                    yDir = thePlayer.transform.position.y - transform.position.y;
 
-                anim.SetBool("EnemyMoving", enemyMoving);
+                    //caso o inimigo fique muito proximo, faço o parar na frente do player e olhar na direção dele
+                    //isso aqui foi feito para o inimigo n ficar empurrando o player para fora do mapa
+                    if (Vector2.Distance(thePlayer.transform.position, transform.position) <= minRange)
+                    {
+                        enemyMoving = false;
+
+                        anim.SetFloat("LastMoveX", xDir);
+                        anim.SetFloat("LastMoveY", yDir);
+                    }
+                    else
+                    {
+                        anim.SetFloat("MoveX", xDir);
+                        anim.SetFloat("MoveY", yDir);
+                    }
+
+                    anim.SetBool("EnemyMoving", enemyMoving);
+                }
             }
+
+            if(Vector2.Distance(thePlayer.transform.position, transform.position) <= minRange && coolDown <= 0)
+            {
+                coolDown = attackCoolDown;
+                attackTimeCoolDown = attackTime;
+                enemyAttacking = true;
+            }
+
+            if (coolDown > 0)
+            {
+                attackTimeCoolDown -= Time.deltaTime;
+                coolDown -= Time.deltaTime;
+            }
+
+            if (attackTimeCoolDown <= 0)
+            {
+                enemyAttacking = false;
+            }
+
+            anim.SetBool("EnemyAttacking", enemyAttacking);
         }
     }
 }
