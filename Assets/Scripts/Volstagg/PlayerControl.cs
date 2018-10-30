@@ -63,11 +63,15 @@ namespace Yarn.Unity.Example
                 playerAttacking = false;
             }
 
-            anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
-            anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
-            anim.SetBool("PlayerMoving", playerMoving);
-            anim.SetFloat("LastMoveX", lastMove.x);
-            anim.SetFloat("LastMoveY", lastMove.y);
+            if (!playerAttacking)
+            {
+                anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
+                anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+                anim.SetBool("PlayerMoving", playerMoving);
+                anim.SetFloat("LastMoveX", lastMove.x);
+                anim.SetFloat("LastMoveY", lastMove.y);
+            }
+            
             anim.SetBool("PlayerAttacking", playerAttacking);
         }
 

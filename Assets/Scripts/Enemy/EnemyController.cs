@@ -60,7 +60,7 @@ namespace Yarn.Unity.Example
             }
 
             enemyMoving = false;
-            
+
             if (!enemyAttacking)
             {
                 //se o personagem entrar na area de ameaça do inimigo, o inimigo irá segui-lo
