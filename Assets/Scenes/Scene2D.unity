@@ -359,7 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueContainer: {fileID: 0}
   continuePrompt: {fileID: 0}
-  textSpeed: 0.025
+  textSpeed: 0.03
   optionButtons: []
 --- !u!114 &592820531
 MonoBehaviour:
@@ -380,7 +380,7 @@ MonoBehaviour:
   variableStorage: {fileID: 592820529}
   dialogueUI: {fileID: 592820530}
   startNode: Start
-  startAutomatically: 0
+  startAutomatically: 1
   automaticCommands: 1
 --- !u!1001 &671816716
 Prefab:
