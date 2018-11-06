@@ -1,0 +1,29 @@
+﻿# Tiled2Unity generated file. Do not modify by hand.
+# Wavefront file for 'phase1_mesh_0016.obj'
+
+# Vertices (Count = 8)
+v -624 -624 0
+v -672 -624 0
+v -672 -576 0
+v -624 -576 0
+v -816 -720 0
+v -864 -720 0
+v -864 -672 0
+v -816 -672 0
+
+# Texture cooridinates (Count = 4)
+vt 0.375 0.6666666
+vt 0.4375 0.6666666
+vt 0.4375 0.75
+vt 0.375 0.75
+
+# Normal
+vn 0 0 -1
+
+# Mesh description
+g phase1_mesh_0016
+
+# Faces
+f 1/1/1 2/2/1 3/3/1 4/4/1
+f 5/1/1 6/2/1 7/3/1 8/4/1
+
