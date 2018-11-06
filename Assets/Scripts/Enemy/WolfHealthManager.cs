@@ -4,23 +4,42 @@ using UnityEngine;
 
 public class WolfHealthManager : MonoBehaviour {
 
-    public int health;
-    private int currentHealth;
+	private GameObject key;
+	public int health;
+	public int currentHealth;
+	private SpriteRenderer m_SpriteRenderer;
+	private Color m_NewColor;
+	private Color buffer;
 
 	// Use this for initialization
-	void Start () {
-        currentHealth = health;	
+	void Start()
+	{
+		key = GameObject.Find("Key");
+		currentHealth = health;
+		m_SpriteRenderer = GetComponent<SpriteRenderer>();
+		buffer = m_SpriteRenderer.color;
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-
-        if (currentHealth <= 0)
-            Destroy(gameObject);
+	void Update()
+	{
+		if (currentHealth <= 0)
+		{
+			key.GetComponent<KeyController>().killed++;
+			Destroy(gameObject);
+		}
 	}
 
-    public void HurtEnemy(int damage)
-    {
-        currentHealth -= damage;
-    }
+	public void HurtEnemy(int damage)
+	{
+		currentHealth -= damage;
+		StartCoroutine(Wait(0.5f));
+	}
+
+	public IEnumerator Wait(float time)
+	{
+		m_SpriteRenderer.color = Color.red;
+		yield return new WaitForSeconds(time);
+		m_SpriteRenderer.color = buffer;
+	}
 }
