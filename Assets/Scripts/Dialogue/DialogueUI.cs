@@ -73,6 +73,9 @@ namespace Yarn.Unity.Example
         //Texto que ficará dentro do balão de dialogo
         private Text text;
 
+        // Texto para apresentar o botão de continuar
+        private Text continuetext;
+
         /// Show a line of dialogue, gradually
         public override IEnumerator RunLine(Yarn.Line line)
         {
@@ -83,6 +86,7 @@ namespace Yarn.Unity.Example
             {
                 balloon = character.transform.Find("Canvas/Balloon").gameObject;
                 text = character.transform.Find("Canvas/Text").gameObject.GetComponent<Text>();
+                continuetext = character.transform.Find("Canvas/Continue").gameObject.GetComponent<Text>();
             }
 
             balloon.SetActive(true);
@@ -108,8 +112,8 @@ namespace Yarn.Unity.Example
             }
 
             // Show the 'press any key' prompt when done, if we have one
-            if (continuePrompt != null)
-                continuePrompt.SetActive(true);
+            if (continuetext != null)
+                continuetext.gameObject.SetActive(true);
 
             // Wait for any user input
             while (Input.GetKeyDown("space") == false)
@@ -121,8 +125,8 @@ namespace Yarn.Unity.Example
             text.gameObject.SetActive(false);
             balloon.SetActive(false);
 
-            if (continuePrompt != null)
-                continuePrompt.SetActive(false);
+            if (continuetext != null)
+                continuetext.gameObject.SetActive(false);
 
         }
 

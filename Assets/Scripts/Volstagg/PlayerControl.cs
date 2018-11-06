@@ -14,10 +14,10 @@ namespace Yarn.Unity.Example
         private Animator anim;
         private bool playerMoving;
         private Vector2 lastMove;
+
         private float attackTime = 1.0f;
         private float attackCoolDown;
         private bool playerAttacking;
-        public AnimationClip a;
 
         // Use this for initialization
         void Start()
@@ -63,11 +63,15 @@ namespace Yarn.Unity.Example
                 playerAttacking = false;
             }
 
-            anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
-            anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
-            anim.SetBool("PlayerMoving", playerMoving);
-            anim.SetFloat("LastMoveX", lastMove.x);
-            anim.SetFloat("LastMoveY", lastMove.y);
+            if (!playerAttacking)
+            {
+                anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
+                anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+                anim.SetBool("PlayerMoving", playerMoving);
+                anim.SetFloat("LastMoveX", lastMove.x);
+                anim.SetFloat("LastMoveY", lastMove.y);
+            }
+            
             anim.SetBool("PlayerAttacking", playerAttacking);
         }
 
