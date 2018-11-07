@@ -1,0 +1,31 @@
+title: Introduction
+tags: 
+colorID: 0
+position: 486,211
+---
+<<change Background Viking>>
+:: Durante uma dura batalha em Raven Rock, um grande guerreiro chamado Rök descansava com seus amigos, ele queria recuperar energias para voltar com toda a sua força (e a sua pança cheia) para a batalha,
+:: o que Rök não imaginava era que os gostos daqueles goles de hidromel e daquela mordida no gravlak apimentado seriam os últimos que ele sentiria...
+:: A garganta de Rök havia fechado: ele estava se engasgando! 
+:: O guerreiro erguia as mãos e se debatia em agonia, até o momento que não passou a não enxergar mais nada.
+<<change Background Odin>>
+:: Devido a uma confusão sobre como Rök havia morrido, ele foi convocado à Valhalla e, cheio de orgulho, estava pronto para se mostrar bobão... Ops, fortão para Odin.
+:: Ele, por sua vez, curioso sobre a morte do guerreiro, o questionou como ele morreu, Rök não pensou duas vezes e disse
+<<as EventSystem active Rök>>
+Rök :: "Oh, grandioso, durante uma de minhas mais duras batalhas, minha refeição não desceu, eu engasguei". 
+:: Odin, carregado pela indignação sua e dos demais presentes no salão, entraram em reunião para decidir a eternidade do guerreiro.
+<<as EventSystem inactive Rök>>
+<<change Background Feast>>
+:: Durante a reunião, um dos guerreiros presentes em Valhalla achava aquilo tudo hilário, e se divertia enchendo o pequeno (bem pequeno) estômago de hidromel e carnes defumadas. 
+:: O que sua pequena cabeça cheia de barba não imaginava era que o futuro de Rök definiria o seu. 
+:: A pauta do guerreiro ter morrido de maneira patética trouxe à tona a morte do anão Volstagg, um fanfarrão sem vergonha que morreu em batalha, mas que nunca tinha, de fato, participado de nenhuma.
+:: Volstagg, que sempre teve a inteligência e a estratégia como suas maiores amigas, escondia-se durante as batalhas e aparecia apenas para os banquetes de vitória, até que um dia os inimigos o acharam.
+:: O terror do anão começou quando Odin o chamou junto ao Rök, pois ele tinha uma mensagem para dar aos dois.
+<<change Background Nilfheim>>
+:: Os guerreiros teriam de recuperar suas honras, afinal, Volstagg era nada mais que um fanfarrão trapaceiro e Rök era estúpido demais para continuar no grande salão. 
+:: Para tanto, Odin decidiu que os enviaria numa missão de recuperação de honra, onde eles desceriam à Nilfheim e enfrentariam os mais diversos desafios,
+:: passando pelos portões da dignidade, e recuperando pouco a pouco seus lugares em Valhalla.
+:: O que chocou a todos foi o que foi dito por último por Odin: eles teriam de descer juntos, passar por tudo juntos, e voltar a salvo juntos.
+:: Caso um dos dois morresse, ambos estariam condenados ao sofrimento eterno e jamais poderiam pisar em Valhalla novamente.
+<<loadNextScene EventSystem>>
+===

@@ -49,6 +49,12 @@ namespace Yarn.Unity.Example
          */
         public GameObject dialogueContainer;
 
+        /// The UI element that displays lines
+        public Text lineText;
+
+        //  The UI element that displays the name of the character
+        public Text nameText;
+
         /// A UI element that appears after lines have finished appearing
         public GameObject continuePrompt;
 
@@ -59,7 +65,7 @@ namespace Yarn.Unity.Example
 
         /// How quickly to show the text, in seconds per character
         [Tooltip("How quickly to show the text, in seconds per character")]
-        public float textSpeed = 0.025f;
+        public float textSpeed;
 
         /// The buttons that let the user choose an option
         public List<Button> optionButtons;
@@ -76,57 +82,113 @@ namespace Yarn.Unity.Example
         // Texto para apresentar o botão de continuar
         private Text continuetext;
 
+        void Awake()
+        {
+            // Start by hiding the container, line and option buttons
+            if (dialogueContainer != null)
+                dialogueContainer.SetActive(false);
+
+            foreach (var button in optionButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+
+            // Hide the continue prompt if it exists
+            if (continuePrompt != null)
+                continuePrompt.SetActive(false);
+        }
+
         /// Show a line of dialogue, gradually
         public override IEnumerator RunLine(Yarn.Line line)
         {
-            string[] lineArray = line.text.Split(':');
-            character = GameObject.Find(lineArray[0]);
-            line.text = lineArray[1];
-            if (character != null)
+            if (!dialogueContainer)
             {
-                balloon = character.transform.Find("Canvas/Balloon").gameObject;
-                text = character.transform.Find("Canvas/Text").gameObject.GetComponent<Text>();
-                continuetext = character.transform.Find("Canvas/Continue").gameObject.GetComponent<Text>();
-            }
-
-            balloon.SetActive(true);
-            text.gameObject.SetActive(true);
-
-            // Show the text
-            if (textSpeed > 0.0f)
-            {
-                // Display the line one character at a time
-                var stringBuilder = new StringBuilder();
-
-                foreach (char c in line.text)
+                string[] lineArray = line.text.Split(new string[] { "::" }, 0);
+                character = GameObject.Find(lineArray[0]);
+                line.text = lineArray[1];
+                if (character != null)
                 {
-                    stringBuilder.Append(c);
-                    text.text = stringBuilder.ToString();
-                    yield return new WaitForSeconds(textSpeed);
+                    balloon = character.transform.Find("Canvas/Balloon").gameObject;
+                    text = character.transform.Find("Canvas/Text").gameObject.GetComponent<Text>();
+                    continuetext = character.transform.Find("Canvas/Continue").gameObject.GetComponent<Text>();
                 }
+
+                balloon.SetActive(true);
+                text.gameObject.SetActive(true);
+
+                // Show the text
+                if (textSpeed > 0.0f)
+                {
+                    // Display the line one character at a time
+                    var stringBuilder = new StringBuilder();
+
+                    foreach (char c in line.text)
+                    {
+                        stringBuilder.Append(c);
+                        text.text = stringBuilder.ToString();
+                        yield return new WaitForSeconds(textSpeed);
+                    }
+                }
+                else
+                {
+                    // Display the line immediately if textSpeed == 0
+                    text.text = line.text;
+                }
+
+                // Show the 'press any key' prompt when done, if we have one
+                if (continuetext != null)
+                    continuetext.gameObject.SetActive(true);
+
+                // Wait for any user input
+                while (Input.GetKeyDown("space") == false)
+                {
+                    yield return null;
+                }
+
+                // Hide the text and prompt
+                text.gameObject.SetActive(false);
+                balloon.SetActive(false);
+
+                if (continuetext != null)
+                    continuetext.gameObject.SetActive(false);
             }
             else
             {
-                // Display the line immediately if textSpeed == 0
-                text.text = line.text;
+                string[] lineArray = line.text.Split(new string[] { "::" }, 0);
+                nameText.text = lineArray[0];
+                line.text = lineArray[1];
+
+                // Show the text
+                if (textSpeed > 0.0f)
+                {
+                    // Display the line one character at a time
+                    var stringBuilder = new StringBuilder();
+
+                    foreach (char c in line.text)
+                    {
+                        stringBuilder.Append(c);
+                        lineText.text = stringBuilder.ToString();
+                        yield return new WaitForSeconds(textSpeed);
+                    }
+                }
+                else
+                {
+                    // Display the line immediately if textSpeed == 0
+                    lineText.text = line.text;
+                }
+
+                if (continuePrompt != null)
+                    continuePrompt.gameObject.SetActive(true);
+
+                // Wait for any user input
+                while (Input.GetKeyDown("space") == false)
+                {
+                    yield return null;
+                }
+
+                if (continuePrompt != null)
+                    continuePrompt.gameObject.SetActive(false);
             }
-
-            // Show the 'press any key' prompt when done, if we have one
-            if (continuetext != null)
-                continuetext.gameObject.SetActive(true);
-
-            // Wait for any user input
-            while (Input.GetKeyDown("space") == false)
-            {
-                yield return null;
-            }
-
-            // Hide the text and prompt
-            text.gameObject.SetActive(false);
-            balloon.SetActive(false);
-
-            if (continuetext != null)
-                continuetext.gameObject.SetActive(false);
 
         }
 
@@ -202,11 +264,11 @@ namespace Yarn.Unity.Example
             Debug.Log("Dialogue starting!");
 
             // Enable the dialogue controls.
-            /*if (dialogueContainer != null)
+            if (dialogueContainer != null)
                 dialogueContainer.SetActive(true);
 
             // Hide the game controls.
-            if (gameControlsContainer != null)
+            /*if (gameControlsContainer != null)
             {
                 gameControlsContainer.gameObject.SetActive(false);
             }*/
@@ -220,11 +282,11 @@ namespace Yarn.Unity.Example
             Debug.Log("Complete!");
 
             // Hide the dialogue interface.
-            /*if (dialogueContainer != null)
+            if (dialogueContainer != null)
                 dialogueContainer.SetActive(false);
 
             // Show the game controls.
-            if (gameControlsContainer != null)
+            /*if (gameControlsContainer != null)
             {
                 gameControlsContainer.gameObject.SetActive(true);
             }*/
