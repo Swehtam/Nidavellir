@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyHealthManager : MonoBehaviour {
 
+	private GameObject key;
     public int health;
     public int currentHealth;
     private SpriteRenderer m_SpriteRenderer;
@@ -13,7 +14,8 @@ public class EnemyHealthManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        currentHealth = health;
+		key = GameObject.Find("Key");
+		currentHealth = health;
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         buffer = m_SpriteRenderer.color;
     }
@@ -21,8 +23,11 @@ public class EnemyHealthManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (currentHealth <= 0)
-            Destroy(gameObject);
+		if (currentHealth <= 0)
+		{
+			key.GetComponent<KeyController>().killed++;
+			Destroy(gameObject);
+		}
 	}
 
     public void HurtEnemy(int damage)
