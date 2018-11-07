@@ -215,7 +215,6 @@ GameObject:
   m_Component:
   - component: {fileID: 261422018}
   - component: {fileID: 261422017}
-  - component: {fileID: 261422014}
   - component: {fileID: 261422012}
   m_Layer: 0
   m_Name: Volstagg
@@ -240,25 +239,6 @@ MonoBehaviour:
     sidePoint: {fileID: 551691871}
   - name: RightSide
     sidePoint: {fileID: 1581526306}
---- !u!95 &261422014
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 95590469824224434, guid: 7bf022e0b07739d469da3f3e40b1320f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 261422011}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 74eb0958741691c44a790d7e2ab14653, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &261422017
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -414,8 +394,8 @@ MonoBehaviour:
     backgroundSprite: {fileID: 21300000, guid: 20c7a41a1b0daee45b9aa3f3b1360486, type: 3}
   - name: Viking
     backgroundSprite: {fileID: 21300000, guid: 9c3cad41601f90042af37c350fbf4a6b, type: 3}
-  - name: Feast
-    backgroundSprite: {fileID: 21300000, guid: 3634843af81f64b45a33c1c7b7d779b7, type: 3}
+  - name: Tavern
+    backgroundSprite: {fileID: 21300000, guid: af5a4b7556e480d418827854483523b8, type: 3}
 --- !u!1 &551691871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +991,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1416262857}
   - component: {fileID: 1416262856}
-  - component: {fileID: 1416262855}
   - component: {fileID: 1416262852}
   m_Layer: 0
   m_Name: "R\xF6k"
@@ -1036,25 +1015,6 @@ MonoBehaviour:
     sidePoint: {fileID: 551691871}
   - name: RightSide
     sidePoint: {fileID: 1581526306}
---- !u!95 &1416262855
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 95612836074713582, guid: e855b22286ec3a343b9534434ccdb4f1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1416262851}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a5379523b7969694caf2380e01842cdb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1416262856
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1099,7 +1059,7 @@ SpriteRenderer:
   m_Size: {x: 0.25, y: 0.58}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1416262857

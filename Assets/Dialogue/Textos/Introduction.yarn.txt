@@ -15,7 +15,7 @@ position: 486,211
 Rök :: "Oh, grandioso, durante uma de minhas mais duras batalhas, minha refeição não desceu, eu engasguei". 
 :: Odin, carregado pela indignação sua e dos demais presentes no salão, entraram em reunião para decidir a eternidade do guerreiro.
 <<as EventSystem inactive Rök>>
-<<change Background Feast>>
+<<change Background Tavern>>
 :: Durante a reunião, um dos guerreiros presentes em Valhalla achava aquilo tudo hilário, e se divertia enchendo o pequeno (bem pequeno) estômago de hidromel e carnes defumadas. 
 :: O que sua pequena cabeça cheia de barba não imaginava era que o futuro de Rök definiria o seu. 
 :: A pauta do guerreiro ter morrido de maneira patética trouxe à tona a morte do anão Volstagg, um fanfarrão sem vergonha que morreu em batalha, mas que nunca tinha, de fato, participado de nenhuma.
