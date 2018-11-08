@@ -26,7 +26,8 @@ public class EnemyHealthManager : MonoBehaviour {
 		if (currentHealth <= 0)
 		{
 			key.GetComponent<KeyController>().killed++;
-			Destroy(gameObject);
+            SoundManagerScript.PlaySound("skeleton-bones");
+            Destroy(gameObject);
 		}
 	}
 
