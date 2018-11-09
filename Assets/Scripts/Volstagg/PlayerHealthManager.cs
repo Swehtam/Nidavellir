@@ -36,22 +36,28 @@ public class PlayerHealthManager : MonoBehaviour {
     {
         currentHealth -= damage;
         SoundManagerScript.PlaySound("volstagg-grunt");
-        StartCoroutine(Wait(0.5f));
+        StartCoroutine(WaitDamage(0.5f));
 	}
 
 	public void CurePlayer(int cure)
 	{
 		currentHealth += cure;
-		//SoundManagerScript.PlaySound("volstagg-grunt");
-		StartCoroutine(Wait(0.5f));
+		StartCoroutine(WaitCure(0.5f));
 	}
 
-	public IEnumerator Wait(float time)
+	public IEnumerator WaitDamage(float time)
 	{
 		m_SpriteRenderer.color = Color.red;		
 		yield return new WaitForSeconds(time);		
 		m_SpriteRenderer.color = buffer;
 	}
+
+    public IEnumerator WaitCure(float time)
+    {
+        m_SpriteRenderer.color = Color.green;
+        yield return new WaitForSeconds(time);
+        m_SpriteRenderer.color = buffer;
+    }
 
     public IEnumerator GoToMenuScene(float time)
     {

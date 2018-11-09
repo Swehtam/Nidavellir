@@ -244,7 +244,6 @@ namespace Yarn.Unity.Example
         public override IEnumerator RunCommand(Yarn.Command command)
         {
             // "Perform" the command
-            Debug.Log("Command: " + command.text);
             string[] commandArray = command.text.Split(' ');
             if (commandArray[0] == "wait")
             {
