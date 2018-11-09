@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthManager : MonoBehaviour {
     public int maxHealth;
@@ -8,6 +9,7 @@ public class PlayerHealthManager : MonoBehaviour {
 	SpriteRenderer m_SpriteRenderer;
 	Color m_NewColor;
 	Color buffer;
+    public bool died;
 
 
 	// Use this for initialization
@@ -25,6 +27,7 @@ public class PlayerHealthManager : MonoBehaviour {
         {
             gameObject.SetActive(false);
             SoundManagerScript.PlaySound("volstagg-death");
+            died = true;
         }
             
 	}
@@ -42,4 +45,10 @@ public class PlayerHealthManager : MonoBehaviour {
 		yield return new WaitForSeconds(time);		
 		m_SpriteRenderer.color = buffer;
 	}
+
+    public IEnumerator GoToMenuScene(float time)
+    {
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene("Menu");
+    }
 }
