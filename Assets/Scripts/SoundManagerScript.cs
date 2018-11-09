@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
-    public static AudioClip skeletonAttack, volstaggAttack, skeletonDeath, volstaggDeath, volstaggHit, pickUpKey;
+    public static AudioClip skeletonAttack, volstaggAttack, skeletonDeath, volstaggDeath, volstaggHit, pickUpKey, gateOpening;
     static AudioSource audioSrc;
     // Use this for initialization
     void Start()
@@ -15,7 +15,8 @@ public class SoundManagerScript : MonoBehaviour
         skeletonDeath = Resources.Load<AudioClip>("skeleton-bones");
         volstaggDeath = Resources.Load<AudioClip>("volstagg-death");
         volstaggHit = Resources.Load<AudioClip>("volstagg-grunt");
-        pickUpKey = Resources.Load<AudioClip>("pickupkey"); 
+        pickUpKey = Resources.Load<AudioClip>("pickupkey");
+        gateOpening = Resources.Load<AudioClip>("gate-opening");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -48,6 +49,9 @@ public class SoundManagerScript : MonoBehaviour
                 break;
             case "pickupkey":
                 audioSrc.PlayOneShot(pickUpKey);
+                break;
+            case "gate-opening":
+                audioSrc.PlayOneShot(gateOpening);
                 break;
         }
     }

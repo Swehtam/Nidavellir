@@ -28,7 +28,8 @@ public class GateController : MonoBehaviour {
 
 	public IEnumerator Wait(float time)
 	{
-		anim.SetBool("GotKey", true);
+        SoundManagerScript.PlaySound("gate-opening");
+        anim.SetBool("GotKey", true);
 		yield return new WaitForSeconds(time);
 		anim.SetBool("IsOpen", true);
 	}
