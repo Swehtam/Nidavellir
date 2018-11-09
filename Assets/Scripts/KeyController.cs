@@ -9,6 +9,8 @@ public class KeyController : MonoBehaviour {
 	public int onda = 0;
 	public GameObject esqueleto;
 	public GameObject lobo;
+	public GameObject h1;
+	public GameObject h2;
 
 	private void Awake()
 	{
@@ -49,7 +51,7 @@ public class KeyController : MonoBehaviour {
 			Instantiate(esqueleto, new Vector3(-29.26f, 6.94f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-24.1f, -1.39f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-22.23f, 0.33f, -0.278f), Quaternion.identity);
-			onda = 2;
+			onda = 2;			
 		}
 		if (killed == 4 && onda == 2)
 		{
@@ -59,6 +61,7 @@ public class KeyController : MonoBehaviour {
 			Instantiate(esqueleto, new Vector3(10.37f, 18.13f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-7.01f, 15.79f, -0.278f), Quaternion.identity);
 			onda = 3;
+			mudaCora();
 		}
 		if (killed == 9 && onda == 3)
 		{
@@ -69,6 +72,7 @@ public class KeyController : MonoBehaviour {
 			Instantiate(esqueleto, new Vector3(1.43f, -4.01f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(8.93f, -7.48f, -0.278f), Quaternion.identity);
 			onda = 4;
+			mudaCora();
 		}
 		if (killed == 15 && onda == 4)
 		{
@@ -80,6 +84,7 @@ public class KeyController : MonoBehaviour {
 			Instantiate(esqueleto, new Vector3(-26.67f, 33.82f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-12.07f, 23.55f, -0.278f), Quaternion.identity);
 			onda = 5;
+			mudaCora();
 		}
 		if (killed == 22 && onda == 5)
 		{
@@ -92,6 +97,7 @@ public class KeyController : MonoBehaviour {
 			Instantiate(esqueleto, new Vector3(-2.92f, 9f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(4.88f, 11.56f, -0.278f), Quaternion.identity);
 			onda = 6;
+			mudaCora();
 		}
 		if (killed == 30 && onda == 6)
 		{
@@ -107,6 +113,98 @@ public class KeyController : MonoBehaviour {
 			this.gameObject.transform.position = new Vector3(99f, 99f, -0.278f);
             SoundManagerScript.PlaySound("pickupkey");
         }
+	}
+
+	void mudaCora() {
+		Vector3 posi1 = posiAle();
+		Vector3 posi2 = posiAle();
+
+		while (posi1 == posi2) {
+			posi2 = posiAle();
+		}
+
+		h1.transform.position = posi1;
+		h2.transform.position = posi2;
+	}
+
+	Vector3 posiAle() {
+		int indice = Random.Range(1, 18);
+
+		if (indice == 1) {
+			return new Vector3(-19.43f, 12.46f, -0.278f);
+		}
+		if (indice == 2)
+		{
+			return new Vector3(-29.26f, 6.94f, -0.278f);
+		}
+		if (indice == 3)
+		{
+			return new Vector3(-2.92f, 9f, -0.278f);
+		}
+		if (indice == 4)
+		{
+			return new Vector3(5.69f, 10.95f, -0.278f);
+		}
+		if (indice == 5)
+		{
+			return new Vector3(-12.07f, 23.55f, -0.278f);
+		}
+		if (indice == 6)
+		{
+			return new Vector3(-24.1f, -1.39f, -0.278f);
+		}
+		if (indice == 7)
+		{
+			return new Vector3(-26.67f, 33.82f, -0.278f);
+		}
+		if (indice == 8)
+		{
+			return new Vector3(-39.45f, 24.2f, -0.278f);
+		}
+		if (indice == 9)
+		{
+			return new Vector3(-28.14f, 32.95f, -0.278f);
+		}
+		if (indice == 10)
+		{
+			return new Vector3(-17.52f, -1.28f, -0.278f);
+		}
+		if (indice == 11)
+		{
+			return new Vector3(-0.16f, -8.79f, -0.278f);
+		}
+		if (indice == 12)
+		{
+			return new Vector3(-12.45f, -6.44f, -0.278f);
+		}
+		if (indice == 13)
+		{
+			return new Vector3(-23.52f, -7.38f, -0.278f);
+		}
+		if (indice == 14)
+		{
+			return new Vector3(-1.87f, 17.6f, -0.278f);
+		}
+		if (indice == 15)
+		{
+			return new Vector3(-7.01f, 15.79f, -0.278f);
+		}
+		if (indice == 16)
+		{
+			return new Vector3(15.11f, 10.34f, -0.278f);
+		}
+		if (indice == 17)
+		{
+			return new Vector3(13.97f, 5.57f, -0.278f);
+		}
+		if (indice == 18)
+		{
+			return new Vector3(10.37f, 18.13f, -0.278f);
+		}
+		else {
+			return new Vector3(0, 0, 0);
+		}
+
 	}
 }
 
