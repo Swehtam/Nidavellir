@@ -103,9 +103,10 @@ public class KeyController : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			onda = 1;
+            onda = 1;
 			this.gameObject.transform.position = new Vector3(99f, 99f, -0.278f);
-		}
+            SoundManagerScript.PlaySound("pickupkey");
+        }
 	}
 }
 

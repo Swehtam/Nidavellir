@@ -46,11 +46,11 @@ namespace Yarn.Unity.Example
                 lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && playerAttacking == false)
             {
                 attackCoolDown = attackTime;
                 playerAttacking = true;
-
+                SoundManagerScript.PlaySound("volAttack-slash");
             }
 
             if (attackCoolDown > 0)
