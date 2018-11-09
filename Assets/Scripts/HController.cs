@@ -18,8 +18,9 @@ public class HController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Player")
-		{			
-			this.gameObject.transform.position = new Vector3(99f, 99f, -0.278f);
+		{
+            SoundManagerScript.PlaySound("pickup-heart");
+            this.gameObject.transform.position = new Vector3(99f, 99f, -0.278f);
 			col.gameObject.GetComponent<PlayerHealthManager>().CurePlayer(1);
 		}
 	}
