@@ -11,7 +11,7 @@ namespace Yarn.Unity.Example
         public float minRange;
         public float attackCoolDown;
 
-        private bool seeker = false;
+        private bool seeker = true;
         private float xDir;
         private float yDir;
 
