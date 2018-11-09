@@ -44,4 +44,15 @@ public class MenuScript : MonoBehaviour {
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene(scene);
     }
+
+    public void ExitGame()
+    {
+        StartCoroutine(Exit(1.0f));
+    }
+    
+    public IEnumerator Exit(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Application.Quit();
+    }
 }
