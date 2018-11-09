@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 namespace Yarn.Unity.Example
 {
+
     public class IntroductionScript : MonoBehaviour
     {
-
         [System.Serializable]
         public struct CharactersInfo
         {

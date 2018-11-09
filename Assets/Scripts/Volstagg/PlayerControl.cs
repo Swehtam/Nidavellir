@@ -15,7 +15,7 @@ namespace Yarn.Unity.Example
         private bool playerMoving;
         private Vector2 lastMove;
 
-        private float attackTime = 0.15f;
+        private float attackTime = 1.0f;
         private float attackCoolDown;
         private bool playerAttacking;
 
@@ -50,6 +50,7 @@ namespace Yarn.Unity.Example
             {
                 attackCoolDown = attackTime;
                 playerAttacking = true;
+                SoundManagerScript.PlaySound("volAttack-slash");
             }
 
             if (attackCoolDown > 0)

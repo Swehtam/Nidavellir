@@ -11,6 +11,7 @@ public class EnemyAttackTrigger : MonoBehaviour {
         if(collision.isTrigger != true && collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(dmg);
+            SoundManagerScript.PlaySound("sword-slash-attack");
         }
     }
 }

@@ -26,13 +26,14 @@ public class EnemyHealthManager : MonoBehaviour {
 		if (currentHealth <= 0)
 		{
 			key.GetComponent<KeyController>().killed++;
-			Destroy(gameObject);
+            Destroy(gameObject);
 		}
 	}
 
     public void HurtEnemy(int damage)
     {
         currentHealth -= damage;
+        SoundManagerScript.PlaySound("skeleton-bones");
         StartCoroutine(Wait(0.5f));
     }
 

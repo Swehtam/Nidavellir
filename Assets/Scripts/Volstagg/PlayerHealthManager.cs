@@ -22,12 +22,17 @@ public class PlayerHealthManager : MonoBehaviour {
 	void Update ()
     {
         if (currentHealth <= 0)
+        {
             gameObject.SetActive(false);
+            SoundManagerScript.PlaySound("volstagg-death");
+        }
+            
 	}
 
     public void HurtPlayer(int damage)
     {
         currentHealth -= damage;
+        SoundManagerScript.PlaySound("volstagg-grunt");
         StartCoroutine(Wait(0.5f));
 	}
 
