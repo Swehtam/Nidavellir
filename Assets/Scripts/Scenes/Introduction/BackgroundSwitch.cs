@@ -19,7 +19,7 @@ namespace Yarn.Unity.Example
         public void ChangeSprite(string spriteName)
         {
             bool backgroundFound = false;
-            //procura o lado que ele deve ficar
+            //procura o background certo
             foreach (var info in backgrounds)
             {
                 if (info.name == spriteName)

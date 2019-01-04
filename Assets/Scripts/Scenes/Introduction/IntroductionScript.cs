@@ -17,6 +17,13 @@ namespace Yarn.Unity.Example
 
         public CharactersInfo[] characters;
 
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                LoadScene();
+            }
+        }
         [YarnCommand("as")]
         public void Active(string function, string characterName)
         {

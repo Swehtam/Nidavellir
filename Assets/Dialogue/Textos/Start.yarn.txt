@@ -18,4 +18,5 @@ Volstagg:: Okay Volstagg, você consegue, você não precisa de um humano
 Volstagg:: você é um anão forte e independente.
 <<wait 1>>
 Volstagg:: forte...
+<<showHUD Canvas>>
 ===

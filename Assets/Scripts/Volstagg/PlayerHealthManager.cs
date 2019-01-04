@@ -9,7 +9,6 @@ public class PlayerHealthManager : MonoBehaviour {
 	SpriteRenderer m_SpriteRenderer;
 	Color m_NewColor;
 	Color buffer;
-    public bool died;
 
 
 	// Use this for initialization
@@ -27,7 +26,7 @@ public class PlayerHealthManager : MonoBehaviour {
         {
             gameObject.SetActive(false);
             SoundManagerScript.PlaySound("volstagg-death");
-            died = true;
+            StartCoroutine(GoToScene(2.5f, "DeathScene"));
         }
             
 	}
@@ -59,9 +58,9 @@ public class PlayerHealthManager : MonoBehaviour {
         m_SpriteRenderer.color = buffer;
     }
 
-    public IEnumerator GoToMenuScene(float time)
+    public IEnumerator GoToScene(float time, string scene)
     {
         yield return new WaitForSeconds(time);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(scene);
     }
 }

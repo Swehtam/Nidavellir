@@ -2,38 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
+using UnityEngine.Audio;
 
 public class MenuScript : MonoBehaviour {
 
-    private string sceneName;
-    public GameObject player;
     public GameObject menuPanel;
     public GameObject optionsPanel;
+    public AudioMixer audioMixer;
 
     void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        sceneName = currentScene.name;
-    }
+        audioMixer.SetFloat("masterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 0f)) * 20);
 
-    void Update()
-    {
-        if (player)
-        {
-            if (player.gameObject.GetComponent<PlayerHealthManager>().died == true)
-            {
-                StartCoroutine(GoToScene(2.5f, "DeathScene"));
-            }
-        }
-        
-        if (sceneName == "DeathScene")
-        {
-            if (Input.GetKeyDown("space"))
-            {
-                StartCoroutine(GoToScene(1.0f, "Menu"));
-            }
-        }
+        audioMixer.SetFloat("musicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0f)) * 20);
+
+        audioMixer.SetFloat("soundEffectsVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundEffectsVolume", 0f)) * 20);
     }
 
     public void LoadIntroScene()
