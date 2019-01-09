@@ -9,7 +9,9 @@ public class PlayerHealthManager : MonoBehaviour {
 	SpriteRenderer m_SpriteRenderer;
 	Color m_NewColor;
 	Color buffer;
-
+    
+    // Variavel sendo usada em outro script para poder mudar para cena de morte
+    public bool died;
 
 	// Use this for initialization
 	void Start ()
@@ -24,11 +26,10 @@ public class PlayerHealthManager : MonoBehaviour {
     {
         if (currentHealth <= 0)
         {
-            gameObject.SetActive(false);
+            died = true;
             SoundManagerScript.PlaySound("volstagg-death");
-            StartCoroutine(GoToScene(2.5f, "DeathScene"));
+            gameObject.SetActive(false);
         }
-            
 	}
 
     public void HurtPlayer(int damage)
@@ -56,11 +57,5 @@ public class PlayerHealthManager : MonoBehaviour {
         m_SpriteRenderer.color = Color.green;
         yield return new WaitForSeconds(time);
         m_SpriteRenderer.color = buffer;
-    }
-
-    public IEnumerator GoToScene(float time, string scene)
-    {
-        yield return new WaitForSeconds(time);
-        SceneManager.LoadScene(scene);
     }
 }
