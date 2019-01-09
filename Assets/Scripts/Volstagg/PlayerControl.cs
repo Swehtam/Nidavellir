@@ -103,8 +103,6 @@ namespace Yarn.Unity.Example
                 anim.SetFloat("LastMoveY", -1.0f);
                 Debug.Log("olhou pra baixo");
             }
-
-            //anim.CrossFade(animationName, 0, -1,);
         }
     }
 }
