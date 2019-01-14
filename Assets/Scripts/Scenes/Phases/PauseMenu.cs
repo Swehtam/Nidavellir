@@ -51,7 +51,7 @@ namespace Yarn.Unity.Example
         public void LoadMenu()
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Menu");
+            LoadingScreenManager.LoadScene("Menu");
         }
 
         // Metodo para o botão de sair do jogo

@@ -10,7 +10,7 @@ public class DeathScript : MonoBehaviour
     {
         // ----Fazer e colocar aqui o metodo para salvar o jogo quando morrer----
 
-        StartCoroutine(GoToScene(1.0f, "Menu"));
+        LoadingScreenManager.LoadScene("Menu");
     }
 
     // Metodo para voltar para o save do player, quando ele apertar esse botão
@@ -18,12 +18,6 @@ public class DeathScript : MonoBehaviour
     {
         // ----Colocar aqui o metodo para voltar para o save do player, por enquanto volta para a cene inicial----
 
-        StartCoroutine(GoToScene(1.0f, "Scene2D"));
-    }
-
-    public IEnumerator GoToScene(float time, string scene)
-    {
-        yield return new WaitForSeconds(time);
-        SceneManager.LoadScene(scene);
+        LoadingScreenManager.LoadScene("Scene2D");
     }
 }

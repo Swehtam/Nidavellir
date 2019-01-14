@@ -21,7 +21,7 @@ public class MenuScript : MonoBehaviour {
 
     public void LoadIntroScene()
     {
-        StartCoroutine(GoToScene(1.0f, "Introduction"));
+        LoadingScreenManager.LoadScene("Introduction");
     }
 
     public void OpenSettingsMenu()
@@ -34,12 +34,6 @@ public class MenuScript : MonoBehaviour {
     {
         menuPanel.SetActive(true);
         optionsPanel.SetActive(false);
-    }
-
-    public IEnumerator GoToScene(float time, string scene)
-    {
-        yield return new WaitForSeconds(time);
-        SceneManager.LoadScene(scene);
     }
 
     public void ExitGame()

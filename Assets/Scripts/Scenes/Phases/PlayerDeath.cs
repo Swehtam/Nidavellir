@@ -13,14 +13,8 @@ public class PlayerDeath : MonoBehaviour
         {
             if (player.gameObject.GetComponent<PlayerHealthManager>().died == true)
             {
-                StartCoroutine(GoToScene(2.5f, "DeathScene"));
+                LoadingScreenManager.LoadScene("DeathScene");
             }
         }
-    }
-
-    public IEnumerator GoToScene(float time, string scene)
-    {
-        yield return new WaitForSeconds(time);
-        SceneManager.LoadScene(scene);
     }
 }

@@ -58,7 +58,7 @@ namespace Yarn.Unity.Example
         [YarnCommand("loadNextScene")]
         public void LoadScene()
         {
-            SceneManager.LoadScene("Scene2D");
+            LoadingScreenManager.LoadScene("Scene2D");
         }
     }
 }
