@@ -37,6 +37,9 @@ namespace Yarn.Unity.Example
 
         private void FixedUpdate()
         {
+            // Para o inimigo não ser empurrado e continuar deslizando com a inercia
+            enemyRB.velocity = new Vector2(0f, 0f);
+
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
@@ -44,10 +47,9 @@ namespace Yarn.Unity.Example
             }
             if (enemyMoving)
             {
-                enemyRB.velocity = new Vector2(0f, 0f);
                 transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, moveSpeed * Time.deltaTime);
             }
-
+            
         }
 
         // Update is called once per frame

@@ -124,6 +124,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 726521847}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &87404093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87404092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2d02a22609053408482ccb758e33e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0.08}
+  shadowMaterial: {fileID: 2100000, guid: 2e20c2a98d2b4504997839972885f5b5, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
 --- !u!1 &88304350
 GameObject:
   m_ObjectHideFlags: 0

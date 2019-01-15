@@ -92,16 +92,13 @@ namespace Yarn.Unity.Example
             if(animationName == "FaceLeft")
             {
                 anim.SetFloat("LastMoveX", -1.0f);
-                Debug.Log("olhou pra esquerda");
             }else if (animationName == "FaceRight")
             {
                 anim.SetFloat("LastMoveX", 1.0f);
-                Debug.Log("olhou pra direita");
             }
             else if (animationName == "FaceDown")
             {
                 anim.SetFloat("LastMoveY", -1.0f);
-                Debug.Log("olhou pra baixo");
             }
         }
     }

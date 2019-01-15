@@ -4,20 +4,38 @@ using UnityEngine;
 
 public class EnemyHealthManager : MonoBehaviour {
 
-	private GameObject key;
     public int health;
     public int currentHealth;
-    private SpriteRenderer m_SpriteRenderer;
-    private Color m_NewColor;
-    private Color buffer;
+
+    //Bool para saber se o inimigo é o esqueleto
+    public bool isSkeleton;
+
+    //Sprite do inimigo
+    private SpriteRenderer enemy_SpriteRenderer;
+    //Sprite do braço do inimigo, se necessário
+    private SpriteRenderer arm_SriteRenderer;
+
+    // Buffer da cor da sprite do inimigo
+    private Color enemy_buffer;
+    // Buffer da cor da sprite do braço do inimig
+    private Color arm_buffer;
+
+    private GameObject key;
 
     // Use this for initialization
     void Start ()
     {
 		key = GameObject.Find("Key");
 		currentHealth = health;
-        m_SpriteRenderer = GetComponent<SpriteRenderer>();
-        buffer = m_SpriteRenderer.color;
+        enemy_SpriteRenderer = GetComponent<SpriteRenderer>();
+        enemy_buffer = enemy_SpriteRenderer.color;
+
+        if (isSkeleton)
+        {
+            arm_buffer = arm_SriteRenderer.color;
+            arm_SriteRenderer = transform.Find("Skeleton-Arm").GetComponent<SpriteRenderer>();
+        }
+            
     }
 	
 	// Update is called once per frame
@@ -33,14 +51,20 @@ public class EnemyHealthManager : MonoBehaviour {
     public void HurtEnemy(int damage)
     {
         currentHealth -= damage;
-        SoundManagerScript.PlaySound("skeleton-bones");
+        if (isSkeleton)
+            SoundManagerScript.PlaySound("skeleton-bones");
         StartCoroutine(Wait(0.5f));
     }
 
     public IEnumerator Wait(float time)
     {
-        m_SpriteRenderer.color = Color.red;
+        enemy_SpriteRenderer.color = Color.red;
+        if (isSkeleton)
+            arm_SriteRenderer.color = Color.red;
+
         yield return new WaitForSeconds(time);
-        m_SpriteRenderer.color = buffer;
+        enemy_SpriteRenderer.color = enemy_buffer;
+        if (isSkeleton)
+            arm_SriteRenderer.color = arm_buffer;
     }
 }

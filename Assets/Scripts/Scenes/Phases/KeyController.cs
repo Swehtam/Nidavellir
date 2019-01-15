@@ -5,8 +5,10 @@ using UnityEngine;
 public class KeyController : MonoBehaviour {
 
 	private int local;
+
 	public int killed = 0;
 	public int onda = 0;
+    public static bool open = false;
 	public GameObject esqueleto;
 	public GameObject lobo;
 	public GameObject h1;
@@ -65,20 +67,20 @@ public class KeyController : MonoBehaviour {
 		}
 		if (killed == 9 && onda == 3)
 		{
-			Instantiate(esqueleto, new Vector3(-12.45f, -6.44f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(-17.52f, -1.28f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(-23.52f, -7.38f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(-0.16f, -8.79f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(1.43f, -4.01f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(8.93f, -7.48f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(-12.45f, -6.44f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(-17.52f, -1.28f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(-23.52f, -7.38f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(-0.16f, -8.79f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(1.43f, -4.01f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(8.93f, -7.48f, -0.278f), Quaternion.identity);
 			onda = 4;
 			mudaCora();
 		}
 		if (killed == 15 && onda == 4)
 		{
-			Instantiate(esqueleto, new Vector3(-28.14f, 32.95f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(-24.04f, 22.99f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(-38.44f, 19.96f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(-28.14f, 32.95f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(-24.04f, 22.99f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(-38.44f, 19.96f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-39.45f, 24.2f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-36.83f, 27.9f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-26.67f, 33.82f, -0.278f), Quaternion.identity);
@@ -88,10 +90,10 @@ public class KeyController : MonoBehaviour {
 		}
 		if (killed == 22 && onda == 5)
 		{
-			Instantiate(esqueleto, new Vector3(5.69f, 10.95f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(7.24f, 5.57f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(13.97f, 5.57f, -0.278f), Quaternion.identity);
-			Instantiate(esqueleto, new Vector3(15.11f, 10.34f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(5.69f, 10.95f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(7.24f, 5.57f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(13.97f, 5.57f, -0.278f), Quaternion.identity);
+			Instantiate(lobo, new Vector3(15.11f, 10.34f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(12.76f, 14.31f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(15.65f, 3.48f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-2.92f, 9f, -0.278f), Quaternion.identity);
@@ -101,7 +103,7 @@ public class KeyController : MonoBehaviour {
 		}
 		if (killed == 30 && onda == 6)
 		{
-			//Abrir Portão
+            open = true;
 		}
 	}
 

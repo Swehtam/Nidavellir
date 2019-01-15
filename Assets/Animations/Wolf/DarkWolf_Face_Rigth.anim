@@ -4,8 +4,9 @@
 AnimationClip:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Wolf_Move_Down
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DarkWolf_Face_Rigth
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,15 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 0f47ac26e2793d34ca5e43d3ee479775, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: 6bb82b436a3c5b047990821c7e7417cf, type: 3}
-    - time: 0.33333334
-      value: {fileID: 21300000, guid: 489913b424cc4d140998910c73e1eb9b, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: 3f2548a480da9ae4ab6eec64d2085ec1, type: 3}
-    - time: 0.6666667
-      value: {fileID: 21300000, guid: d087f6640367b5a4fbce1dac54c892a7, type: 3}
+      value: {fileID: 21300000, guid: 5a2d250b26707fb479568e662d3bea6b, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -47,17 +40,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 0f47ac26e2793d34ca5e43d3ee479775, type: 3}
-    - {fileID: 21300000, guid: 6bb82b436a3c5b047990821c7e7417cf, type: 3}
-    - {fileID: 21300000, guid: 489913b424cc4d140998910c73e1eb9b, type: 3}
-    - {fileID: 21300000, guid: 3f2548a480da9ae4ab6eec64d2085ec1, type: 3}
-    - {fileID: 21300000, guid: d087f6640367b5a4fbce1dac54c892a7, type: 3}
+    - {fileID: 21300000, guid: 5a2d250b26707fb479568e662d3bea6b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.8333334
+    m_StopTime: 0.16666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -76,5 +65,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_GenerateMotionCurves: 0
   m_Events: []

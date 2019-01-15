@@ -6,10 +6,21 @@ using UnityEngine.SceneManagement;
 public class PlayerHealthManager : MonoBehaviour {
     public int maxHealth;
     public int currentHealth;
-	SpriteRenderer m_SpriteRenderer;
-	Color m_NewColor;
-	Color buffer;
-    
+
+    //Sprite do player
+	private SpriteRenderer player_SpriteRenderer;
+    //Sprite do shield do player
+    private SpriteRenderer shield_SpriteRenderer;
+    //Sprite do braço do player
+    private SpriteRenderer arm_SpriteRenderer;
+
+    //Buffer da cor do player
+	private Color player_buffer;
+    //Buffer da cor do braço do player
+    private Color arm_buffer;
+    //Buffer da cor do shield do player;
+    private Color shield_buffer;
+
     // Variavel sendo usada em outro script para poder mudar para cena de morte
     public bool died;
 
@@ -17,9 +28,15 @@ public class PlayerHealthManager : MonoBehaviour {
 	void Start ()
     {
         currentHealth = maxHealth;
-		m_SpriteRenderer = GetComponent<SpriteRenderer>();
-		buffer = m_SpriteRenderer.color;
-	}
+        player_SpriteRenderer = GetComponent<SpriteRenderer>();
+        player_buffer = player_SpriteRenderer.color;
+
+        shield_SpriteRenderer = transform.Find("Shield").GetComponent<SpriteRenderer>();
+        shield_buffer = shield_SpriteRenderer.color;
+
+        arm_SpriteRenderer = transform.Find("Attack-Arm").GetComponent<SpriteRenderer>();
+        arm_buffer = arm_SpriteRenderer.color;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -47,15 +64,27 @@ public class PlayerHealthManager : MonoBehaviour {
 
 	public IEnumerator WaitDamage(float time)
 	{
-		m_SpriteRenderer.color = Color.red;		
-		yield return new WaitForSeconds(time);		
-		m_SpriteRenderer.color = buffer;
-	}
+        player_SpriteRenderer.color = Color.red;
+        shield_SpriteRenderer.color = Color.red;
+        arm_SpriteRenderer.color = Color.red;
+
+        yield return new WaitForSeconds(time);
+
+        player_SpriteRenderer.color = player_buffer;
+        shield_SpriteRenderer.color = shield_buffer;
+        arm_SpriteRenderer.color = arm_buffer;
+    }
 
     public IEnumerator WaitCure(float time)
     {
-        m_SpriteRenderer.color = Color.green;
+        player_SpriteRenderer.color = Color.green;
+        shield_SpriteRenderer.color = Color.green;
+        arm_SpriteRenderer.color = Color.green;
+
         yield return new WaitForSeconds(time);
-        m_SpriteRenderer.color = buffer;
+
+        player_SpriteRenderer.color = player_buffer;
+        shield_SpriteRenderer.color = shield_buffer;
+        arm_SpriteRenderer.color = arm_buffer;
     }
 }

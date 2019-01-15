@@ -25,8 +25,6 @@ public class WolfController : MonoBehaviour
     private float coolDown;
     private float attackTimeCoolDown;
  
-	
-
 	// Use this for initialization
 
 	void Start()

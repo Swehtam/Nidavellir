@@ -16,7 +16,7 @@ public class GateController : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		if (key.GetComponent<KeyController>().onda == 6)
+		if (KeyController.open)
 		{
 			if (col.gameObject.tag == "Player")
 			{
