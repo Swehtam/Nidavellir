@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 95590469824224434}
   - component: {fileID: 114058461502466366}
   - component: {fileID: 114932544558789842}
+  - component: {fileID: 87404093}
   m_Layer: 0
   m_Name: Volstagg
   m_TagString: Player
@@ -182,6 +183,22 @@ MonoBehaviour:
   maxHealth: 5
   currentHealth: 0
   died: 0
+--- !u!114 &87404093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050044084606780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2d02a22609053408482ccb758e33e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0.3, y: -0.26}
+  angle: {x: 60, y: 0, z: -30}
+  shadowMaterial: {fileID: 2100000, guid: 2e20c2a98d2b4504997839972885f5b5, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
 --- !u!1 &1245916204218150
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4667169411238066}
   - component: {fileID: 212791734678597704}
+  - component: {fileID: 1152725290}
   m_Layer: 0
   m_Name: Attack-Arm
   m_TagString: Untagged
@@ -261,6 +279,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1152725290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245916204218150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2d02a22609053408482ccb758e33e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0.3, y: -0.26}
+  angle: {x: 60, y: 0, z: -30}
+  shadowMaterial: {fileID: 2100000, guid: 2e20c2a98d2b4504997839972885f5b5, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
 --- !u!1 &1349023342950098
 GameObject:
   m_ObjectHideFlags: 0

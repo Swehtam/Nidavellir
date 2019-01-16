@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 50685198797996432}
   - component: {fileID: 61510805955462318}
   - component: {fileID: 114582190043704258}
+  - component: {fileID: 870174471}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
@@ -254,7 +255,22 @@ MonoBehaviour:
   health: 2
   currentHealth: 0
   isSkeleton: 1
-  arm_SriteRenderer: {fileID: 212058933653940446}
+--- !u!114 &870174471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294994804398600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2d02a22609053408482ccb758e33e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0.4, y: -0.38}
+  angle: {x: 60, y: 0, z: -30}
+  shadowMaterial: {fileID: 2100000, guid: 2e20c2a98d2b4504997839972885f5b5, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
 --- !u!1 &1893388383084652
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4826437190232440}
   - component: {fileID: 212058933653940446}
+  - component: {fileID: 1956718278}
   m_Layer: 0
   m_Name: Skeleton-Arm
   m_TagString: Untagged
@@ -334,3 +351,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1956718278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893388383084652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2d02a22609053408482ccb758e33e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0.4, y: -0.38}
+  angle: {x: 60, y: 0, z: -30}
+  shadowMaterial: {fileID: 2100000, guid: 2e20c2a98d2b4504997839972885f5b5, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}

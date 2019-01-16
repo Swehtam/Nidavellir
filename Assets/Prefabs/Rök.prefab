@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1984223415}
   - component: {fileID: 1984223416}
+  - component: {fileID: 1984223417}
   m_Layer: 0
   m_Name: Attack-Arm
   m_TagString: Untagged
@@ -79,6 +80,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1984223417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984223414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2d02a22609053408482ccb758e33e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0.5, y: -0.4}
+  angle: {x: 60, y: 0, z: -30}
+  shadowMaterial: {fileID: 2100000, guid: 2e20c2a98d2b4504997839972885f5b5, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
 --- !u!1 &1085028036062460
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +497,7 @@ GameObject:
   - component: {fileID: 50080594356455244}
   - component: {fileID: 61458141221655704}
   - component: {fileID: 114540998123616842}
+  - component: {fileID: 195658317}
   m_Layer: 0
   m_Name: "R\xF6k"
   m_TagString: Player
@@ -633,3 +651,19 @@ MonoBehaviour:
   - name: GoTo
     moveTo: {fileID: 0}
   moveSpeed: 4
+--- !u!114 &195658317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900876618346016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2d02a22609053408482ccb758e33e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0.5, y: -0.4}
+  angle: {x: 60, y: 0, z: -30}
+  shadowMaterial: {fileID: 2100000, guid: 2e20c2a98d2b4504997839972885f5b5, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
