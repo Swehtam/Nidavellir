@@ -5,13 +5,10 @@ using UnityEngine;
 public class GateController : MonoBehaviour {
 	public GameObject key;
 	private Animator anim;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update () {		
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -24,7 +21,6 @@ public class GateController : MonoBehaviour {
 			}
 		}
 	}
-
 
 	public IEnumerator Wait(float time)
 	{

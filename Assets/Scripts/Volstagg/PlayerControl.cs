@@ -15,7 +15,8 @@ namespace Yarn.Unity.Example
         private bool playerMoving;
         private Vector2 lastMove;
 
-        private float attackTime = 1.0f;
+        //Tempo q Vosltagg leva para fazer a animação
+        private float attackTime = 0.55f;
         private float attackCoolDown;
         private bool playerAttacking;
 

@@ -8,7 +8,6 @@ public class LoadingScreenManager : MonoBehaviour
 
     [Header("Loading Visuals")]
     public Image loadingIcon;
-    public Image loadingDoneIcon;
     public Text loadingText;
     public Slider progressBar;
     public Image fadeOverlay;
@@ -117,7 +116,6 @@ public class LoadingScreenManager : MonoBehaviour
     void ShowLoadingVisuals()
     {
         loadingIcon.gameObject.SetActive(true);
-        loadingDoneIcon.gameObject.SetActive(false);
 
         progressBar.value = 0f;
         loadingText.text = "LOADING...";
@@ -125,9 +123,6 @@ public class LoadingScreenManager : MonoBehaviour
 
     void ShowCompletionVisuals()
     {
-        loadingIcon.gameObject.SetActive(false);
-        loadingDoneIcon.gameObject.SetActive(true);
-
         progressBar.value = 1f;
         loadingText.text = "LOADING DONE";
     }

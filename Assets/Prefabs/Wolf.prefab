@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2e20c2a98d2b4504997839972885f5b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   maxRange: 5
   minRange: 1.5
   attackCoolDown: 3
+  isSkeleton: 0
 --- !u!114 &1453516973
 MonoBehaviour:
   m_ObjectHideFlags: 0
