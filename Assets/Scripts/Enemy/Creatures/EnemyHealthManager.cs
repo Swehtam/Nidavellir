@@ -13,7 +13,7 @@ public class EnemyHealthManager : MonoBehaviour {
     //Sprite do inimigo
     private SpriteRenderer enemy_SpriteRenderer;
     //Sprite do braço do inimigo, se necessário
-    private SpriteRenderer arm_SriteRenderer;
+    private SpriteRenderer arm_SpriteRenderer;
 
     // Buffer da cor da sprite do inimigo
     private Color enemy_buffer;
@@ -32,8 +32,8 @@ public class EnemyHealthManager : MonoBehaviour {
 
         if (isSkeleton)
         {
-            arm_buffer = arm_SriteRenderer.color;
-            arm_SriteRenderer = transform.Find("Skeleton-Arm").GetComponent<SpriteRenderer>();
+            arm_SpriteRenderer = transform.Find("Skeleton-Arm").GetComponent<SpriteRenderer>();
+            arm_buffer = arm_SpriteRenderer.color;
         }
             
     }
@@ -60,11 +60,11 @@ public class EnemyHealthManager : MonoBehaviour {
     {
         enemy_SpriteRenderer.color = Color.red;
         if (isSkeleton)
-            arm_SriteRenderer.color = Color.red;
+            arm_SpriteRenderer.color = Color.red;
 
         yield return new WaitForSeconds(time);
         enemy_SpriteRenderer.color = enemy_buffer;
         if (isSkeleton)
-            arm_SriteRenderer.color = arm_buffer;
+            arm_SpriteRenderer.color = arm_buffer;
     }
 }

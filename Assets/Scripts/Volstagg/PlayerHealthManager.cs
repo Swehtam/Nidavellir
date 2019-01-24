@@ -43,12 +43,14 @@ public class PlayerHealthManager : MonoBehaviour {
     {
         if (currentHealth <= 0)
         {
+            //Se Volstagg morrer vai fazer com que outro Script chame a mudança de cena
             died = true;
             SoundManagerScript.PlaySound("volstagg-death");
             gameObject.SetActive(false);
         }
 	}
 
+    //Dar dano no player
     public void HurtPlayer(int damage)
     {
         currentHealth -= damage;
@@ -56,12 +58,14 @@ public class PlayerHealthManager : MonoBehaviour {
         StartCoroutine(WaitDamage(0.5f));
 	}
 
+    //Curar no player
 	public void CurePlayer(int cure)
 	{
 		currentHealth += cure;
 		StartCoroutine(WaitCure(0.5f));
 	}
 
+    //Fazer com que tudo fique vermelho se Volstagg tomar dano
 	public IEnumerator WaitDamage(float time)
 	{
         player_SpriteRenderer.color = Color.red;
@@ -75,6 +79,7 @@ public class PlayerHealthManager : MonoBehaviour {
         arm_SpriteRenderer.color = arm_buffer;
     }
 
+    //Fazer com que tudo de Volstagg fique verde ai pegar um coração
     public IEnumerator WaitCure(float time)
     {
         player_SpriteRenderer.color = Color.green;

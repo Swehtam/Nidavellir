@@ -8,17 +8,29 @@ namespace Yarn.Unity.Example
     {
 
         public float moveSpeed;
+
         private Rigidbody2D myRB;
         private Vector3 moveInput;
+        private GameObject point;
 
         private Animator anim;
         private bool playerMoving;
         private Vector2 lastMove;
+        private bool dialogueMove;
 
         //Tempo q Vosltagg leva para fazer a animação
         private float attackTime = 0.55f;
         private float attackCoolDown;
         private bool playerAttacking;
+
+        //array para guardar todos os pontos que Volstagg pode andar durante dialogo
+        [System.Serializable]
+        public struct MoveToInfo
+        {
+            public string name;
+            public GameObject moveTo;
+        }
+        public MoveToInfo[] pointsToMove;
 
         // Use this for initialization
         void Start()
@@ -33,6 +45,21 @@ namespace Yarn.Unity.Example
             //Remove o controle do player caso o Dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                //Se estiver rodando o dialogo e o player precisar andar
+                if (dialogueMove)
+                {
+                    //vetor para saber qual a posição do ponto para o player
+                    lastMove = new Vector2(point.transform.position.x - transform.position.x, point.transform.position.y - transform.position.y);
+
+                    anim.SetFloat("MoveX", lastMove.x);
+                    anim.SetFloat("MoveY", lastMove.y);
+                    anim.SetFloat("LastMoveX", lastMove.x);
+                    anim.SetFloat("LastMoveY", lastMove.y);
+                }
+                
+                anim.SetBool("PlayerMoving", dialogueMove);
+
+                //Retorna pois ainda tem o dialogo rodando
                 return;
             }
 
@@ -78,11 +105,26 @@ namespace Yarn.Unity.Example
 
         private void FixedUpdate()
         {
-            //Para os controles dos inimigos caso o dialogo esteja acontecendo
+            //Para os controles do player caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                //Caso o dialogo esteja acontecendo e o player precise mover para algum lugar
+                if (dialogueMove)
+                {
+                    myRB.velocity = new Vector2(0f, 0f);
+                    transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
+
+                    //Quando chegar para de mover
+                    if (point.GetComponent<MoveToCollider>().stop)
+                    {
+                        dialogueMove = false;
+                    }
+                }
+                //Retorna pois ainda esta acontecendo o dialogo
                 return;
             }
+
+            //Mover o player atraves do teclado caso nao tenha dialogo
             myRB.velocity = moveInput;
         }
 
@@ -93,14 +135,50 @@ namespace Yarn.Unity.Example
             if(animationName == "FaceLeft")
             {
                 anim.SetFloat("LastMoveX", -1.0f);
-            }else if (animationName == "FaceRight")
+                anim.SetFloat("LastMoveY", 0f);
+            }
+            else if (animationName == "FaceRight")
             {
                 anim.SetFloat("LastMoveX", 1.0f);
+                anim.SetFloat("LastMoveY", 0f);
             }
             else if (animationName == "FaceDown")
             {
+                anim.SetFloat("LastMoveX", 0f);
                 anim.SetFloat("LastMoveY", -1.0f);
             }
+            else if (animationName == "FaceUp")
+            {
+                anim.SetFloat("LastMoveX", 0f);
+                anim.SetFloat("LastMoveY", 1.0f);
+            }
+        }
+
+        //metodo para fazer Volstagg andar até um ponto especifico durante o dialogo
+        [YarnCommand("moveTo")]
+        public void MovePoint(string pointName)
+        {
+            GameObject p = null;
+            //procura o ponto para onde irá se mover dentro do array
+            foreach (var info in pointsToMove)
+            {
+                if (info.name == pointName)
+                {
+                    p = info.moveTo;
+                    break;
+                }
+            }
+
+            //se não achar mandar uma mensagem para o console
+            if (p == null)
+            {
+                Debug.LogErrorFormat("Não foi encontrando o point {0}!", pointName);
+                return;
+            }
+
+            //se achar coloque o point para onde ele deva ir no objeto responsavel por isso
+            point = p;
+            dialogueMove = true;
         }
     }
 }

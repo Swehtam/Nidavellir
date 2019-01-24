@@ -9,7 +9,6 @@ public class LoadingScreenManager : MonoBehaviour
     [Header("Loading Visuals")]
     public Image loadingIcon;
     public Text loadingText;
-    public Slider progressBar;
     public Image fadeOverlay;
 
     [Header("Timing Settings")]
@@ -57,18 +56,10 @@ public class LoadingScreenManager : MonoBehaviour
         FadeIn();
         StartOperation(levelName);
 
-        float lastProgress = 0f;
-
         // operation does not auto-activate scene, so it's stuck at 0.9
         while (DoneLoading() == false)
         {
             yield return null;
-
-            if (Mathf.Approximately(operation.progress, lastProgress) == false)
-            {
-                progressBar.value = operation.progress;
-                lastProgress = operation.progress;
-            }
         }
 
         if (loadSceneMode == LoadSceneMode.Additive)
@@ -116,15 +107,12 @@ public class LoadingScreenManager : MonoBehaviour
     void ShowLoadingVisuals()
     {
         loadingIcon.gameObject.SetActive(true);
-
-        progressBar.value = 0f;
-        loadingText.text = "LOADING...";
+        loadingText.text = "CARREGANDO...";
     }
 
     void ShowCompletionVisuals()
     {
-        progressBar.value = 1f;
-        loadingText.text = "LOADING DONE";
+        loadingText.text = "CARREGAMENTO COMPLETO";
     }
 
 }

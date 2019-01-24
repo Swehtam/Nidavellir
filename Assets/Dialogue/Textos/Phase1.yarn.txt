@@ -1,0 +1,39 @@
+title: Start
+tags: 
+colorID: 0
+position: 540,260
+---
+<<animation Gate open>>
+<<wait 1.5>>
+<<moveTo Rök RökInitialPoint>>
+<<moveTo Volstagg VolstaggInitialPoint>>
+<<moveTo Skeleton SkeletonInitialPoint>>
+<<wait 3>>
+<<moveTo Skeleton SkeletonFinalPoint>>
+<<zoom MainCamera out>>
+<<wait 2>>
+<<animation Gate close>>
+<<wait 1.5>>
+<<setAnimation Volstagg FaceLeft>>
+<<wait 0.3>>
+<<setAnimation Rök FaceRight>>
+<<wait 0.3>>
+Volstagg:: Não bastasse o alvoroço que causou quando chegou em Valhalla, 
+Volstagg:: o engasgadinho ainda me bota numa situação dessas... Oh, cilada...
+Volstagg:: Já que estamos presos aqui, precisamos conseguir um jeito de sair. 
+Volstagg:: O que você acha que podemos fazer?
+Rök:: Viemos por aqui...
+Rök:: Então vamos sair por aqui! 
+Rök:: Só quebrar o portão! Rok consegue, Rok é forte e masculo!
+<<moveTo Rök NearGate>>
+<<wait 1>>
+<<setAnimation Volstagg FaceUp
+<<setAnimation Rök FaceUp>>
+<<setAnimation Rök Attack>>
+<<wait 1>>
+Volstagg:: ...........
+<<setAnimation Volstagg FaceDown>>
+Volstagg:: Bom, o portão não abre por que tem uma tranca,
+Volstagg:: por aqui não dá pra sair agora, 
+Volstagg:: terei de explorar esse inferno!
+===

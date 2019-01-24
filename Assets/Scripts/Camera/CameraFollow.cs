@@ -21,6 +21,7 @@ public class CameraFollow : MonoBehaviour {
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desirePosition, smoothSpeed * Time.deltaTime);
             transform.position = smoothedPosition;
         }
+        gameObject.GetComponent<Camera>().orthographicSize = 1.0f;
 		
 	}
 }

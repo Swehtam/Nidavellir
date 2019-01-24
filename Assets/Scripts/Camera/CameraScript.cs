@@ -11,6 +11,9 @@ namespace Yarn.Unity.Example
         public float smoothSpeed;
         public Vector3 offset;
 
+        private float value = 4f;
+        private bool zoom = true;
+
         void Start()
         {
             Screen.SetResolution((int)Screen.width, (int)Screen.height, true);
@@ -18,13 +21,26 @@ namespace Yarn.Unity.Example
 
         void FixedUpdate()
         {
+            //Fazer com que a camera mova suavemente para o Player
             if (target != null)
             {
                 Vector3 desirePosition = target.position + offset;
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desirePosition, smoothSpeed * Time.deltaTime);
                 transform.position = smoothedPosition;
             }
-            gameObject.GetComponent<Camera>().orthographicSize = 1.0f;
+
+            //Dar zoom in para 4.0f
+            if(zoom && value > 4.0f)
+            {
+                value -= Time.deltaTime;
+            }
+
+            //Dar zoom out para 4.0f
+            if(!zoom && value < 6.0f)
+            {
+                value += Time.deltaTime;
+            }
+            gameObject.GetComponent<Camera>().orthographicSize = value;
         }
 
         [YarnCommand("zoom")]
@@ -32,7 +48,11 @@ namespace Yarn.Unity.Example
         {
             if (mode == "in")
             {
-
+                zoom = true;
+            }
+            if (mode == "out")
+            {
+                zoom = false;
             }
         }
     }

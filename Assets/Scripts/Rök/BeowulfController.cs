@@ -6,46 +6,54 @@ namespace Yarn.Unity.Example
 {
     public class BeowulfController : MonoBehaviour
     {
-
-        private Animator anim;
-        private bool beowulfMoving;
-        private Vector2 direction;
-        private Rigidbody2D beowulfRB;
-        private float xDir;
-        private float yDir;
-        private GameObject point;
-        private bool timeToMove;
-
-        //array para guardar todos os pontos que Rök pode andar
+        //array para guardar todos os pontos que Rök pode andar e variavel para velocidade
         [System.Serializable]
         public struct MoveToInfo
         {
             public string name;
             public GameObject moveTo;
         }
-
         public MoveToInfo[] pointsToMove;
         public float moveSpeed;
+        
+        //Componentes de Rök
+        private Animator anim;
+        private Rigidbody2D rökRB;
+
+        //Variaveis para fazer Rök se mexer
+        private bool rökMoving;
+        private float xDir;
+        private float yDir;
+        private GameObject point;
+        private bool dialogueMove;
 
         // Use this for initialization
         void Start()
         {
-            beowulfRB = GetComponent<Rigidbody2D>();
+            rökRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-            timeToMove = false;
         }
 
         private void FixedUpdate()
         {
+            rökRB.velocity = new Vector2(0f, 0f);
             //Para os controles de Beowulf caso o dialogo esteja acontecendo
-            if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true && !timeToMove)
+            if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                if (dialogueMove)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
+
+                    if (point.GetComponent<MoveToCollider>().stop)
+                    {
+                        dialogueMove = false;
+                    }
+                }
                 return;
             }
 
-            if (beowulfMoving)
+            if (rökMoving)
             {
-                beowulfRB.velocity = new Vector2(0f, 0f);
                 transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
             }
 
@@ -55,29 +63,42 @@ namespace Yarn.Unity.Example
         void Update()
         {
 
-            //Para os controles de Beowulf caso o dialogo esteja acontecendo
-            if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true && !timeToMove)
+            //Para os controles de Rök caso o dialogo esteja acontecendo ou não precise se mover
+            if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                //Se estiver rodando o dialogo e o player precisar andar
+                if (dialogueMove)
+                {
+                    //vetor para saber qual a posição do ponto para o player
+                    xDir = point.transform.position.x - transform.position.x;
+                    yDir = point.transform.position.y - transform.position.y;
+
+                    anim.SetFloat("MoveX", xDir);
+                    anim.SetFloat("MoveY", yDir);
+                    anim.SetFloat("LastMoveX", xDir);
+                    anim.SetFloat("LastMoveY", yDir);
+                }
+                
+                anim.SetBool("RökMoving", dialogueMove);
+
+                //Retorna pois ainda tem o dialogo rodando
                 return;
             }
 
-            //vetor para saber qual a posição do inimigo para o player
-            beowulfMoving = true;
-            xDir = point.transform.position.x - transform.position.x;
-            yDir = point.transform.position.y - transform.position.y;
+            //Só vai se mexer se não tiver dialogo
+            if (rökMoving)
+            {
+                //vetor para saber qual a posição do ponto para o player
+                xDir = point.transform.position.x - transform.position.x;
+                yDir = point.transform.position.y - transform.position.y;
+            }
+            
 
             anim.SetFloat("MoveX", xDir);
             anim.SetFloat("MoveY", yDir);
             anim.SetFloat("LastMoveX", xDir);
             anim.SetFloat("LastMoveY", yDir);
-            anim.SetBool("EnemyMoving", beowulfMoving);
-        }
-
-        //colisão para ele sair da cena do jooj quando chegar no ponto desejado
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.transform.tag == "Finish")
-                gameObject.SetActive(false);
+            anim.SetBool("RökMoving", rökMoving);
         }
 
         //metodo para fazer Rök andar até um ponto especifico nos arquivos .yarn
@@ -104,7 +125,25 @@ namespace Yarn.Unity.Example
 
             //se achar coloque o point para onde ele deva ir no objeto responsavel por isso
             point = p;
-            timeToMove = true;
+            dialogueMove = true;
+        }
+
+        //Metodo para rodar as animações de Rök de acordo com dialogo
+        [YarnCommand("setAnimation")]
+        public void PlayAnimation(string animationName)
+        {  
+            if (animationName == "FaceRight")
+            {
+                anim.SetFloat("LastMoveX", 1.0f);
+            }
+            else if (animationName == "FaceUo")
+            {
+                anim.SetFloat("LastMoveY", 1.0f);
+            }
+            else if (animationName == "Attack")
+            {
+                anim.SetBool("RökAttacking", true);
+            }
         }
     }
 }

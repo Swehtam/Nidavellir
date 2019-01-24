@@ -14,15 +14,29 @@ namespace Yarn.Unity.Example
         //Bool para saber se o inimigo é o esqueleto
         public bool isSkeleton;
 
+        //array para guardar todos os pontos que Rök pode andar
+        [System.Serializable]
+        public struct MoveToInfo
+        {
+            public string name;
+            public GameObject moveTo;
+        }
+        public MoveToInfo[] pointsToMove;
+
+        //Variaveis para fazer os inimigos se mexerem
         private bool seeker = true;
         private float xDir;
         private float yDir;
-
+        private GameObject point;
         private bool enemyMoving;
+        private bool dialogueMove;
+
+        //Componentes dos inimigos
         private Rigidbody2D enemyRB;
         private Animator anim;
         private PlayerControl thePlayer;
 
+        //Variaveis para ataque dos inimigos
         private float attackTime = 0.5f;
         private float coolDown;
         private float attackTimeCoolDown;
@@ -51,8 +65,21 @@ namespace Yarn.Unity.Example
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                if (dialogueMove)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
+
+                    if (point.GetComponent<MoveToCollider>().stop)
+                    {
+                        dialogueMove = false;
+                    }
+                }
+
+                //Retorna pois ainda tem o dialogo rodando
                 return;
             }
+
+            //Se nao estiver com dialogo
             if (enemyMoving)
             {
                 transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, moveSpeed * Time.deltaTime);
@@ -66,6 +93,21 @@ namespace Yarn.Unity.Example
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                //Se estiver rodando o dialogo e o player precisar andar
+                if (dialogueMove)
+                {
+                    //vetor para saber qual a posição do ponto para o player
+                    xDir = point.transform.position.x - transform.position.x;
+                    yDir = point.transform.position.y - transform.position.y;
+                }
+
+                anim.SetFloat("MoveX", xDir);
+                anim.SetFloat("MoveY", yDir);
+                anim.SetFloat("LastMoveX", xDir);
+                anim.SetFloat("LastMoveY", yDir);
+                anim.SetBool("EnemyMoving", dialogueMove);
+
+                //Retorna pois ainda tem o dialogo rodando
                 return;
             }
 
@@ -121,6 +163,33 @@ namespace Yarn.Unity.Example
             }
 
             anim.SetBool("EnemyAttacking", enemyAttacking);
+        }
+
+        //metodo para fazer Rök andar até um ponto especifico nos arquivos .yarn
+        [YarnCommand("moveTo")]
+        public void MovePoint(string pointName)
+        {
+            GameObject p = null;
+            //procura o ponto para onde irá se mover dentro do array
+            foreach (var info in pointsToMove)
+            {
+                if (info.name == pointName)
+                {
+                    p = info.moveTo;
+                    break;
+                }
+            }
+
+            //se não achar mandar uma mensagem para o console
+            if (p == null)
+            {
+                Debug.LogErrorFormat("Não foi encontrando o point {0}!", pointName);
+                return;
+            }
+
+            //se achar coloque o point para onde ele deva ir no objeto responsavel por isso
+            point = p;
+            dialogueMove = true;
         }
     }
 }

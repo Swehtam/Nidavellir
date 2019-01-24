@@ -31,7 +31,7 @@ public class FireballScript : MonoBehaviour
 
         if(cooldown <= 0f)
         {
-            StartCoroutine(DestroyFireball());
+            //StartCoroutine(DestroyFireball());
         }
     }
 
@@ -47,6 +47,6 @@ public class FireballScript : MonoBehaviour
     {
         anim.SetBool("StopFireball", true);
         yield return new WaitForSeconds(1f);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
