@@ -179,11 +179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530813ca6f2ed1a47beb9d5e6f2c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 3.5
   maxRange: 5
   minRange: 1.5
   attackCoolDown: 3
   isSkeleton: 0
+  pointsToMove: []
 --- !u!114 &1453516973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,4 +271,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9007e2d27284341aede2107a5566a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 0
+  dmg: 1

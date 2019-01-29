@@ -42,6 +42,9 @@ public class HUDController : MonoBehaviour {
 
         switch (honra)
         {
+            case -1:
+                cervaUI.sprite = cervaSprites[0];
+                break;
             case 0:
                 cervaUI.sprite = cervaSprites[0];
                 break;

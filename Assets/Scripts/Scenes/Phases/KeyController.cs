@@ -7,17 +7,22 @@ public class KeyController : MonoBehaviour {
 	private int local;
 
 	public int killed = 0;
-	public int onda = 0;
-    public static bool open = false;
+    public int needToKill = 0;
+	public int onda;
+    public bool open;
 	public GameObject esqueleto;
 	public GameObject lobo;
 	public GameObject h1;
 	public GameObject h2;
+    public bool gotKey;
 
 	private void Awake()
 	{
 		local = Random.Range(1, 5);
-	}
+        onda = -1;
+        open = false;
+        gotKey = false;
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -47,25 +52,27 @@ public class KeyController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (killed == 0 && onda == 1)
+		if (killed == 0 && onda == 0)
 		{
 			Instantiate(esqueleto, new Vector3(-19.43f, 12.46f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-29.26f, 6.94f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-24.1f, -1.39f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-22.23f, 0.33f, -0.278f), Quaternion.identity);
-			onda = 2;			
+			onda = 1;
+            needToKill = 4;
 		}
-		if (killed == 4 && onda == 2)
+		if (killed == needToKill && onda == 1)
 		{
 			Instantiate(esqueleto, new Vector3(-1.87f, 27.35f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(9.24f, 21.91f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-1.87f, 17.6f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(10.37f, 18.13f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-7.01f, 15.79f, -0.278f), Quaternion.identity);
-			onda = 3;
-			mudaCora();
+			onda = 2;
+            needToKill = 9;
+            MudaCora();
 		}
-		if (killed == 9 && onda == 3)
+		if (killed == needToKill && onda == 2)
 		{
 			Instantiate(lobo, new Vector3(-12.45f, -6.44f, -0.278f), Quaternion.identity);
 			Instantiate(lobo, new Vector3(-17.52f, -1.28f, -0.278f), Quaternion.identity);
@@ -73,10 +80,11 @@ public class KeyController : MonoBehaviour {
 			Instantiate(lobo, new Vector3(-0.16f, -8.79f, -0.278f), Quaternion.identity);
 			Instantiate(lobo, new Vector3(1.43f, -4.01f, -0.278f), Quaternion.identity);
 			Instantiate(lobo, new Vector3(8.93f, -7.48f, -0.278f), Quaternion.identity);
-			onda = 4;
-			mudaCora();
+			onda = 3;
+            needToKill = 15;
+            MudaCora();
 		}
-		if (killed == 15 && onda == 4)
+		if (killed == needToKill && onda == 3)
 		{
 			Instantiate(lobo, new Vector3(-28.14f, 32.95f, -0.278f), Quaternion.identity);
 			Instantiate(lobo, new Vector3(-24.04f, 22.99f, -0.278f), Quaternion.identity);
@@ -85,10 +93,11 @@ public class KeyController : MonoBehaviour {
 			Instantiate(esqueleto, new Vector3(-36.83f, 27.9f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-26.67f, 33.82f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-12.07f, 23.55f, -0.278f), Quaternion.identity);
-			onda = 5;
-			mudaCora();
+			onda = 4;
+            needToKill = 22;
+            MudaCora();
 		}
-		if (killed == 22 && onda == 5)
+		if (killed == needToKill && onda == 4)
 		{
 			Instantiate(lobo, new Vector3(5.69f, 10.95f, -0.278f), Quaternion.identity);
 			Instantiate(lobo, new Vector3(7.24f, 5.57f, -0.278f), Quaternion.identity);
@@ -98,38 +107,42 @@ public class KeyController : MonoBehaviour {
 			Instantiate(esqueleto, new Vector3(15.65f, 3.48f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(-2.92f, 9f, -0.278f), Quaternion.identity);
 			Instantiate(esqueleto, new Vector3(4.88f, 11.56f, -0.278f), Quaternion.identity);
-			onda = 6;
-			mudaCora();
+			onda = 5;
+            needToKill = 30;
+            MudaCora();
 		}
-		if (killed == 30 && onda == 6)
+		if (killed == needToKill && onda == 5)
 		{
+            onda = 6;
             open = true;
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D col)
+	void OnTriggerEnter2D(Collider2D col)
 	{
 		if(col.gameObject.tag == "Player")
 		{
-            onda = 1;
+            gotKey = true;
+            onda = 0;
 			this.gameObject.transform.position = new Vector3(99f, 99f, -0.278f);
             SoundManagerScript.PlaySound("pickupkey");
+            
         }
 	}
 
-	void mudaCora() {
-		Vector3 posi1 = posiAle();
-		Vector3 posi2 = posiAle();
+	void MudaCora() {
+		Vector3 posi1 = PosiAle();
+		Vector3 posi2 = PosiAle();
 
 		while (posi1 == posi2) {
-			posi2 = posiAle();
+			posi2 = PosiAle();
 		}
 
 		h1.transform.position = posi1;
 		h2.transform.position = posi2;
 	}
 
-	Vector3 posiAle() {
+	Vector3 PosiAle() {
 		int indice = Random.Range(1, 18);
 
 		if (indice == 1) {

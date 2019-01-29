@@ -6,18 +6,19 @@ namespace Yarn.Unity.Example
 {
     public class GateController : MonoBehaviour
     {
-        public GameObject key;
+        public KeyController key;
         private Animator anim;
 
         // Use this for initialization
         void Start()
         {
+            key = FindObjectOfType<KeyController>();
             anim = GetComponent<Animator>();
         }
 
         void OnCollisionEnter2D(Collision2D col)
         {
-            if (KeyController.open)
+            if (key.open)
             {
                 if (col.gameObject.tag == "Player")
                 {

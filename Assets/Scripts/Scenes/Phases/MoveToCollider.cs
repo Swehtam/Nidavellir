@@ -6,44 +6,60 @@ namespace Yarn.Unity.Example
 {
     public class MoveToCollider : MonoBehaviour
     {
-        public bool stop = false;
         //colisão para ele sair da cena do jooj quando chegar no ponto desejado
         void OnTriggerEnter2D(Collider2D col)
         {
             if (col.isTrigger != true)
             {
-                //Quando Volstagg chegar no collider destruir o collider para ter menos objetos na cena
-                if (col.name.Equals("Volstagg") && gameObject.name.Equals("VolstaggInitialPoint"))
-                {
-                    col.GetComponent<PlayerControl>().moveSpeed = 5;
-                    stop = true;
-                    StartCoroutine(DestroyCollider());
-                }
-
                 //Quando Rök chegar no collider destruir o collider para ter menos objetos na cena
-                if (col.name.Equals("Rök") && (gameObject.name.Equals("RökInitialPoint") || gameObject.name.Equals("NearGate")))
+                if (col.name.Equals("Rök") && gameObject.name.Equals("NearGate"))
                 {
-                    if (gameObject.name.Equals("RökInitialPoint"))
-                        col.GetComponent<BeowulfController>().moveSpeed = 5;
-
-                    if (gameObject.name.Equals("NearGate"))
-                        col.GetComponent<Rigidbody2D>().mass = 10;
-
-                    stop = true;
-                    StartCoroutine(DestroyCollider());
+                    col.GetComponent<Rigidbody2D>().isKinematic = true;
                 }
 
                 //Quando Skeleton chegar no collider destruir o collider para ter menos objetos na cena e destruir o Skeleton
-                if (col.name.Equals("Skeleton") && (gameObject.name.Equals("SkeletonInitialPoint") || gameObject.name.Equals("SkeletonFinalPoint")))
+                if (col.name.Equals("Skeleton") && gameObject.name.Equals("SkeletonFinalPoint"))
                 {
-                    if (gameObject.name.Equals("SkeletonFinalPoint"))
-                        Destroy(col.gameObject);
-
-                    stop = true;
                     StartCoroutine(DestroyCollider());
+                    Destroy(col.gameObject);
                 }
             }
         }
+
+        void OnTriggerExit2D(Collider2D col)
+        {
+            if(!gameObject.name.Equals("NearGate"))
+            {
+                //Quando Volstagg sair do collider mudar sua velocidade e destruir o collider para ter menos objetos na cena
+                if (col.name.Equals("Volstagg") && gameObject.name.Equals("VolstaggInitialPoint"))
+                {
+                    col.GetComponent<PlayerControl>().moveSpeed = 5;
+                    StartCoroutine(DestroyCollider());
+                }
+                if (col.name.Equals("Rök") && gameObject.name.Equals("RökInitialPoint"))
+                {
+                    col.GetComponent<BeowulfController>().moveSpeed = 4;
+                    StartCoroutine(DestroyCollider());
+                }
+                if (col.name.Equals("Skeleton") && gameObject.name.Equals("SkeletonInitialPoint"))
+                {
+                    StartCoroutine(DestroyCollider());
+                }
+            }
+
+        }
+
+        /*private void OnTriggerStay2D(Collider2D col)
+        {
+            if (col.name.Equals("Volstagg") && gameObject.name.Equals("VolstaggInitialPoint"))
+            {
+                col.GetComponent<PlayerControl>().moveSpeed = 5;
+            }
+            if (col.name.Equals("Rök") && gameObject.name.Equals("RökInitialPoint"))
+            {
+                col.GetComponent<BeowulfController>().moveSpeed = 4;
+            }
+        }*/
 
         public IEnumerator DestroyCollider()
         {

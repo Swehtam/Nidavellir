@@ -21,7 +21,6 @@ namespace Yarn.Unity.Example
         private Rigidbody2D rökRB;
 
         //Variaveis para fazer Rök se mexer
-        private bool rökMoving;
         private float xDir;
         private float yDir;
         private GameObject point;
@@ -44,17 +43,12 @@ namespace Yarn.Unity.Example
                 {
                     transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
 
-                    if (point.GetComponent<MoveToCollider>().stop)
+                    if (transform.position == point.transform.position)
                     {
                         dialogueMove = false;
                     }
                 }
                 return;
-            }
-
-            if (rökMoving)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
             }
 
         }
@@ -78,27 +72,12 @@ namespace Yarn.Unity.Example
                     anim.SetFloat("LastMoveX", xDir);
                     anim.SetFloat("LastMoveY", yDir);
                 }
-                
+
                 anim.SetBool("RökMoving", dialogueMove);
 
                 //Retorna pois ainda tem o dialogo rodando
                 return;
             }
-
-            //Só vai se mexer se não tiver dialogo
-            if (rökMoving)
-            {
-                //vetor para saber qual a posição do ponto para o player
-                xDir = point.transform.position.x - transform.position.x;
-                yDir = point.transform.position.y - transform.position.y;
-            }
-            
-
-            anim.SetFloat("MoveX", xDir);
-            anim.SetFloat("MoveY", yDir);
-            anim.SetFloat("LastMoveX", xDir);
-            anim.SetFloat("LastMoveY", yDir);
-            anim.SetBool("RökMoving", rökMoving);
         }
 
         //metodo para fazer Rök andar até um ponto especifico nos arquivos .yarn

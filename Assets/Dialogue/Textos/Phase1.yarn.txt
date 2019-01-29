@@ -36,4 +36,5 @@ Volstagg:: ...........
 Volstagg:: Bom, o portão não abre por que tem uma tranca,
 Volstagg:: por aqui não dá pra sair agora, 
 Volstagg:: terei de explorar esse inferno!
+<<showHUD GameCanvas>>
 ===

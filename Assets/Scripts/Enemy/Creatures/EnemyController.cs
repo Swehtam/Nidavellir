@@ -69,7 +69,7 @@ namespace Yarn.Unity.Example
                 {
                     transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
 
-                    if (point.GetComponent<MoveToCollider>().stop)
+                    if (transform.position == point.transform.position)
                     {
                         dialogueMove = false;
                     }
