@@ -26,7 +26,7 @@ namespace Yarn.Unity.Example
             {
                 if (!keyController.gotKey)
                 {
-                    string newQuestText = "Encontre uma maneira de abrir o portão.\n\n Vou lher dar uma dica: começa com 'C' e termina com 'have'.";
+                    string newQuestText = "Encontre uma maneira de abrir o portão.\n\n Vou lhe dar uma dica: começa com 'c' e termina com 'have'.";
                     StartCoroutine(NewQuest(newQuestText));
                 }
                 else if (keyController.gotKey && !keyController.open)
