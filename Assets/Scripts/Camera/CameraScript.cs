@@ -11,7 +11,7 @@ namespace Yarn.Unity.Example
         public float smoothSpeed;
         public Vector3 offset;
 
-        private float value = 4f;
+        public float cameraSize = 4f;
         private bool zoom = true;
 
         void Start()
@@ -30,17 +30,17 @@ namespace Yarn.Unity.Example
             }
 
             //Dar zoom in para 4.0f
-            if(zoom && value > 4.0f)
+            if(zoom && cameraSize > 4.0f)
             {
-                value -= Time.deltaTime;
+                cameraSize -= Time.deltaTime;
             }
 
             //Dar zoom out para 4.0f
-            if(!zoom && value < 6.0f)
+            if(!zoom && cameraSize < 6.0f)
             {
-                value += Time.deltaTime;
+                cameraSize += Time.deltaTime;
             }
-            gameObject.GetComponent<Camera>().orthographicSize = value;
+            gameObject.GetComponent<Camera>().orthographicSize = cameraSize;
         }
 
         [YarnCommand("zoom")]

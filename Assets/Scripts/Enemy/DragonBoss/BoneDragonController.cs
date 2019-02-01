@@ -11,32 +11,32 @@ namespace Yarn.Unity.Example
         public bool shoot;
         public GameObject fireball;
         public Transform firePoint;
+        public float direction;
+        public int phase;
 
-        private float xDir;
-
-        private bool dragonMoving;
+        //private bool dragonMoving;
         private Rigidbody2D dragonRB;
         private Animator anim;
         private bool dragonFireball;
 
-        private float attackTime = 0.5f;
-        private float coolDown;
-        private float attackTimeCoolDown;
-        private bool enemyAttacking;
+        //private float attackTime = 0.5f;
+        //private float coolDown;
+        //private float attackTimeCoolDown;
 
         void Start()
         {
             dragonRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-            coolDown = 0f;
-            enemyAttacking = false;
+            //coolDown = 0f;
             dragonFireball = true;
+            phase = 1;
+            direction = -1f;
         }
 
         private void FixedUpdate()
         {
             // Para o inimigo não ser empurrado e continuar deslizando com a inercia
-            //dragonRB.velocity = new Vector2(0f, 0f);
+            dragonRB.velocity = new Vector2(0f, 0f);
 
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
@@ -58,19 +58,35 @@ namespace Yarn.Unity.Example
                 return;
             }
 
-            if (dragonFireball)
+            if (phase == 1)
             {
-                if (shoot)
+                //anim.SetBool("StartFlying", true);
+
+
+                anim.SetFloat("FacingX", direction);
+            }
+            else if (phase == 2)
+            {
+                if (dragonFireball)
                 {
-                    GameObject clone = (GameObject)Instantiate(fireball, firePoint.position, Quaternion.identity, gameObject.transform);
-                    //clone.rigidbody2D.AddForce(transform.forward * 100);
-                    clone.GetComponent<Rigidbody2D>().AddForce(new Vector2(1.0f, 0.0f) * 100);
-                    dragonFireball = false;
+                    if (shoot)
+                    {
+                        GameObject clone = (GameObject)Instantiate(fireball, firePoint.position, Quaternion.identity, gameObject.transform);
+                        clone.GetComponent<Rigidbody2D>().AddForce(new Vector2(1.0f, 0.0f) * 100);
+                        dragonFireball = false;
+                    }
+                    anim.SetBool("FireballAttack", dragonFireball);
                 }
             }
+            else if (phase == 3)
+            {
 
-            anim.SetFloat("FacingX", 1f);
-            anim.SetBool("FireballAttack", dragonFireball);
+            }
+
+            
+
+            
+            
 
             /*enemyMoving = false;
 
@@ -122,6 +138,14 @@ namespace Yarn.Unity.Example
             }
 
             anim.SetBool("EnemyAttacking", enemyAttacking);*/
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                
+            }
         }
     }
 }

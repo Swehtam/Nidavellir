@@ -21,6 +21,7 @@ public class EnemyHealthManager : MonoBehaviour {
     private Color arm_buffer;
 
     private GameObject key;
+    private bool takingDamage;
 
     // Use this for initialization
     void Start ()
@@ -29,6 +30,7 @@ public class EnemyHealthManager : MonoBehaviour {
 		currentHealth = health;
         enemy_SpriteRenderer = GetComponent<SpriteRenderer>();
         enemy_buffer = enemy_SpriteRenderer.color;
+        takingDamage = false;
 
         if (isSkeleton)
         {
@@ -50,10 +52,19 @@ public class EnemyHealthManager : MonoBehaviour {
 
     public void HurtEnemy(int damage)
     {
-        currentHealth -= damage;
-        if (isSkeleton)
-            SoundManagerScript.PlaySound("skeleton-bones");
-        StartCoroutine(Wait(0.5f));
+        if (!takingDamage)
+        {
+            takingDamage = true;
+            currentHealth -= damage;
+            if (isSkeleton)
+                SoundManagerScript.PlaySound("skeleton-bones");
+            StartCoroutine(Wait(0.5f));
+        }
+        else
+        {
+            return;
+        }
+        
     }
 
     public IEnumerator Wait(float time)
@@ -66,5 +77,7 @@ public class EnemyHealthManager : MonoBehaviour {
         enemy_SpriteRenderer.color = enemy_buffer;
         if (isSkeleton)
             arm_SpriteRenderer.color = arm_buffer;
+
+        takingDamage = false;
     }
 }

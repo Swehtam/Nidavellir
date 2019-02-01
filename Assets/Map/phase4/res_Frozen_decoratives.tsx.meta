@@ -1,0 +1,71 @@
+fileFormatVersion: 2
+guid: e91debcd92992b844b6cd21f554871d4
+ScriptedImporter:
+  fileIDToRecycleName:
+    2800000: Atlas_res_Frozen_decoratives_1
+    11400000: _TilesetScriptObject
+    11400002: _superAsset
+    11400004: Tile_res_Frozen_decoratives_1
+    11400006: Tile_res_Frozen_decoratives_2
+    11400008: Tile_res_Frozen_decoratives_3
+    11400010: Tile_res_Frozen_decoratives_4
+    11400012: Tile_res_Frozen_decoratives_5
+    11400014: Tile_res_Frozen_decoratives_6
+    11400016: Tile_res_Frozen_decoratives_7
+    11400018: Tile_res_Frozen_decoratives_8
+    11400020: Tile_res_Frozen_decoratives_9
+    11400022: Tile_res_Frozen_decoratives_10
+    11400024: Tile_res_Frozen_decoratives_11
+    11400026: Tile_res_Frozen_decoratives_12
+    11400028: Tile_res_Frozen_decoratives_13
+    11400030: Tile_res_Frozen_decoratives_14
+    11400032: Tile_res_Frozen_decoratives_15
+    11400034: Tile_res_Frozen_decoratives_16
+    11400036: Tile_res_Frozen_decoratives_17
+    11400038: Tile_res_Frozen_decoratives_18
+    11400040: Tile_res_Frozen_decoratives_19
+    11400042: Tile_res_Frozen_decoratives_20
+    11400044: Tile_res_Frozen_decoratives_21
+    11400046: Tile_res_Frozen_decoratives_22
+    11400048: Tile_res_Frozen_decoratives_23
+    11400050: Tile_res_Frozen_decoratives_24
+    11400052: Tile_res_Frozen_decoratives_25
+    21300000: Sprite_res_Frozen_decoratives_1
+    21300002: Sprite_res_Frozen_decoratives_2
+    21300004: Sprite_res_Frozen_decoratives_3
+    21300006: Sprite_res_Frozen_decoratives_4
+    21300008: Sprite_res_Frozen_decoratives_5
+    21300010: Sprite_res_Frozen_decoratives_6
+    21300012: Sprite_res_Frozen_decoratives_7
+    21300014: Sprite_res_Frozen_decoratives_8
+    21300016: Sprite_res_Frozen_decoratives_9
+    21300018: Sprite_res_Frozen_decoratives_10
+    21300020: Sprite_res_Frozen_decoratives_11
+    21300022: Sprite_res_Frozen_decoratives_12
+    21300024: Sprite_res_Frozen_decoratives_13
+    21300026: Sprite_res_Frozen_decoratives_14
+    21300028: Sprite_res_Frozen_decoratives_15
+    21300030: Sprite_res_Frozen_decoratives_16
+    21300032: Sprite_res_Frozen_decoratives_17
+    21300034: Sprite_res_Frozen_decoratives_18
+    21300036: Sprite_res_Frozen_decoratives_19
+    21300038: Sprite_res_Frozen_decoratives_20
+    21300040: Sprite_res_Frozen_decoratives_21
+    21300042: Sprite_res_Frozen_decoratives_22
+    21300044: Sprite_res_Frozen_decoratives_23
+    21300046: Sprite_res_Frozen_decoratives_24
+    21300048: Sprite_res_Frozen_decoratives_25
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: cc34d0f3dc257a442819830b408c5322, type: 3}
+  errors: []
+  warnings: []
+  missingSortingLayers: []
+  missingLayers: []
+  pixelsPerUnit: 100
+  edgesPerEllipse: 32
+  useSpriteAtlas: 1
+  atlasWidth: 2048
+  atlasHeight: 2048
