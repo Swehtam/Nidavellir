@@ -11,20 +11,20 @@ namespace Yarn.Unity.Example
         private PlayerHealthManager playerHealth;
         private BoneDragonController dragon;
         private bool isBroken;
-        private SpriteRenderer floorSR;
+        private Animator anim;
 
         // Start is called before the first frame update
         void Start()
         {
             playerHealth = FindObjectOfType<PlayerHealthManager>();
             dragon = FindObjectOfType<BoneDragonController>();
-            floorSR = GetComponent<SpriteRenderer>();
             isBroken = false;
+            anim = GetComponent<Animator>();
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
+        private void OnTriggerStay2D(Collider2D col)
         {
-            if(dragon.phase == 1)
+            if(dragon.phase == 2)
             {
                 if (!col.isTrigger && col.CompareTag("Player"))
                 {
@@ -43,9 +43,10 @@ namespace Yarn.Unity.Example
 
         public IEnumerator HoleAnimation()
         {
-            floorSR.sprite = holeSprite;
-            //Animação do buraco abrindo
-            yield return new WaitForSeconds(1f);
+            anim.SetBool("FloorBreaking", true);
+            yield return new WaitForSeconds(0.6f);
+            anim.SetBool("FloorBreaking", false);
+            isBroken = true;
         }
     }
 }
