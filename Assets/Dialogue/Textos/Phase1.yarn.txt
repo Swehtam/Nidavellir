@@ -24,7 +24,7 @@ Volstagg:: Já que estamos presos aqui, precisamos conseguir um jeito de sair.
 Volstagg:: O que você acha que podemos fazer?
 Rök:: Viemos por aqui...
 Rök:: Então vamos sair por aqui! 
-Rök:: Só quebrar o portão! Rok consegue, Rok é forte e masculo!
+Rök:: Só quebrar o portão! Rok consegue, Rok é forte e másculo!
 <<moveTo Rök NearGate>>
 <<wait 1>>
 <<setAnimation Volstagg FaceUp
@@ -33,7 +33,7 @@ Rök:: Só quebrar o portão! Rok consegue, Rok é forte e masculo!
 <<wait 1>>
 Volstagg:: ...........
 <<setAnimation Volstagg FaceDown>>
-Volstagg:: Bom, o portão não abre por que tem uma tranca,
+Volstagg:: Bom, o portão não abre porque tem uma tranca,
 Volstagg:: por aqui não dá pra sair agora, 
 Volstagg:: terei de explorar esse inferno!
 <<showHUD GameCanvas>>
