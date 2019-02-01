@@ -51,3 +51,6 @@ TagManager:
   - name: WorldObjects
     uniqueID: 3094778173
     locked: 0
+  - name: Boss
+    uniqueID: 3715147237
+    locked: 0

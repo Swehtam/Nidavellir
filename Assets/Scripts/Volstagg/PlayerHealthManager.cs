@@ -61,8 +61,12 @@ public class PlayerHealthManager : MonoBehaviour {
     //Curar no player
 	public void CurePlayer(int cure)
 	{
-		currentHealth += cure;
-		StartCoroutine(WaitCure(0.5f));
+        currentHealth += cure;
+
+        if (currentHealth > 5)
+            currentHealth = 5;
+       
+        StartCoroutine(WaitCure(0.5f));
 	}
 
     //Fazer com que tudo fique vermelho se Volstagg tomar dano
