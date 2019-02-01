@@ -2,51 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballScript : MonoBehaviour
+namespace Yarn.Unity.Example
 {
-    private Rigidbody2D fireballRB;
-    private Animator anim;
-    private float timeToDestroy = 3f;
-    private float cooldown;
-    private bool fbCreated;
-
-    // Start is called before the first frame update
-    void Start()
+    public class FireballScript : MonoBehaviour
     {
-        fireballRB = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        fbCreated = true;
-    }
+        //Componente da Fireball
+        private Animator anim;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (fbCreated)
+        //Outros game objects
+        private BoneDragonController dragon;
+        private PlayerHealthManager playerHealth;
+
+        //Variaveis de controle da Fireball
+        private readonly float timeToDestroy = 3f;
+        private float cooldown;
+        private bool fbCreated;
+        private readonly int damage = 2; 
+
+        // Start is called before the first frame update
+        void Start()
         {
-            cooldown = timeToDestroy;
-            fbCreated = false;
+            anim = GetComponent<Animator>();
+            fbCreated = true;
+            dragon = FindObjectOfType<BoneDragonController>();
+            playerHealth = FindObjectOfType<PlayerHealthManager>();
         }
 
-        cooldown -= Time.deltaTime;
-
-        if(cooldown <= 0f)
+        // Update is called once per frame
+        void Update()
         {
-            //StartCoroutine(DestroyFireball());
-        }
-    }
+            if (fbCreated)
+            {
+                cooldown = timeToDestroy;
+                fbCreated = false;
+                anim.SetFloat("FireballDirection", dragon.direction);
+            }
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.isTrigger != true && col.CompareTag("Player"))
+            cooldown -= Time.deltaTime;
+
+            if (cooldown <= 0f)
+            {
+                StartCoroutine(DestroyFireball());
+            }
+        }
+
+        void OnTriggerEnter2D(Collider2D col)
         {
-            StartCoroutine(DestroyFireball());
+            if (col.isTrigger != true && col.CompareTag("Player"))
+            {
+                playerHealth.HurtPlayer(damage);
+                StartCoroutine(DestroyFireball());
+            }
         }
-    }
 
-    private IEnumerator DestroyFireball()
-    {
-        anim.SetBool("StopFireball", true);
-        yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        private IEnumerator DestroyFireball()
+        {
+            anim.SetBool("StopFireball", true);
+            yield return new WaitForSeconds(0.8f);
+            Destroy(gameObject);
+        }
     }
 }
