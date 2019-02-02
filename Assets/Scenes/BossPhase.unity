@@ -2435,8 +2435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002513eada4979a4db7ea9e637b89eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 540957413}
-  smoothSpeed: 5
+  targets:
+  - name: Volstagg
+    moveTo: {fileID: 540957413}
+  targetName: Volstagg
   offset: {x: 0, y: 0, z: -10}
   cameraSize: 4
 --- !u!60 &1725552584 stripped
@@ -2939,6 +2941,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: phase4
       objectReference: {fileID: 0}
+    - target: {fileID: 400068, guid: cc0da31def35fae4dbf802979d5c2b92, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 400068, guid: cc0da31def35fae4dbf802979d5c2b92, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.08
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cc0da31def35fae4dbf802979d5c2b92, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.9
@@ -3133,14 +3143,6 @@ PrefabInstance:
     - target: {fileID: 400036, guid: cc0da31def35fae4dbf802979d5c2b92, type: 3}
       propertyPath: m_LocalPosition.y
       value: -6.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 400068, guid: cc0da31def35fae4dbf802979d5c2b92, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 400068, guid: cc0da31def35fae4dbf802979d5c2b92, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.08
       objectReference: {fileID: 0}
     - target: {fileID: 6600000, guid: cc0da31def35fae4dbf802979d5c2b92, type: 3}
       propertyPath: m_ColliderPaths.Array.size

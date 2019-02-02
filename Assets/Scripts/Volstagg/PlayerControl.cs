@@ -108,10 +108,10 @@ namespace Yarn.Unity.Example
             //Para os controles do player caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                myRB.velocity = new Vector2(0f, 0f);
                 //Caso o dialogo esteja acontecendo e o player precise mover para algum lugar
                 if (dialogueMove)
                 {
-                    myRB.velocity = new Vector2(0f, 0f);
                     transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
 
                     //Quando chegar para de mover

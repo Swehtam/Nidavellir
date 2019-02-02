@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour {
-
-    public int dmg;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+namespace Yarn.Unity.Example
+{
+    public class PlayerAttack : MonoBehaviour
     {
-        if (collision.isTrigger != true && collision.CompareTag("Enemy"))
+
+        public int dmg;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            collision.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(dmg);
+            if (collision.isTrigger != true && collision.CompareTag("Enemy"))
+            {
+                collision.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(dmg);
+            }
         }
     }
 }

@@ -75,10 +75,14 @@ namespace Yarn.Unity.Example
         }
 
         // Metodo para mostrar o HUD quando for chamado no dialogo
-        [YarnCommand("showHUD")]
-        public void ShowHUD()
+        [YarnCommand("HUD")]
+        public void ShowHUD(string command)
         {
-            hudMenu.SetActive(true);
+            if(command.Equals("show"))
+                hudMenu.SetActive(true);
+
+            if (command.Equals("hide"))
+                hudMenu.SetActive(false);
         }
     }
 }

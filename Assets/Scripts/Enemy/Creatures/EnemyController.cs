@@ -191,5 +191,22 @@ namespace Yarn.Unity.Example
             point = p;
             dialogueMove = true;
         }
+
+        //Metodo para rodas as animações do Skeleton de acordo com dialogo
+        [YarnCommand("setAnimation")]
+        public void PlayAnimation(string animationName)
+        {
+            if (animationName == "Scream")
+            {
+                StartCoroutine(Scream());
+            }
+        }
+
+        public IEnumerator Scream()
+        {
+            anim.SetBool("Scream", true);
+            yield return new WaitForSeconds(1f);
+            anim.SetBool("Scream", false);
+        }
     }
 }

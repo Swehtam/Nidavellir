@@ -8,12 +8,14 @@ namespace Yarn.Unity.Example
     {
         public KeyController key;
         private Animator anim;
+        private bool loadNextScene;
 
         // Use this for initialization
         void Start()
         {
             key = FindObjectOfType<KeyController>();
             anim = GetComponent<Animator>();
+            loadNextScene = false;
         }
 
         void OnCollisionEnter2D(Collision2D col)
@@ -22,8 +24,18 @@ namespace Yarn.Unity.Example
             {
                 if (col.gameObject.tag == "Player")
                 {
+                    loadNextScene = true;
                     StartCoroutine(Open());
                 }
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D col)
+        {
+            if (col.gameObject.tag == "Player")
+            {
+                if (loadNextScene)
+                    LoadingScreenManager.LoadScene("BossPhase");
             }
         }
 
@@ -34,6 +46,7 @@ namespace Yarn.Unity.Example
             yield return new WaitForSeconds(1.0f);
             anim.SetBool("IsOpen", true);
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            
         }
 
         public IEnumerator Close()

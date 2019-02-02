@@ -36,7 +36,6 @@ namespace Yarn.Unity.Example
                     {
                         playerHealth.HurtPlayer(5);
                     }
-
                 }
             }
         }
