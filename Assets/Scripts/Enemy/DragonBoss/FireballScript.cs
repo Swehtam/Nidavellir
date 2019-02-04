@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,12 @@ namespace Yarn.Unity.Example
 {
     public class FireballScript : MonoBehaviour
     {
-        //Componente da Fireball
+        //variavel para saber se atingiu o bloco de gelo, variavel sendo utilizada no script IceBlockHidding
+        public bool iceBlockHit;
+
+        //Componentes da Fireball
         private Animator anim;
+        private Rigidbody2D fireRB;
 
         //Outros game objects
         private BoneDragonController dragon;
@@ -17,11 +22,13 @@ namespace Yarn.Unity.Example
         private readonly float timeToDestroy = 3f;
         private float cooldown;
         private bool fbCreated;
-        private readonly int damage = 2; 
+        private readonly int damage = 1; 
 
         // Start is called before the first frame update
         void Start()
         {
+            iceBlockHit = false;
+            fireRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             fbCreated = true;
             dragon = FindObjectOfType<BoneDragonController>();
@@ -38,25 +45,35 @@ namespace Yarn.Unity.Example
                 anim.SetFloat("FireballDirection", dragon.direction);
             }
 
-            cooldown -= Time.deltaTime;
-
-            if (cooldown <= 0f)
+            if (iceBlockHit)
             {
                 StartCoroutine(DestroyFireball());
             }
+            else
+            {
+                cooldown -= Time.deltaTime;
+
+                if (cooldown <= 0f)
+                {
+                    StartCoroutine(DestroyFireball());
+                }
+            }
+            
         }
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.isTrigger != true && col.CompareTag("Player"))
+            if (!col.isTrigger && col.CompareTag("Player"))
             {
                 playerHealth.HurtPlayer(damage);
+                playerHealth.SlowPlayer();
                 StartCoroutine(DestroyFireball());
             }
         }
 
         private IEnumerator DestroyFireball()
         {
+            fireRB.velocity = new Vector2(0f, 0f);
             anim.SetBool("StopFireball", true);
             yield return new WaitForSeconds(0.8f);
             Destroy(gameObject);

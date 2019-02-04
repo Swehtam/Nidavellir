@@ -13,6 +13,10 @@ namespace Yarn.Unity.Example
         public Transform firePoint;
         public float direction;
         public int phase;
+        public int volstaggLane;
+
+        //Variavel para saber se o boss morreu, ela ta sendo usado no script BossHealthManager
+        public bool died;
 
         //private bool dragonMoving;
         private Rigidbody2D dragonRB;
@@ -29,6 +33,7 @@ namespace Yarn.Unity.Example
             anim = GetComponent<Animator>();
             //coolDown = 0f;
             dragonFireball = true;
+            died = false;
             phase = 1;
             direction = -1f;
         }
@@ -37,6 +42,10 @@ namespace Yarn.Unity.Example
         {
             // Para o inimigo não ser empurrado e continuar deslizando com a inercia
             dragonRB.velocity = new Vector2(0f, 0f);
+            if (died)
+            {
+                //alterara a variavel que será usada na movimentação do boss, para ele mesmo, ou seja, ele vai parar aonde estiver
+            }
 
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
@@ -60,6 +69,7 @@ namespace Yarn.Unity.Example
 
             if (phase == 1)
             {
+                //boss ja vai estar voando por causa do dialogo então não precisa disso aqui
                 //anim.SetBool("StartFlying", true);
 
 
@@ -82,11 +92,6 @@ namespace Yarn.Unity.Example
             {
 
             }
-
-            
-
-            
-            
 
             /*enemyMoving = false;
 
@@ -138,14 +143,6 @@ namespace Yarn.Unity.Example
             }
 
             anim.SetBool("EnemyAttacking", enemyAttacking);*/
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.CompareTag("Player"))
-            {
-                
-            }
         }
     }
 }

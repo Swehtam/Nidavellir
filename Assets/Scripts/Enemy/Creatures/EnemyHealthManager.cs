@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Yarn.Unity.Example
 {
     public class EnemyHealthManager : MonoBehaviour
     {
-
         public int health;
         public int currentHealth;
 

@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackTrigger : MonoBehaviour {
-
-    public int dmg;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+namespace Yarn.Unity.Example
+{
+    public class EnemyAttackTrigger : MonoBehaviour
     {
-        if(collision.isTrigger != true && collision.CompareTag("Player"))
+        public int dmg;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            collision.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(dmg);
-            SoundManagerScript.PlaySound("sword-slash-attack");
+            if (collision.isTrigger != true && collision.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(dmg);
+                SoundManagerScript.PlaySound("sword-slash-attack");
+            }
         }
     }
 }
+

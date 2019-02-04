@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerDeath : MonoBehaviour
+namespace Yarn.Unity.Example
 {
-    public GameObject player;
-
-    void Update()
+    public class PlayerDeath : MonoBehaviour
     {
-        if (player)
+        public GameObject player;
+
+        void Update()
         {
-            if (player.gameObject.GetComponent<PlayerHealthManager>().died == true)
+            if (player)
             {
-                LoadingScreenManager.LoadScene("DeathScene");
+                if (player.gameObject.GetComponent<PlayerHealthManager>().died == true)
+                {
+                    LoadingScreenManager.LoadScene("DeathScene");
+                }
             }
         }
     }

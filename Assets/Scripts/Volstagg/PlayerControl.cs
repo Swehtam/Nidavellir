@@ -6,23 +6,6 @@ namespace Yarn.Unity.Example
 {
     public class PlayerControl : MonoBehaviour
     {
-
-        public float moveSpeed;
-
-        private Rigidbody2D myRB;
-        private Vector3 moveInput;
-        private GameObject point;
-
-        private Animator anim;
-        private bool playerMoving;
-        private Vector2 lastMove;
-        private bool dialogueMove;
-
-        //Tempo q Vosltagg leva para fazer a animação
-        private float attackTime = 0.55f;
-        private float attackCoolDown;
-        private bool playerAttacking;
-
         //array para guardar todos os pontos que Volstagg pode andar durante dialogo
         [System.Serializable]
         public struct MoveToInfo
@@ -32,9 +15,31 @@ namespace Yarn.Unity.Example
         }
         public MoveToInfo[] pointsToMove;
 
+        //Variaveis de velocidade de Volstagg
+        public float moveSpeed;
+        public bool canRun;
+
+        //Componentes de Volstagg
+        private Rigidbody2D myRB;
+        private Animator anim;
+
+        //Variaveis para o movimento de Volstagg
+        private Vector3 moveInput;
+        private GameObject point;
+        private bool playerMoving;
+        private Vector2 lastMove;
+        private bool dialogueMove;
+
+        //Tempo q Vosltagg leva para fazer a animação
+        //Variaveis para o ataque dele
+        private readonly float attackTime = 0.55f;
+        private float attackCoolDown;
+        private bool playerAttacking;
+        
         // Use this for initialization
         void Start()
         {
+            canRun = true;
             myRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
         }
@@ -64,6 +69,15 @@ namespace Yarn.Unity.Example
             }
 
             playerMoving = false;
+
+            if (Input.GetKey(KeyCode.LeftShift) && canRun)
+            {
+                moveSpeed = 5f;
+            }
+            else
+            {
+                moveSpeed = 2f;
+            }
 
             moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             moveInput = moveInput * moveSpeed;
