@@ -70,7 +70,7 @@ namespace Yarn.Unity.Example
 
             playerMoving = false;
 
-            if (Input.GetKey(KeyCode.LeftShift) && canRun)
+            if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && canRun)
             {
                 moveSpeed = 5f;
             }

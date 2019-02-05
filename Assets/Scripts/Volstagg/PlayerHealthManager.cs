@@ -9,8 +9,12 @@ namespace Yarn.Unity.Example
     {
         public int maxHealth;
         public int currentHealth;
+        // Variavel sendo usada em outro script para poder mudar para cena de morte
+        public bool died;
 
         private PlayerControl player;
+        private float slowCD;
+        private bool normal;
 
         //Sprite do player
         private SpriteRenderer player_SpriteRenderer;
@@ -26,12 +30,11 @@ namespace Yarn.Unity.Example
         //Buffer da cor do shield do player;
         private Color shield_buffer;
 
-        // Variavel sendo usada em outro script para poder mudar para cena de morte
-        public bool died;
-
         // Use this for initialization
         void Start()
         {
+            normal = true;
+            slowCD = 0f;
             currentHealth = maxHealth;
             player = GetComponent<PlayerControl>();
 
@@ -48,6 +51,12 @@ namespace Yarn.Unity.Example
         // Update is called once per frame
         void Update()
         {
+            if (normal)
+            {
+                player_SpriteRenderer.color = player_buffer;
+                shield_SpriteRenderer.color = shield_buffer;
+                arm_SpriteRenderer.color = arm_buffer;
+            }
             if (currentHealth <= 0)
             {
                 //Se Volstagg morrer vai fazer com que outro Script chame a mudança de cena
@@ -55,73 +64,60 @@ namespace Yarn.Unity.Example
                 SoundManagerScript.PlaySound("volstagg-death");
                 gameObject.SetActive(false);
             }
+
+            if(slowCD >= 0 && !normal)
+            {
+                player.canRun = false;
+
+                player_SpriteRenderer.color = Color.blue;
+                shield_SpriteRenderer.color = Color.blue;
+                arm_SpriteRenderer.color = Color.blue;
+
+                slowCD -= Time.deltaTime;
+            }
+            else
+            {
+                player.canRun = true;
+                normal = true;
+            }
         }
 
         //Dar dano no player
+        //Fazer com que tudo fique vermelho se Volstagg tomar dano
         public void HurtPlayer(int damage)
         {
+            normal = false;
             currentHealth -= damage;
             SoundManagerScript.PlaySound("volstagg-grunt");
-            StartCoroutine(WaitDamage(0.5f));
+            StartCoroutine(Wait(0.5f, Color.red));
         }
 
         //Curar no player
+        //Fazer com que tudo de Volstagg fique verde ai pegar um coração
         public void CurePlayer(int cure)
         {
+            normal = false;
             currentHealth += cure;
 
             if (currentHealth > 5)
                 currentHealth = 5;
 
-            StartCoroutine(WaitCure(0.5f));
+            StartCoroutine(Wait(0.5f, Color.green));
         }
 
         public void SlowPlayer()
         {
-            player.canRun = false;
-            StartCoroutine(WaitSlow(2f));
+            slowCD = 2f;
+            normal = false;
         }
 
-        //Fazer com que tudo fique vermelho se Volstagg tomar dano
-        public IEnumerator WaitDamage(float time)
+        public IEnumerator Wait(float time, Color color)
         {
-            player_SpriteRenderer.color = Color.red;
-            shield_SpriteRenderer.color = Color.red;
-            arm_SpriteRenderer.color = Color.red;
+            player_SpriteRenderer.color = color;
+            shield_SpriteRenderer.color = color;
+            arm_SpriteRenderer.color = color;
 
             yield return new WaitForSeconds(time);
-
-            player_SpriteRenderer.color = player_buffer;
-            shield_SpriteRenderer.color = shield_buffer;
-            arm_SpriteRenderer.color = arm_buffer;
-        }
-
-        //Fazer com que tudo de Volstagg fique verde ai pegar um coração
-        public IEnumerator WaitCure(float time)
-        {
-            player_SpriteRenderer.color = Color.green;
-            shield_SpriteRenderer.color = Color.green;
-            arm_SpriteRenderer.color = Color.green;
-
-            yield return new WaitForSeconds(time);
-
-            player_SpriteRenderer.color = player_buffer;
-            shield_SpriteRenderer.color = shield_buffer;
-            arm_SpriteRenderer.color = arm_buffer;
-        }
-
-        public IEnumerator WaitSlow(float time)
-        {
-            player_SpriteRenderer.color = Color.blue;
-            shield_SpriteRenderer.color = Color.blue;
-            arm_SpriteRenderer.color = Color.blue;
-
-            yield return new WaitForSeconds(time);
-
-            player_SpriteRenderer.color = player_buffer;
-            shield_SpriteRenderer.color = shield_buffer;
-            arm_SpriteRenderer.color = arm_buffer;
-            player.canRun = true;
         }
     }
 }

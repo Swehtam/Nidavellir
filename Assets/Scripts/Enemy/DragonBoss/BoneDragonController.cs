@@ -8,11 +8,13 @@ namespace Yarn.Unity.Example
     {
         public float moveSpeed;
         public float attackCoolDown;
-        public bool shoot;
         public GameObject fireball;
         public Transform firePoint;
         public float direction;
         public int phase;
+        public bool shoot;
+
+        //Fazendo referencia ao Script BossLane
         public int volstaggLane;
 
         //Variavel para saber se o boss morreu, ela ta sendo usado no script BossHealthManager
@@ -21,21 +23,26 @@ namespace Yarn.Unity.Example
         //private bool dragonMoving;
         private Rigidbody2D dragonRB;
         private Animator anim;
-        private bool dragonFireball;
+        private GameObject point;
 
-        //private float attackTime = 0.5f;
-        //private float coolDown;
-        //private float attackTimeCoolDown;
+        private readonly float attackTime = 2f;
+        private float coolDown;
+        private float attackTimeCoolDown;
+        private bool attackingFireball;
+        private bool fbCreated;
 
         void Start()
         {
+            point = FindObjectOfType<PlayerControl>().gameObject;
             dragonRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-            //coolDown = 0f;
-            dragonFireball = true;
+            coolDown = 0f;
+            attackingFireball = false;
             died = false;
-            phase = 1;
-            direction = -1f;
+            phase = 2;
+            direction = 1f;
+            shoot = false;
+            fbCreated = false;
         }
 
         private void FixedUpdate()
@@ -51,6 +58,18 @@ namespace Yarn.Unity.Example
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
                 return;
+            }
+            if(phase == 1)
+            {
+
+            }
+            else if (phase == 2)
+            {
+                transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x, point.transform.position.y + 2f), moveSpeed * Time.deltaTime);
+            }
+            else if (phase == 3)
+            {
+
             }
             /*if (dragonRB)
             /{
@@ -77,16 +96,34 @@ namespace Yarn.Unity.Example
             }
             else if (phase == 2)
             {
-                if (dragonFireball)
+                if (shoot && !fbCreated)
                 {
-                    if (shoot)
-                    {
-                        GameObject clone = (GameObject)Instantiate(fireball, firePoint.position, Quaternion.identity, gameObject.transform);
-                        clone.GetComponent<Rigidbody2D>().AddForce(new Vector2(1.0f, 0.0f) * 100);
-                        dragonFireball = false;
-                    }
-                    anim.SetBool("FireballAttack", dragonFireball);
+                    fbCreated = true;
+                    GameObject clone = (GameObject)Instantiate(fireball, firePoint.position, Quaternion.identity);
+                    clone.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction, 0.0f) * 200);
                 }
+
+                if (coolDown <= 0)
+                {
+                    attackingFireball = true;
+                    coolDown = attackCoolDown;
+                    attackTimeCoolDown = attackTime;
+                }
+
+                if (coolDown > 0)
+                {
+                    attackTimeCoolDown -= Time.deltaTime;
+                    coolDown -= Time.deltaTime;
+                }
+
+                if (attackTimeCoolDown < 0)
+                {
+                    attackingFireball = false;
+                    fbCreated = false;
+                }
+
+                anim.SetBool("FireballAttack", attackingFireball);
+                anim.SetFloat("FacingX", direction);
             }
             else if (phase == 3)
             {
