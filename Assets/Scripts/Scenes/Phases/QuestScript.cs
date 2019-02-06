@@ -14,45 +14,56 @@ namespace Yarn.Unity.Example
         private readonly float eraseSpeed = 0f;
         private bool runnig = false;
         private KeyController keyController;
+        private BoneDragonController boss;
 
         private void Start()
         {
             keyController = FindObjectOfType<KeyController>();
+            boss = FindObjectOfType<BoneDragonController>();
         }
 
         void Update()
         {
             if (!runnig)
             {
-                if (!keyController.gotKey)
+                if (keyController)
                 {
-                    string newQuestText = "Encontre uma maneira de abrir o portão.\n\n Vou lhe dar uma dica: começa com 'c' e termina com 'have'.";
-                    StartCoroutine(NewQuest(newQuestText));
-                }
-                else if (keyController.gotKey && !keyController.open)
-                {
-                    string newQuestText = "Opa, vejo que você tem companhia, é melhor se livrar deles.\n\n  Onda: " + keyController.onda + " de 5\n  Inimigos derrotados: " + keyController.killed +
-                                          " de " + keyController.needToKill;
-
-                    if (keyController.killed == 0 && quest.text != newQuestText)
+                    if (!keyController.gotKey)
                     {
+                        string newQuestText = "Encontre uma maneira de abrir o portão.\n\n Vou lhe dar uma dica: começa com 'c' e termina com 'have'.";
                         StartCoroutine(NewQuest(newQuestText));
                     }
-                    else if (keyController.killed > 0 && keyController.killed < 30)
+                    else if (keyController.gotKey && !keyController.open)
                     {
-                        StartCoroutine(UpdateQuest(newQuestText));
+                        string newQuestText = "Opa, vejo que você tem companhia, é melhor se livrar deles.\n\n  Onda: " + keyController.onda + " de 5\n  Inimigos derrotados: " + keyController.killed +
+                                              " de " + keyController.needToKill;
+
+                        if (keyController.killed == 0 && quest.text != newQuestText)
+                        {
+                            StartCoroutine(NewQuest(newQuestText));
+                        }
+                        else if (keyController.killed > 0 && keyController.killed < 30)
+                        {
+                            StartCoroutine(UpdateQuest(newQuestText));
+                        }
+                        else
+                        {
+                            return;
+                        }
+
                     }
                     else
                     {
-                        return;
+                        string newQuestText = " Para um anão até que você não é ruim.\n\n Agora vá e passe pelo portão, você merece continuar sua jornada.";
+                        StartCoroutine(NewQuest(newQuestText));
                     }
+                }
+
+                if (boss)
+                {
 
                 }
-                else
-                {
-                    string newQuestText = " Para um anão até que você não é ruim.\n\n Agora vá e passe pelo portão, você merece continuar sua jornada.";
-                    StartCoroutine(NewQuest(newQuestText));
-                }
+                
             }
         }
 

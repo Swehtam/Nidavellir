@@ -11,6 +11,7 @@ namespace Yarn.Unity.Example
         public int currentHealth;
         // Variavel sendo usada em outro script para poder mudar para cena de morte
         public bool died;
+        public bool dontTakeDamage;
 
         private PlayerControl player;
         private float slowCD;
@@ -34,6 +35,7 @@ namespace Yarn.Unity.Example
         void Start()
         {
             normal = true;
+            dontTakeDamage = false;
             slowCD = 0f;
             currentHealth = maxHealth;
             player = GetComponent<PlayerControl>();
@@ -86,10 +88,13 @@ namespace Yarn.Unity.Example
         //Fazer com que tudo fique vermelho se Volstagg tomar dano
         public void HurtPlayer(int damage)
         {
-            normal = false;
-            currentHealth -= damage;
-            SoundManagerScript.PlaySound("volstagg-grunt");
-            StartCoroutine(Wait(0.5f, Color.red));
+            if (!dontTakeDamage)
+            {
+                normal = false;
+                currentHealth -= damage;
+                SoundManagerScript.PlaySound("volstagg-grunt");
+                StartCoroutine(Wait(0.5f, Color.red));
+            }
         }
 
         //Curar no player

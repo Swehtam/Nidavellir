@@ -14,7 +14,7 @@ namespace Yarn.Unity.Example
             boss = FindObjectOfType<BoneDragonController>();
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
+        private void OnTriggerStay2D(Collider2D col)
         {
             if(!col.isTrigger && col.name.Equals("Volstagg"))
             {

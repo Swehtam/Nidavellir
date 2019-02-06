@@ -8,11 +8,21 @@ namespace Yarn.Unity.Example
     {
         public float moveSpeed;
         public float attackCoolDown;
+        //So que de gelo
         public GameObject fireball;
         public Transform firePoint;
         public float direction;
         public int phase;
         public bool shoot;
+
+        //Pontos para onde o dragão vai voar
+        [System.Serializable]
+        public struct FlyToInfo
+        {
+            public string name;
+            public Transform flyTo;
+        }
+        public FlyToInfo[] pointsToFly;
 
         //Fazendo referencia ao Script BossLane
         public int volstaggLane;
@@ -20,62 +30,121 @@ namespace Yarn.Unity.Example
         //Variavel para saber se o boss morreu, ela ta sendo usado no script BossHealthManager
         public bool died;
 
-        //private bool dragonMoving;
+        private bool dragonFlying;
         private Rigidbody2D dragonRB;
         private Animator anim;
-        private GameObject point;
+        private Transform point;
+        private PlayerHealthManager player;
+        private BossHealthManager healthManager;
 
-        private readonly float attackTime = 2f;
+        private readonly float attackTime = 1f;
         private float coolDown;
         private float attackTimeCoolDown;
         private bool attackingFireball;
         private bool fbCreated;
+        private bool airStriking;
+        private Transform airAttackPoint;
 
         void Start()
         {
-            point = FindObjectOfType<PlayerControl>().gameObject;
+            healthManager = GetComponent<BossHealthManager>();
+            player = FindObjectOfType<PlayerHealthManager>();
+            point = null;
+            airAttackPoint = null;
             dragonRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             coolDown = 0f;
             attackingFireball = false;
             died = false;
             phase = 2;
-            direction = 1f;
+            direction = -1f;
             shoot = false;
             fbCreated = false;
+            airStriking = false;
+            dragonFlying = false;
+            anim.SetBool("StartFlying", true);
+            anim.SetBool("Flying", true);
+            volstaggLane = 2;
         }
 
         private void FixedUpdate()
         {
             // Para o inimigo não ser empurrado e continuar deslizando com a inercia
             dragonRB.velocity = new Vector2(0f, 0f);
-            if (died)
-            {
-                //alterara a variavel que será usada na movimentação do boss, para ele mesmo, ou seja, ele vai parar aonde estiver
-            }
 
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
+                if (transform.position == point.position)
+                {
+                    point = null;
+                    dragonFlying = false;
+                    direction = player.transform.position.x - transform.position.x;
+                }
                 return;
             }
-            if(phase == 1)
-            {
 
+            //Caso ele tenha morrido dê play na animação e pare tudo
+            if (died)
+            {
+                //alterara a variavel que será usada na movimentação do boss, para ele mesmo, ou seja, ele vai parar aonde estiver
+                anim.SetBool("Dead", true);
+                return;
+            }
+
+            //Caso esteja vivo e não esteja voando;
+            if (phase == 1)
+            {
+                if (dragonFlying)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
+                    if (transform.position == point.position)
+                    {
+                        point = null;
+                        dragonFlying = false;
+                        direction = player.transform.position.x - transform.position.x;
+                    }
+                    return;
+                }
+                if (airStriking)
+                {
+                    anim.SetBool("AirStriking", true);
+                    transform.position = Vector2.MoveTowards(transform.position, airAttackPoint.position, moveSpeed * Time.deltaTime);
+                    if (transform.position == airAttackPoint.position)
+                    {
+                        airAttackPoint = null;
+                        airStriking = false;
+                        anim.SetBool("AirStriking", false);
+                        FlyToPoint(direction, true);
+                    }
+                    return;
+                }
             }
             else if (phase == 2)
             {
-                transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x, point.transform.position.y + 2f), moveSpeed * Time.deltaTime);
+                if (dragonFlying)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
+                    if (transform.position == point.position)
+                    {
+                        point = null;
+                        dragonFlying = false;
+                        anim.SetBool("StartFlying", false);
+                        anim.SetBool("Flying", false);
+                        direction = player.transform.position.x - transform.position.x;
+                    }
+                    return;
+                }
+                if (attackingFireball)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, player.transform.position.y + 2f), moveSpeed * Time.deltaTime);
+                }
             }
             else if (phase == 3)
             {
 
             }
-            /*if (dragonRB)
-            /{
-                transform.position = Vector2.MoveTowards(transform.position, //Algum Ponto, moveSpeed * Time.deltaTime);
-            }*/
-
         }
 
         void Update()
@@ -83,24 +152,42 @@ namespace Yarn.Unity.Example
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                anim.SetFloat("FacingX", direction);
+                return;
+            }
+            if (dragonFlying)
+            {
+                moveSpeed = 7f;
                 return;
             }
 
             if (phase == 1)
             {
                 //boss ja vai estar voando por causa do dialogo então não precisa disso aqui
-                //anim.SetBool("StartFlying", true);
-
+                if (!airStriking)
+                {
+                    AirStrikePoint(direction);
+                }
+                else
+                {
+                    moveSpeed = 15f;
+                }
 
                 anim.SetFloat("FacingX", direction);
             }
             else if (phase == 2)
             {
+                if (healthManager.takingDamage)
+                {
+                    FlyToPoint(direction, false);
+                    return;
+                }
                 if (shoot && !fbCreated)
                 {
                     fbCreated = true;
-                    GameObject clone = (GameObject)Instantiate(fireball, firePoint.position, Quaternion.identity);
-                    clone.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction, 0.0f) * 200);
+                    direction = player.transform.position.x - transform.position.x;
+                    GameObject clone = (GameObject)Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
+                    clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 200);
                 }
 
                 if (coolDown <= 0)
@@ -123,63 +210,175 @@ namespace Yarn.Unity.Example
                 }
 
                 anim.SetBool("FireballAttack", attackingFireball);
-                anim.SetFloat("FacingX", direction);
+
             }
             else if (phase == 3)
             {
 
             }
 
-            /*enemyMoving = false;
+            anim.SetFloat("FacingX", direction);
+        }
 
-            if (!enemyAttacking)
+        //Função para fazer o dragão voar
+        private void FlyToPoint(float directionToFly, bool outPoint)
+        {
+            dragonFlying = true;
+            //Usado na primeira fase
+            if (outPoint)
             {
-                //se o personagem entrar na area de ameaça do inimigo, o inimigo irá segui-lo
-                if (Vector2.Distance(thePlayer.transform.position, transform.position) <= maxRange || seeker)
+                //se o player estiver na direita, é pq o dragão acabou de passar por ele, 
+                //então ele deve voar para o lado esquerdo fora do mapa
+                if (directionToFly < 0)
                 {
-                    seeker = true;
-                    enemyMoving = true;
-
-                    //coordenadas para saber a direção que o player se encontra do inimigo
-                    xDir = thePlayer.transform.position.x - transform.position.x;
-
-                    //caso o inimigo fique muito proximo, faço o parar na frente do player e olhar na direção dele
-                    //isso aqui foi feito para o inimigo n ficar empurrando o player para fora do mapa
-                    if (Vector2.Distance(thePlayer.transform.position, transform.position) <= minRange)
+                    foreach (var info in pointsToFly)
                     {
-                        enemyMoving = false;
-
-                        anim.SetFloat("LastMoveX", xDir);
+                        if (info.name.Equals("Left"))
+                        {
+                            point = info.flyTo;
+                        }
                     }
-                    else
+                }
+                //caso o player esteja a esquerda,
+                //então o dragão deve voar para o lado direito do mapa
+                else
+                {
+                    foreach (var info in pointsToFly)
                     {
-                        anim.SetFloat("MoveX", xDir);
-                        anim.SetFloat("MoveY", yDir);
+                        if (info.name.Equals("Right"))
+                        {
+                            point = info.flyTo;
+                        }
                     }
+                }
+            }
+            //Usado na segunda fase
+            else
+            {
+                anim.SetBool("StartFlying", true);
+                anim.SetBool("Flying", true);
 
-                    anim.SetBool("EnemyMoving", enemyMoving);
+                if (directionToFly > 0)
+                {
+                    foreach (var info in pointsToFly)
+                    {
+                        if (info.name.Equals("RightMidLane"))
+                        {
+                            point = info.flyTo;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var info in pointsToFly)
+                    {
+                        if (info.name.Equals("LeftMidLane"))
+                        {
+                            point = info.flyTo;
+                        }
+                    }
                 }
             }
 
-            if (Vector2.Distance(thePlayer.transform.position, transform.position) <= minRange && coolDown <= 0)
-            {
-                coolDown = attackCoolDown;
-                attackTimeCoolDown = attackTime;
-                enemyAttacking = true;
-            }
+        }
 
-            if (coolDown > 0)
-            {
-                attackTimeCoolDown -= Time.deltaTime;
-                coolDown -= Time.deltaTime;
-            }
+        private void AirStrikePoint(float flyingDirection)
+        {
+            dragonFlying = true;
+            airStriking = true;
+            int lane = volstaggLane;
 
-            if (attackTimeCoolDown <= 0)
+            //Vai estar no topo
+            if (flyingDirection > 0)
             {
-                enemyAttacking = false;
+                if (lane == 1)
+                {
+                    foreach (var info in pointsToFly)
+                    {
+                        if (info.name.Equals("LeftTopLane"))
+                        {
+                            point = info.flyTo;
+                        }
+                        if (info.name.Equals("RightTopLane"))
+                        {
+                            airAttackPoint = info.flyTo;
+                        }
+                    }
+                }
+                else if (lane == 2)
+                {
+                    foreach (var info in pointsToFly)
+                    {
+                        if (info.name.Equals("LeftMidLane"))
+                        {
+                            point = info.flyTo;
+                        }
+                        if (info.name.Equals("RightMidLane"))
+                        {
+                            airAttackPoint = info.flyTo;
+                        }
+                    }
+                }
+                else if (lane == 3)
+                {
+                    foreach (var info in pointsToFly)
+                    {
+                        if (info.name.Equals("LeftBotLane"))
+                        {
+                            point = info.flyTo;
+                        }
+                        if (info.name.Equals("RightBotLane"))
+                        {
+                            airAttackPoint = info.flyTo;
+                        }
+                    }
+                }
             }
-
-            anim.SetBool("EnemyAttacking", enemyAttacking);*/
+            else
+            {
+                if (lane == 1)
+                {
+                    foreach (var info in pointsToFly)
+                    {
+                        if (info.name.Equals("RightTopLane"))
+                        {
+                            point = info.flyTo;
+                        }
+                        if (info.name.Equals("LeftTopLane"))
+                        {
+                            airAttackPoint = info.flyTo;
+                        }
+                    }
+                }
+                else if (lane == 2)
+                {
+                    foreach (var info in pointsToFly)
+                    {
+                        if (info.name.Equals("RightMidLane"))
+                        {
+                            point = info.flyTo;
+                        }
+                        if (info.name.Equals("LeftMidLane"))
+                        {
+                            airAttackPoint = info.flyTo;
+                        }
+                    }
+                }
+                else if (lane == 3)
+                {
+                    foreach (var info in pointsToFly)
+                    {
+                        if (info.name.Equals("RightBotLane"))
+                        {
+                            point = info.flyTo;
+                        }
+                        if (info.name.Equals("LeftBotLane"))
+                        {
+                            airAttackPoint = info.flyTo;
+                        }
+                    }
+                }
+            }
         }
     }
 }

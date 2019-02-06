@@ -47,11 +47,11 @@ namespace Yarn.Unity.Example
         public IEnumerator DestroyIceBlock()
         {
             destroyed = true;
-            iceB.isVolstaggHidding = false;
             anim.SetFloat("Direction", direction);
             anim.SetBool("Breaking", true);
             yield return new WaitForSeconds(1f);
             anim.SetBool("Breaking", false);
+            iceB.isVolstaggHidding = false;
         }
     }
 }

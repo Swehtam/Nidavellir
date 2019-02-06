@@ -8,12 +8,16 @@ namespace Yarn.Unity.Example
     {
         public bool isVolstaggHidding;
         private IceBlockBreaking iceB;
+        private PlayerHealthManager player;
+        private BoneDragonController boss;
 
         // Start is called before the first frame update
         void Start()
         {
             iceB = GetComponentInParent<IceBlockBreaking>();
+            boss = FindObjectOfType<BoneDragonController>();
             isVolstaggHidding = false;
+            player = FindObjectOfType<PlayerHealthManager>();
         }
 
         void OnTriggerStay2D(Collider2D col)
@@ -22,7 +26,17 @@ namespace Yarn.Unity.Example
             {
                 if (!col.isTrigger && col.name.Equals("Volstagg"))
                 {
-                    isVolstaggHidding = true;
+                    float playerDirection = col.transform.position.x - transform.position.x;
+                    playerDirection = (Mathf.Abs(playerDirection)) / playerDirection;
+                    Debug.Log(playerDirection);
+
+                    float bossDirection = (Mathf.Abs(boss.direction)) / boss.direction;
+                    Debug.Log(bossDirection);
+                    if (playerDirection == bossDirection)
+                    {
+                        isVolstaggHidding = true;
+                        player.dontTakeDamage = true;
+                    }
                 }
             }
         }
@@ -32,6 +46,7 @@ namespace Yarn.Unity.Example
             if (!col.isTrigger && col.name.Equals("Volstagg"))
             {
                 isVolstaggHidding = false;
+                player.dontTakeDamage = false;
             }
         }
     }

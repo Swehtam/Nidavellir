@@ -19,7 +19,7 @@ namespace Yarn.Unity.Example
         private Color boss_buffer;
 
         //variavel para saber se ele ta levando dano, para não levar 2 vezes
-        private bool takingDamage;
+        public bool takingDamage;
         
         // Use this for initialization
         void Start()
