@@ -1,0 +1,22 @@
+title: Key
+tags: 
+colorID: 0
+position: 540,260
+---
+<<HUD GameCanvas hide>>
+<<setAnimation Volstagg FaceDown>>
+Volstagg:: Os caras esquecem a chave dos portões do inferno nos cantos
+Volstagg:: ainda ficam reclamando que não subiram a Valhalla... Sei não.
+<<moveTo MainCamera WaveTarget>>
+<<wait 1>>
+<<setAnimation Skeleton1 Scream>>
+<<setAnimation Skeleton2 Scream>>
+<<setAnimation Skeleton3 Scream>>
+<<setAnimation Skeleton4 Scream>>
+<<wait 2>>
+<<moveTo MainCamera Volstagg>>
+<<wait 1>>
+Volstagg:: Ok, não gostei desse som. Tá, mais uma bronca tá vindo ai,
+Volstagg:: minha barba tá coçando de nervoso.
+<<HUD GameCanvas show>>
+===

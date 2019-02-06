@@ -12,6 +12,7 @@ namespace Yarn.Unity.Example
         public GameObject pauseMenuUI;
         public GameObject settingsMenu;
         public GameObject hudMenu;
+        public GameObject quest;
 
         // Update is called once per frame
         void Update()
@@ -83,6 +84,17 @@ namespace Yarn.Unity.Example
 
             if (command.Equals("hide"))
                 hudMenu.SetActive(false);
+        }
+
+        // Metodo para mostrar as Quests quando for chamado no dialogo
+        [YarnCommand("Quests")]
+        public void ShowQuests(string command)
+        {
+            if (command.Equals("show"))
+                quest.SetActive(true);
+
+            if (command.Equals("hide"))
+                quest.SetActive(false);
         }
     }
 }

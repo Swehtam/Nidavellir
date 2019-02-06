@@ -47,6 +47,10 @@ namespace Yarn.Unity.Example
         // Update is called once per frame
         void Update()
         {
+            //Para não fazer nenhum animação quando estiver pausado
+            if (Time.timeScale == 0)
+                return;
+
             //Remove o controle do player caso o Dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
