@@ -122,6 +122,7 @@ namespace Yarn.Unity.Example
             else if (animationName == "Attack")
             {
                 anim.SetBool("RökAttacking", true);
+                SoundManagerScript.PlaySound("rokAttackingGate");
             }
         }
     }
