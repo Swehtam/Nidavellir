@@ -114,15 +114,20 @@ namespace Yarn.Unity.Example
             if (animationName == "FaceRight")
             {
                 anim.SetFloat("LastMoveX", 1.0f);
+                anim.SetFloat("LastMoveY", 0f);
             }
-            else if (animationName == "FaceUo")
+            else if (animationName == "FaceUp")
             {
+                anim.SetFloat("LastMoveX", 0f);
                 anim.SetFloat("LastMoveY", 1.0f);
             }
             else if (animationName == "Attack")
             {
                 anim.SetBool("RökAttacking", true);
                 SoundManagerScript.PlaySound("rokAttackingGate");
+            }else if (animationName == "StopAttack")
+            {
+                anim.SetBool("RökAttacking", false);
             }
         }
     }

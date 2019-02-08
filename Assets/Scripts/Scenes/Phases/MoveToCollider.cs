@@ -33,7 +33,6 @@ namespace Yarn.Unity.Example
                 //Quando Volstagg sair do collider mudar sua velocidade e destruir o collider para ter menos objetos na cena
                 if (col.name.Equals("Volstagg") && gameObject.name.Equals("VolstaggInitialPoint"))
                 {
-                    col.GetComponent<PlayerControl>().moveSpeed = 5;
                     StartCoroutine(DestroyCollider());
                 }
                 if (col.name.Equals("Rök") && gameObject.name.Equals("RökInitialPoint"))
@@ -48,18 +47,6 @@ namespace Yarn.Unity.Example
             }
 
         }
-
-        /*private void OnTriggerStay2D(Collider2D col)
-        {
-            if (col.name.Equals("Volstagg") && gameObject.name.Equals("VolstaggInitialPoint"))
-            {
-                col.GetComponent<PlayerControl>().moveSpeed = 5;
-            }
-            if (col.name.Equals("Rök") && gameObject.name.Equals("RökInitialPoint"))
-            {
-                col.GetComponent<BeowulfController>().moveSpeed = 4;
-            }
-        }*/
 
         public IEnumerator DestroyCollider()
         {

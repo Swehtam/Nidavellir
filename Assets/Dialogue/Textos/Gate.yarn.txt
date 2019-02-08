@@ -1,0 +1,30 @@
+title: Gate
+tags: 
+colorID: 0
+position: 541,260
+---
+<<HUD GameCanvas hide>>
+<<Quests GameCanvas hide>>
+<<moveTo Volstagg VolstaggNearGate>>
+<<wait 0.3>>
+<<setAnimation Volstagg FaceUp>>
+<<wait 0.3>>
+<<animation Gate open>>
+<<wait 0.5>>
+<<setAnimation Rök StopAttack>>
+<<wait 1>>
+<<setAnimation Rök FaceRight>>
+<<wait 0.3>>
+<<setAnimation Volstagg FaceLeft>>
+<<wait 0.3>>
+Volstagg:: Finalmente!
+Rök:: Rök disse que resolveria! 
+Volstagg:: Tu…? Agora pronto...
+<<setAnimation Volstagg FaceUp>>
+<<setAnimation Rök FaceUp>>
+<<wait 0.3>>
+<<moveTo Volstagg VolstaggFinalPoint>>
+<<moveTo Rök RökFinalPoint>>
+<<wait 0.5>>
+<<changeScene EventSystem BossPhase>>
+===

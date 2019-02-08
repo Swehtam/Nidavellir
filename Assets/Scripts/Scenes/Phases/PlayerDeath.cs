@@ -19,5 +19,11 @@ namespace Yarn.Unity.Example
                 }
             }
         }
+
+        [YarnCommand("changeScene")]
+        public void ChangeScene(string command)
+        {
+            LoadingScreenManager.LoadScene(command);
+        }
     }
 }

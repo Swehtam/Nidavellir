@@ -23,7 +23,7 @@ public class ChangeLayOrder : MonoBehaviour
             }
 
             //Fazer com q o objeto com o collider se destrua caso o numero de mobs especifico entrar no colider
-            if(counter == 4 && gameObject.name.Equals("BehindGate"))
+            if(counter == 6 && gameObject.name.Equals("BehindGate"))
             {
                 Destroy(gameObject);
             }

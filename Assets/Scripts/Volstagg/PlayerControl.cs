@@ -176,6 +176,7 @@ namespace Yarn.Unity.Example
         [YarnCommand("moveTo")]
         public void MovePoint(string pointName)
         {
+            moveSpeed = 2f;
             GameObject p = null;
             //procura o ponto para onde irá se mover dentro do array
             foreach (var info in pointsToMove)

@@ -8,34 +8,23 @@ namespace Yarn.Unity.Example
     {
         public KeyController key;
         private Animator anim;
-        private bool loadNextScene;
+        public BoxCollider2D childCollider;
 
         // Use this for initialization
         void Start()
         {
             key = FindObjectOfType<KeyController>();
             anim = GetComponent<Animator>();
-            loadNextScene = false;
         }
 
-        void OnCollisionEnter2D(Collision2D col)
+        void OnTriggerEnter2D(Collider2D col)
         {
             if (key.open)
             {
                 if (col.gameObject.tag == "Player")
                 {
-                    loadNextScene = true;
-                    StartCoroutine(Open());
+                    FindObjectOfType<DialogueRunner>().StartDialogue("Gate");
                 }
-            }
-        }
-
-        private void OnTriggerStay2D(Collider2D col)
-        {
-            if (col.gameObject.tag == "Player")
-            {
-                if (loadNextScene)
-                    LoadingScreenManager.LoadScene("BossPhase");
             }
         }
 
@@ -45,7 +34,7 @@ namespace Yarn.Unity.Example
             anim.SetBool("GotKey", true);
             yield return new WaitForSeconds(1.0f);
             anim.SetBool("IsOpen", true);
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            childCollider.isTrigger = true;
             
         }
 
@@ -55,17 +44,17 @@ namespace Yarn.Unity.Example
             anim.SetBool("IsOpen", false);
             yield return new WaitForSeconds(1.0f);
             anim.SetBool("GotKey", false);
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+            childCollider.isTrigger = false;
         }
 
         [YarnCommand("animation")]
         public void PlayAnimation(string animationName)
         {
-            if (animationName == "open")
+            if (animationName.Equals("open"))
             {
                 StartCoroutine(Open());
             }
-            else if (animationName == "close")
+            else if (animationName.Equals("close"))
             {
                 StartCoroutine(Close());
             }
