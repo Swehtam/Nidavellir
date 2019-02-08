@@ -3,6 +3,7 @@ tags:
 colorID: 0
 position: 540,260
 ---
+<<zoom MainCamera in>>
 <<animation Gate open>>
 <<wait 1.5>>
 <<moveTo Rök RökInitialPoint>>

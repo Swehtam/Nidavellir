@@ -28,14 +28,17 @@ namespace Yarn.Unity.Example
                 {
                     float playerDirection = col.transform.position.x - transform.position.x;
                     playerDirection = (Mathf.Abs(playerDirection)) / playerDirection;
-                    Debug.Log(playerDirection);
 
                     float bossDirection = (Mathf.Abs(boss.direction)) / boss.direction;
-                    Debug.Log(bossDirection);
                     if (playerDirection == bossDirection)
                     {
                         isVolstaggHidding = true;
                         player.dontTakeDamage = true;
+                    }
+                    else
+                    {
+                        isVolstaggHidding = false;
+                        player.dontTakeDamage = false;
                     }
                 }
             }

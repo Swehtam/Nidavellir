@@ -40,7 +40,7 @@ namespace Yarn.Unity.Example
         private readonly float attackTime = 1f;
         private float coolDown;
         private float attackTimeCoolDown;
-        private bool attackingFireball;
+        public bool attackingFireball;
         private bool fbCreated;
         private bool airStriking;
         private Transform airAttackPoint;
@@ -56,7 +56,7 @@ namespace Yarn.Unity.Example
             coolDown = 0f;
             attackingFireball = false;
             died = false;
-            phase = 2;
+            phase = 1;
             direction = -1f;
             shoot = false;
             fbCreated = false;
@@ -109,13 +109,13 @@ namespace Yarn.Unity.Example
                 }
                 if (airStriking)
                 {
-                    anim.SetBool("AirStriking", true);
+                    anim.SetBool("AirStriking", airStriking);
                     transform.position = Vector2.MoveTowards(transform.position, airAttackPoint.position, moveSpeed * Time.deltaTime);
                     if (transform.position == airAttackPoint.position)
                     {
                         airAttackPoint = null;
                         airStriking = false;
-                        anim.SetBool("AirStriking", false);
+                        anim.SetBool("AirStriking", airStriking);
                         FlyToPoint(direction, true);
                     }
                     return;
@@ -123,6 +123,7 @@ namespace Yarn.Unity.Example
             }
             else if (phase == 2)
             {
+                airStriking = false;
                 if (dragonFlying)
                 {
                     transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
@@ -172,8 +173,6 @@ namespace Yarn.Unity.Example
                 {
                     moveSpeed = 15f;
                 }
-
-                anim.SetFloat("FacingX", direction);
             }
             else if (phase == 2)
             {
@@ -208,15 +207,14 @@ namespace Yarn.Unity.Example
                     attackingFireball = false;
                     fbCreated = false;
                 }
-
-                anim.SetBool("FireballAttack", attackingFireball);
-
             }
             else if (phase == 3)
             {
 
             }
 
+            anim.SetBool("AirStriking", airStriking);
+            anim.SetBool("FireballAttack", attackingFireball);
             anim.SetFloat("FacingX", direction);
         }
 

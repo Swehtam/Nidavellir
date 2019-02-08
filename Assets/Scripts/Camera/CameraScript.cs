@@ -19,7 +19,7 @@ namespace Yarn.Unity.Example
         private float smoothSpeed;
         public Vector3 offset;
 
-        public float cameraSize = 4f;
+        public float cameraSize = 6f;
         private bool zoom = true;
 
         void Start()

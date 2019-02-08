@@ -17,25 +17,21 @@ namespace Yarn.Unity.Example
         void Start()
         {
             playerHealth = FindObjectOfType<PlayerHealthManager>();
-            dragon = FindObjectOfType<BoneDragonController>();
             isBroken = false;
             anim = GetComponent<Animator>();
         }
 
         private void OnTriggerStay2D(Collider2D col)
         {
-            if(dragon.phase == 2)
+            if (!col.isTrigger && col.CompareTag("Player"))
             {
-                if (!col.isTrigger && col.CompareTag("Player"))
+                if (!isBroken)
                 {
-                    if (!isBroken)
-                    {
-                        StartCoroutine(HoleAnimation());
-                    }
-                    else
-                    {
-                        playerHealth.HurtPlayer(5);
-                    }
+                    StartCoroutine(HoleAnimation());
+                }
+                else
+                {
+                    playerHealth.HurtPlayer(5);
                 }
             }
         }
