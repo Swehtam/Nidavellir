@@ -15,7 +15,7 @@ namespace Yarn.Unity.Example
 
         private PlayerControl player;
         private float slowCD;
-        private bool normal;
+        private bool backToNormal;
 
         //Sprite do player
         private SpriteRenderer player_SpriteRenderer;
@@ -34,7 +34,7 @@ namespace Yarn.Unity.Example
         // Use this for initialization
         void Start()
         {
-            normal = true;
+            backToNormal = false;
             dontTakeDamage = false;
             slowCD = 0f;
             currentHealth = maxHealth;
@@ -53,12 +53,6 @@ namespace Yarn.Unity.Example
         // Update is called once per frame
         void Update()
         {
-            if (normal)
-            {
-                player_SpriteRenderer.color = player_buffer;
-                shield_SpriteRenderer.color = shield_buffer;
-                arm_SpriteRenderer.color = arm_buffer;
-            }
             if (currentHealth <= 0)
             {
                 //Se Volstagg morrer vai fazer com que outro Script chame a mudança de cena
@@ -67,7 +61,7 @@ namespace Yarn.Unity.Example
                 gameObject.SetActive(false);
             }
 
-            if(slowCD >= 0 && !normal)
+            if(slowCD > 0)
             {
                 player.canRun = false;
 
@@ -76,11 +70,13 @@ namespace Yarn.Unity.Example
                 arm_SpriteRenderer.color = Color.blue;
 
                 slowCD -= Time.deltaTime;
+                backToNormal = true;
             }
-            else
+            else if (slowCD <= 0 && backToNormal)
             {
                 player.canRun = true;
-                normal = true;
+                backToNormal = false;
+                StartCoroutine(Normal());
             }
         }
 
@@ -90,7 +86,6 @@ namespace Yarn.Unity.Example
         {
             if (!dontTakeDamage)
             {
-                normal = false;
                 currentHealth -= damage;
                 SoundManagerScript.PlaySound("volstagg-grunt");
                 StartCoroutine(Wait(0.5f, Color.red));
@@ -101,7 +96,6 @@ namespace Yarn.Unity.Example
         //Fazer com que tudo de Volstagg fique verde ai pegar um coração
         public void CurePlayer(int cure)
         {
-            normal = false;
             currentHealth += cure;
 
             if (currentHealth > 5)
@@ -113,7 +107,6 @@ namespace Yarn.Unity.Example
         public void SlowPlayer()
         {
             slowCD = 2f;
-            normal = false;
         }
 
         public IEnumerator Wait(float time, Color color)
@@ -123,6 +116,15 @@ namespace Yarn.Unity.Example
             arm_SpriteRenderer.color = color;
 
             yield return new WaitForSeconds(time);
+            StartCoroutine(Normal());
+        }
+
+        public IEnumerator Normal()
+        {
+            player_SpriteRenderer.color = player_buffer;
+            shield_SpriteRenderer.color = shield_buffer;
+            arm_SpriteRenderer.color = arm_buffer;
+            yield return null;
         }
     }
 }

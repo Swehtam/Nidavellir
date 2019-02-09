@@ -25,8 +25,8 @@ Volstagg:: Não bastasse o alvoroço que causou quando chegou em Valhalla,
 Volstagg:: o engasgadinho ainda me bota numa situação dessas... Oh, cilada...
 Volstagg:: Já que estamos presos aqui, precisamos conseguir um jeito de sair. 
 Volstagg:: O que você acha que podemos fazer?
-Rök:: Viemos por aqui. Então vamos sair por aqui!
-Rök:: Só quebrar o portão! Rok consegue, Rok é forte e másculo!
+Rök:: Rök veio por aqui... Então Rök vai sair por aqui!
+Rök:: Só quebrar o portão! Rök consegue, Rök é forte e másculo!
 <<moveTo Rök RökNearGate>>
 <<wait 1>>
 <<setAnimation Volstagg FaceUp>>
@@ -41,6 +41,78 @@ Volstagg:: Calma Volstagg, pense no banquete em Valhalla.
 Volstagg:: Bom, o portão não abre porque tem uma tranca,
 Volstagg:: por aqui não dá pra sair agora, 
 Volstagg:: terei de explorar esse inferno!
+<<HUD GameCanvas show>>
+<<Quests GameCanvas show>>
+===
+
+title: Phase1.Death1
+tags: 
+colorID: 0
+position: 524,111
+---
+<<zoom MainCamera in>>
+<<animation Gate open>>
+<<wait 1.5>>
+<<moveTo Rök RökInitialPoint>>
+<<moveTo Volstagg VolstaggInitialPoint>>
+<<moveTo Skeleton SkeletonInitialPoint>>
+<<wait 2>>
+<<setAnimation Skeleton Scream>>
+<<wait 2>>
+<<moveTo Skeleton SkeletonFinalPoint>>
+<<zoom MainCamera out>>
+<<wait 2>>
+<<animation Gate close>>
+<<wait 1.5>>
+<<setAnimation Volstagg FaceLeft>>
+<<wait 0.3>>
+<<setAnimation Rök FaceRight>>
+<<wait 0.3>>
+Volstagg:: Déjà vu!
+Rök:: Hmmm, parece gostoso. Rök com fome.
+<<moveTo Rök RökNearGate>>
+<<wait 1>>
+<<setAnimation Volstagg FaceUp>>
+<<setAnimation Rök FaceUp>>
+<<setAnimation Rök Attack>>
+<<wait 1>>
+Volstagg:: Esquece...
+<<setAnimation Volstagg FaceDown>>
+<<HUD GameCanvas show>>
+<<Quests GameCanvas show>>
+===
+
+title: Phase1.Death2
+tags: 
+colorID: 0
+position: 524,111
+---
+<<zoom MainCamera in>>
+<<animation Gate open>>
+<<wait 1.5>>
+<<moveTo Rök RökInitialPoint>>
+<<moveTo Volstagg VolstaggInitialPoint>>
+<<moveTo Skeleton SkeletonInitialPoint>>
+<<wait 2>>
+<<setAnimation Skeleton Scream>>
+<<wait 2>>
+<<moveTo Skeleton SkeletonFinalPoint>>
+<<zoom MainCamera out>>
+<<wait 2>>
+<<animation Gate close>>
+<<wait 1.5>>
+<<setAnimation Volstagg FaceLeft>>
+<<wait 0.3>>
+<<setAnimation Rök FaceRight>>
+<<wait 0.3>>
+Volstagg:: Alguma coisa está errada.
+<<moveTo Rök RökNearGate>>
+<<wait 1>>
+<<setAnimation Volstagg FaceUp>>
+<<setAnimation Rök FaceUp>>
+<<setAnimation Rök Attack>>
+<<wait 1>>
+<<setAnimation Volstagg FaceDown>>
 <<HUD GameCanvas show>>
 <<Quests GameCanvas show>>
 ===

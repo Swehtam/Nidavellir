@@ -20,3 +20,24 @@ Volstagg:: Ok, não gostei desse som. Tá, mais uma bronca tá vindo ai,
 Volstagg:: minha barba tá coçando de nervoso.
 <<HUD GameCanvas show>>
 ===
+
+title: Key.Death
+tags: 
+colorID: 0
+position: 541,260
+---
+<<HUD GameCanvas hide>>
+<<setAnimation Volstagg FaceDown>>
+Volstagg:: Dessa vez eu consigo
+<<moveTo MainCamera WaveTarget>>
+<<wait 1>>
+<<setAnimation Skeleton1 Scream>>
+<<setAnimation Skeleton2 Scream>>
+<<setAnimation Skeleton3 Scream>>
+<<setAnimation Skeleton4 Scream>>
+<<wait 2>>
+<<moveTo MainCamera Volstagg>>
+<<wait 1>>
+Volstagg:: Ou não...
+<<HUD GameCanvas show>>
+===
