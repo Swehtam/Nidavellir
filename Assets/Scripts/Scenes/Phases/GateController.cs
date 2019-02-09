@@ -23,6 +23,7 @@ namespace Yarn.Unity.Example
             {
                 if (col.gameObject.tag == "Player")
                 {
+                    IntroductionScript.phase = 4;
                     FindObjectOfType<DialogueRunner>().StartDialogue("Gate");
                 }
             }

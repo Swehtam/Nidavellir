@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 namespace Yarn.Unity.Example
 {
-
     public class IntroductionScript : MonoBehaviour
     {
         [System.Serializable]
@@ -16,12 +15,33 @@ namespace Yarn.Unity.Example
         }
 
         public CharactersInfo[] characters;
+        public static int phase;
+
+        void Start()
+        {
+            if(phase == 1)
+            {
+                FindObjectOfType<DialogueRunner>().StartDialogue("Introduction.Phase1");
+            }
+            else if (phase == 4)
+            {
+                FindObjectOfType<DialogueRunner>().StartDialogue("Introduction.Phase4");
+            }
+        }
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                LoadScene();
+                if(phase == 1)
+                {
+                    LoadScene("Scene2D");
+                }
+                else if (phase == 4)
+                {
+                    LoadScene("BossPhase");
+                }
+                
             }
         }
         [YarnCommand("as")]
@@ -56,9 +76,9 @@ namespace Yarn.Unity.Example
         }
 
         [YarnCommand("loadNextScene")]
-        public void LoadScene()
+        public void LoadScene(string scene)
         {
-            LoadingScreenManager.LoadScene("Scene2D");
+            LoadingScreenManager.LoadScene(scene);
         }
     }
 }

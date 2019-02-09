@@ -26,5 +26,5 @@ Volstagg:: Tu…? Agora pronto...
 <<moveTo Volstagg VolstaggFinalPoint>>
 <<moveTo Rök RökFinalPoint>>
 <<wait 0.5>>
-<<changeScene EventSystem BossPhase>>
+<<changeScene EventSystem Introduction>>
 ===

@@ -1,4 +1,4 @@
-title: Introduction
+title: Introduction.Phase1
 tags: 
 colorID: 0
 position: 486,211
@@ -13,7 +13,7 @@ position: 486,211
 :: Ele, por sua vez, curioso sobre a morte do guerreiro, o questionou como ele morreu, Rök não pensou duas vezes e disse
 <<as EventSystem active Rök>>
 Rök :: "Oh, grandioso, durante uma de minhas mais duras batalhas, minha refeição não desceu, eu engasguei". 
-:: No salão, os 8 Jarls da Yggdrasil, que governavam os demais salões e ajudavam Odin a tomar todas as suas decisões, revoltaram-se com o que ouviram. ::
+:: No salão, os 8 Jarls da Yggdrasil, que governavam os demais salões e ajudavam Odin a tomar todas as suas decisões, revoltaram-se com o que ouviram.
 :: Odin e os 8 Jarls, carregados pela indignação deles e dos demais presentes no salão, entraram em reunião para decidir a eternidade do guerreiro.
 <<as EventSystem inactive Rök>>
 <<change Background Tavern>>
@@ -30,5 +30,20 @@ Rök :: "Oh, grandioso, durante uma de minhas mais duras batalhas, minha refeiç
 :: passando pelos portões da dignidade, e recuperando pouco a pouco seus lugares em Valhalla.
 :: O que chocou a todos foi o que foi dito por último por Odin: eles teriam de descer juntos, passar por tudo juntos, e voltar a salvo juntos.
 :: Caso um dos dois morresse, ambos estariam condenados ao sofrimento eterno e jamais poderiam pisar em Valhalla novamente.
-<<loadNextScene EventSystem>>
+<<loadNextScene EventSystem Scene2D>>
+===
+
+title: Introduction.Phase4
+tags: 
+colorID: 0
+position: 485,211
+---
+<<change Background Walking>>
+:: Depois de enfrentar todos os esqueletos, lobos, labirintos e os demais perigos que Nilfheim tinha separado para a dupla, Volstagg e Rök seguiram para a tão esperada saída.
+:: Era chegada a hora da subida dos heróis pela Yggdrasil, eles estavam certos de suas capacidades e mais confiantes do que nunca… Ou ao menos o anão estava. Rök ninguém nunca vai entender o que pensa. (Ou se ele pensa)
+<<change Background Attack>>
+:: Volstagg havia melhorado sua percepção dos inimigos, tinha visto que, de fato, ele era um guerreiro capaz de lutar por sua honra, não importando o quão pequenino ele fosse!
+<<change Background Gate>>
+:: Rök… Bem, o Rök… Erm… Ele tentou, né?
+<<loadNextScene EventSystem BossPhase>>
 ===
