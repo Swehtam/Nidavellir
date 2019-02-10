@@ -135,6 +135,7 @@ namespace Yarn.Unity.Example
                     //Quando chegar para de mover
                     if (transform.position == point.transform.position)
                     {
+                        point = null;
                         dialogueMove = false;
                     }
                 }

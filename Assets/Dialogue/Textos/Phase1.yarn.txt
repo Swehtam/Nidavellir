@@ -11,6 +11,8 @@ position: 540,260
 <<moveTo Skeleton SkeletonInitialPoint>>
 <<wait 2>>
 <<setAnimation Skeleton Scream>>
+<<wait 0.3>>
+<<shake MainCamera>>
 <<wait 2>>
 <<moveTo Skeleton SkeletonFinalPoint>>
 <<zoom MainCamera out>>
@@ -58,6 +60,8 @@ position: 524,111
 <<moveTo Skeleton SkeletonInitialPoint>>
 <<wait 2>>
 <<setAnimation Skeleton Scream>>
+<<wait 0.3>>
+<<shake MainCamera>>
 <<wait 2>>
 <<moveTo Skeleton SkeletonFinalPoint>>
 <<zoom MainCamera out>>
@@ -95,6 +99,8 @@ position: 524,111
 <<moveTo Skeleton SkeletonInitialPoint>>
 <<wait 2>>
 <<setAnimation Skeleton Scream>>
+<<wait 0.3>>
+<<shake MainCamera>>
 <<wait 2>>
 <<moveTo Skeleton SkeletonFinalPoint>>
 <<zoom MainCamera out>>

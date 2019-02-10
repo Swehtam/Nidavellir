@@ -193,6 +193,8 @@ MonoBehaviour:
   maxRange: 4
   minRange: 1.5
   attackCoolDown: 3
+  isSkeleton: 1
+  pointsToMove: []
 --- !u!50 &50685198797996432
 Rigidbody2D:
   serializedVersion: 4

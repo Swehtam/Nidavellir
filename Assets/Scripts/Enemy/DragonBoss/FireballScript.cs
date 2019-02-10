@@ -63,10 +63,14 @@ namespace Yarn.Unity.Example
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            if (!col.isTrigger && col.CompareTag("Player"))
+            if (!col.isTrigger && col.CompareTag("Player") && col.name.Equals("Volstagg"))
             {
                 playerHealth.HurtPlayer(damage);
                 playerHealth.SlowPlayer();
+                StartCoroutine(DestroyFireball());
+            }
+            else if (!col.isTrigger && col.CompareTag("Player"))
+            {
                 StartCoroutine(DestroyFireball());
             }
         }

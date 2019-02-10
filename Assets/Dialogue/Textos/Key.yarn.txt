@@ -13,6 +13,8 @@ Volstagg:: ainda ficam reclamando que não subiram a Valhalla... Sei não.
 <<setAnimation Skeleton2 Scream>>
 <<setAnimation Skeleton3 Scream>>
 <<setAnimation Skeleton4 Scream>>
+<<wait 0.3>>
+<<shake MainCamera>>
 <<wait 2>>
 <<moveTo MainCamera Volstagg>>
 <<wait 1>>

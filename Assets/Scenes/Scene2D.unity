@@ -4243,6 +4243,11 @@ PrefabInstance:
       propertyPath: pointsToMove.Array.data[1].name
       value: SkeletonFinalPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 114639200047979378, guid: b1bb8ceefaee6754fa49128a1fbde62b,
+        type: 3}
+      propertyPath: isSkeleton
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1bb8ceefaee6754fa49128a1fbde62b, type: 3}
 --- !u!1 &166013642
@@ -12713,7 +12718,7 @@ PrefabInstance:
         type: 3}
       propertyPath: pointsToMove.Array.data[0].moveTo
       value: 
-      objectReference: {fileID: 146265557}
+      objectReference: {fileID: 146265558}
     - target: {fileID: 114540998123616842, guid: e855b22286ec3a343b9534434ccdb4f1,
         type: 3}
       propertyPath: pointsToMove.Array.data[0].name
@@ -12728,7 +12733,7 @@ PrefabInstance:
         type: 3}
       propertyPath: pointsToMove.Array.data[1].moveTo
       value: 
-      objectReference: {fileID: 815150582}
+      objectReference: {fileID: 815150583}
     - target: {fileID: 114540998123616842, guid: e855b22286ec3a343b9534434ccdb4f1,
         type: 3}
       propertyPath: pointsToMove.Array.data[2].name
@@ -12738,7 +12743,7 @@ PrefabInstance:
         type: 3}
       propertyPath: pointsToMove.Array.data[2].moveTo
       value: 
-      objectReference: {fileID: 1292648443}
+      objectReference: {fileID: 1292648444}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e855b22286ec3a343b9534434ccdb4f1, type: 3}
 --- !u!1 &537740759
@@ -24693,6 +24698,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &988245554 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1394975706870736, guid: 63880b7c2e98c6b409c4e36c3b6316ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 671816716}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &988245555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988245554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8259bdc8c7929a9429d2252d38c8c059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeMagnetude: 0.05
+  shakeTime: 0.5
+  mainCamera: {fileID: 988245560}
+--- !u!20 &988245560 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 20517405212132104, guid: 63880b7c2e98c6b409c4e36c3b6316ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 671816716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &993424169
 GameObject:
   m_ObjectHideFlags: 0

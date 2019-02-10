@@ -39,14 +39,6 @@ namespace Yarn.Unity.Example
             {
                 deaths = 0;
                 scene = actualScene;
-                if (scene.Equals("Scene2D"))
-                {
-                    FindObjectOfType<DialogueRunner>().StartDialogue("Phase1");
-                }
-                else if (scene.Equals("BossPhase"))
-                {
-                    //FindObjectOfType<DialogueRunner>().StartDialogue("Phase4");
-                }
             }
         }
 

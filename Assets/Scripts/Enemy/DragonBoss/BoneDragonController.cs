@@ -62,9 +62,6 @@ namespace Yarn.Unity.Example
             fbCreated = false;
             airStriking = false;
             dragonFlying = false;
-            anim.SetBool("StartFlying", true);
-            anim.SetBool("Flying", true);
-            volstaggLane = 2;
         }
 
         private void FixedUpdate()
@@ -75,12 +72,19 @@ namespace Yarn.Unity.Example
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
-                transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
-                if (transform.position == point.position)
+                if (point)
                 {
-                    point = null;
-                    dragonFlying = false;
-                    direction = player.transform.position.x - transform.position.x;
+                    anim.SetBool("StartFlying", true);
+                    anim.SetBool("Flying", true);
+                    transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
+                    if (transform.position == point.position)
+                    {
+                        point = null;
+                        dragonFlying = false;
+                        anim.SetBool("StartFlying", false);
+                        anim.SetBool("Flying", false);
+                        direction = player.transform.position.x - transform.position.x;
+                    }
                 }
                 return;
             }
@@ -123,6 +127,7 @@ namespace Yarn.Unity.Example
             }
             else if (phase == 2)
             {
+                moveSpeed = 10f;
                 airStriking = false;
                 if (dragonFlying)
                 {
@@ -153,12 +158,19 @@ namespace Yarn.Unity.Example
             //Para os controles dos inimigos caso o dialogo esteja acontecendo
             if (FindObjectOfType<DialogueRunner>().isDialogueRunning == true)
             {
+                if (shoot && !fbCreated)
+                {
+                    fbCreated = true;
+                    direction = player.transform.position.x - transform.position.x;
+                    GameObject clone = (GameObject)Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
+                    clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 100);
+                }
                 anim.SetFloat("FacingX", direction);
                 return;
             }
             if (dragonFlying)
             {
-                moveSpeed = 7f;
+                 
                 return;
             }
 
@@ -167,6 +179,7 @@ namespace Yarn.Unity.Example
                 //boss ja vai estar voando por causa do dialogo então não precisa disso aqui
                 if (!airStriking)
                 {
+                    moveSpeed = 10f;
                     AirStrikePoint(direction);
                 }
                 else
@@ -180,13 +193,6 @@ namespace Yarn.Unity.Example
                 {
                     FlyToPoint(direction, false);
                     return;
-                }
-                if (shoot && !fbCreated)
-                {
-                    fbCreated = true;
-                    direction = player.transform.position.x - transform.position.x;
-                    GameObject clone = (GameObject)Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
-                    clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 200);
                 }
 
                 if (coolDown <= 0)
@@ -211,6 +217,14 @@ namespace Yarn.Unity.Example
             else if (phase == 3)
             {
 
+            }
+
+            if (shoot && !fbCreated)
+            {
+                fbCreated = true;
+                direction = player.transform.position.x - transform.position.x;
+                GameObject clone = (GameObject)Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
+                clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 200);
             }
 
             anim.SetBool("AirStriking", airStriking);
@@ -282,6 +296,8 @@ namespace Yarn.Unity.Example
 
         private void AirStrikePoint(float flyingDirection)
         {
+            anim.SetBool("StartFlying", true);
+            anim.SetBool("Flying", true);
             dragonFlying = true;
             airStriking = true;
             int lane = volstaggLane;
@@ -376,6 +392,52 @@ namespace Yarn.Unity.Example
                         }
                     }
                 }
+            }
+        }
+
+        //metodo para fazer o Boss voar até um ponto especifico nos arquivos .yarn
+        [YarnCommand("flyTo")]
+        public void Fly(string pointName)
+        {
+            moveSpeed = 10f;
+            Transform p = null;
+            //procura o ponto para onde irá se mover dentro do array
+            foreach (var info in pointsToFly)
+            {
+                if (info.name == pointName)
+                {
+                    p = info.flyTo;
+                    break;
+                }
+            }
+
+            //se não achar mandar uma mensagem para o console
+            if (p == null)
+            {
+                Debug.LogErrorFormat("Não foi encontrando o point {0}!", pointName);
+                return;
+            }
+            else
+            {
+                //se achar coloque o point para onde ele deva ir no objeto responsavel por isso
+                point = p;
+                direction = point.position.x - transform.position.x;
+            }
+        }
+
+        //Metodo para fazer as animações do Boss
+        [YarnCommand("setAnimation")]
+        public void SetAnimation(string command)
+        {
+            anim.SetBool("FireballAttack", false);
+            anim.SetBool("AirStriking", false);
+            if (command.Equals("Fireball"))
+            {
+                anim.SetBool("DialogFireball", true);
+            }
+            else if (command.Equals("StopFireball"))
+            {
+                anim.SetBool("DialogFireball", false);
             }
         }
     }

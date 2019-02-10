@@ -11,7 +11,7 @@ namespace Yarn.Unity.Example
         public struct MoveToInfo
         {
             public string name;
-            public GameObject moveTo;
+            public Transform moveTo;
         }
         public MoveToInfo[] pointsToMove;
         public float moveSpeed;
@@ -23,8 +23,8 @@ namespace Yarn.Unity.Example
         //Variaveis para fazer Rök se mexer
         private float xDir;
         private float yDir;
-        private GameObject point;
-        private bool dialogueMove;
+        private Transform point;
+        private bool dialogueMove = false;
 
         // Use this for initialization
         void Start()
@@ -41,10 +41,10 @@ namespace Yarn.Unity.Example
             {
                 if (dialogueMove)
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, point.transform.position, moveSpeed * Time.deltaTime);
-
-                    if (transform.position == point.transform.position)
+                    transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
+                    if (transform.position == point.position)
                     {
+                        point = null;
                         dialogueMove = false;
                     }
                 }
@@ -64,8 +64,8 @@ namespace Yarn.Unity.Example
                 if (dialogueMove)
                 {
                     //vetor para saber qual a posição do ponto para o player
-                    xDir = point.transform.position.x - transform.position.x;
-                    yDir = point.transform.position.y - transform.position.y;
+                    xDir = point.position.x - transform.position.x;
+                    yDir = point.position.y - transform.position.y;
 
                     anim.SetFloat("MoveX", xDir);
                     anim.SetFloat("MoveY", yDir);
@@ -84,7 +84,7 @@ namespace Yarn.Unity.Example
         [YarnCommand("moveTo")]
         public void MovePoint(string pointName)
         {
-            GameObject p = null;
+            Transform p = null;
             //procura o ponto para onde irá se mover dentro do array
             foreach (var info in pointsToMove)
             {
@@ -101,10 +101,12 @@ namespace Yarn.Unity.Example
                 Debug.LogErrorFormat("Não foi encontrando o point {0}!", pointName);
                 return;
             }
-
-            //se achar coloque o point para onde ele deva ir no objeto responsavel por isso
-            point = p;
-            dialogueMove = true;
+            else
+            {
+                //se achar coloque o point para onde ele deva ir no objeto responsavel por isso
+                point = p;
+                dialogueMove = true;
+            }
         }
 
         //Metodo para rodar as animações de Rök de acordo com dialogo
@@ -116,18 +118,48 @@ namespace Yarn.Unity.Example
                 anim.SetFloat("LastMoveX", 1.0f);
                 anim.SetFloat("LastMoveY", 0f);
             }
+            if (animationName == "FaceLeft")
+            {
+                anim.SetFloat("LastMoveX", -1.0f);
+                anim.SetFloat("LastMoveY", 0f);
+            }
             else if (animationName == "FaceUp")
             {
                 anim.SetFloat("LastMoveX", 0f);
                 anim.SetFloat("LastMoveY", 1.0f);
             }
+            else if (animationName == "FaceDown")
+            {
+                anim.SetFloat("LastMoveX", 0f);
+                anim.SetFloat("LastMoveY", -1.0f);
+            }
             else if (animationName == "Attack")
             {
                 anim.SetBool("RökAttacking", true);
                 SoundManagerScript.PlaySound("rokAttackingGate");
-            }else if (animationName == "StopAttack")
+            }
+            else if (animationName == "StopAttack")
             {
                 anim.SetBool("RökAttacking", false);
+            }
+            else if (animationName == "UnFrozen")
+            {
+                anim.SetBool("Freeze", false);
+                anim.SetBool("KeepFrozen", false);
+            }
+            else if (animationName == "RunningForAttack")
+            {
+                anim.SetBool("RunningForAttack", true);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if(col.isTrigger && col.CompareTag("Boss"))
+            {
+                anim.SetBool("RunningForAttack", false);
+                anim.SetBool("Freeze", true);
+                anim.SetBool("KeepFrozen", true);
             }
         }
     }

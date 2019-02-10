@@ -93,9 +93,11 @@ namespace Yarn.Unity.Example
                 Debug.LogErrorFormat("Não foi encontrando o target {0}!", commandTarget);
                 return;
             }
-
-            //se achar diga qual o nome do target para a camera ir
-            targetName = targetTest;
+            else
+            {
+                //se achar diga qual o nome do target para a camera ir
+                targetName = targetTest;
+            }
         }
     }
 }
