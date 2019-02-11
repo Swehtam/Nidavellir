@@ -9,8 +9,7 @@ namespace Yarn.Unity.Example
         public Sprite holeSprite;
 
         private PlayerHealthManager playerHealth;
-        private BoneDragonController dragon;
-        private bool isBroken;
+        public bool isBroken = false;
         private bool steped;
         private Animator anim;
 
@@ -18,7 +17,6 @@ namespace Yarn.Unity.Example
         void Start()
         {
             playerHealth = FindObjectOfType<PlayerHealthManager>();
-            isBroken = false;
             anim = GetComponent<Animator>();
         }
 

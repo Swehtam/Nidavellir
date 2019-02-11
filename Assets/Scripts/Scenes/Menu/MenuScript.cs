@@ -11,6 +11,7 @@ namespace Yarn.Unity.Example
         public GameObject menuPanel;
         public GameObject optionsPanel;
         public AudioMixer audioMixer;
+        private LevelChanger levelChanger;
 
         void Start()
         {
@@ -19,12 +20,14 @@ namespace Yarn.Unity.Example
             audioMixer.SetFloat("musicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0f)) * 20);
 
             audioMixer.SetFloat("soundEffectsVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundEffectsVolume", 0f)) * 20);
+
+            levelChanger = FindObjectOfType<LevelChanger>();
         }
 
         public void LoadIntroScene()
         {
             IntroductionScript.phase = 1;
-            LoadingScreenManager.LoadScene("Introduction");
+            levelChanger.FadeToLevel("Introduction");
         }
 
         public void OpenSettingsMenu()

@@ -13,8 +13,13 @@ namespace Yarn.Unity.Example
         public GameObject settingsMenu;
         public GameObject hudMenu;
         public GameObject quest;
+        private LevelChanger levelChanger;
+        
+        void Start()
+        {
+            levelChanger = FindObjectOfType<LevelChanger>();
+        }
 
-        // Update is called once per frame
         void Update()
         {
             // Pausar e despausar quando aperta ESC
@@ -52,7 +57,7 @@ namespace Yarn.Unity.Example
         public void LoadMenu()
         {
             Time.timeScale = 1f;
-            LoadingScreenManager.LoadScene("Menu");
+            levelChanger.FadeToLevel("Menu");
         }
 
         // Metodo para o botão de sair do jogo

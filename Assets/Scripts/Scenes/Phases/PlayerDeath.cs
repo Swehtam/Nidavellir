@@ -9,10 +9,12 @@ namespace Yarn.Unity.Example
     {
         public GameObject player;
         public static int deaths = 0;
-        private static string scene = "";
+        public static string scene = "";
+        private LevelChanger levelChanger;
 
         void Start()
         {
+            levelChanger = FindObjectOfType<LevelChanger>();
             string actualScene;
             actualScene = SceneManager.GetActiveScene().name;
 
@@ -32,7 +34,18 @@ namespace Yarn.Unity.Example
                 }
                 else if (scene.Equals("BossPhase"))
                 {
-
+                    if (deaths == 1)
+                    {
+                        FindObjectOfType<DialogueRunner>().StartDialogue("Phase4.Death1");
+                    }
+                    else if (deaths == 2)
+                    {
+                        FindObjectOfType<DialogueRunner>().StartDialogue("Phase4.Death2");
+                    }
+                    else
+                    {
+                        FindObjectOfType<DialogueRunner>().StartDialogue("Phase4.Death3");
+                    }
                 }
             }
             else
@@ -48,7 +61,7 @@ namespace Yarn.Unity.Example
             {
                 if (player.gameObject.GetComponent<PlayerHealthManager>().died == true)
                 {
-                    LoadingScreenManager.LoadScene("DeathScene");
+                    StartCoroutine(Death());
                 }
             }
         }
@@ -56,13 +69,20 @@ namespace Yarn.Unity.Example
         [YarnCommand("changeScene")]
         public void ChangeScene(string command)
         {
-            LoadingScreenManager.LoadScene(command);
+            levelChanger.FadeToLevel(command);
         }
 
         [YarnCommand("changeNode")]
         public void ChangeNode(string command)
         {
             FindObjectOfType<DialogueRunner>().StartDialogue(command);
+        }
+
+        //Quando Volstagg morrer demorar para ele fazer o barulho de morte
+        public IEnumerator Death()
+        {
+            yield return new WaitForSeconds(3f);
+            levelChanger.FadeToLevel("DeathScene");
         }
     }
 }

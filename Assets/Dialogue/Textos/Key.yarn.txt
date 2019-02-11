@@ -30,7 +30,7 @@ position: 541,260
 ---
 <<HUD GameCanvas hide>>
 <<setAnimation Volstagg FaceDown>>
-Volstagg:: Dessa vez eu consigo
+Volstagg:: Dessa vez eu consigo!
 <<moveTo MainCamera WaveTarget>>
 <<wait 1>>
 <<setAnimation Skeleton1 Scream>>

@@ -6,15 +6,26 @@ namespace Yarn.Unity.Example
 {
     public class BoneDragonController : MonoBehaviour
     {
+        //variaveis para o dragão se mexer
         public float moveSpeed;
-        public float attackCoolDown;
-        //So que de gelo
-        public GameObject fireball;
-        public Transform firePoint;
         public float direction;
-        public int phase;
+        
+        //Variaveis referentes para a Bola de Gelo
+        public float iceballAttackCoolDown;
+        public GameObject iceball;
+        public Transform shootPoint;
         public bool shoot;
+        public bool attackingIceball;
 
+        //Variaveis referentes ao Rugido
+        public float roarAttackCoolDown;
+
+        //variaveis referentes ao Rasante
+        public float airAttackCoolDown;
+
+        //Variavel para saber a fase do boss
+        public int phase;
+        
         //Pontos para onde o dragão vai voar
         [System.Serializable]
         public struct FlyToInfo
@@ -30,38 +41,62 @@ namespace Yarn.Unity.Example
         //Variavel para saber se o boss morreu, ela ta sendo usado no script BossHealthManager
         public bool died;
 
-        private bool dragonFlying;
+        //Componentes usados pelo Boss
         private Rigidbody2D dragonRB;
         private Animator anim;
-        private Transform point;
         private PlayerHealthManager player;
         private BossHealthManager healthManager;
 
-        private readonly float attackTime = 1f;
-        private float coolDown;
-        private float attackTimeCoolDown;
-        public bool attackingFireball;
+        //Variaveis para movimentação do dragão
+        private Transform point;
+        private bool dragonFlying;
+
+        //Variaveis referentes à Bola de Gelo
+        private readonly float iceballAttackTime = 1f;
+        private float iceballCoolDown;
+        private float iceballTimeCoolDown;
         private bool fbCreated;
+
+        //Variaveis referentes ao Rugido
+        private readonly float roarAttackTime = 1.3f;
+        private float roarCoolDown;
+        private float roarTimeCoolDown;
+        private bool roar;
+        private readonly float roarForce = 500f;
+        private float roarForceDecrese;
+
+        //Variaveis referentes ao Rasante
+        private readonly int airStrikeAttackCount = 3;
+        private float airCoolDown;
+        private int airStrikeCount;
         private bool airStriking;
         private Transform airAttackPoint;
-
+        
         void Start()
         {
+            direction = -1;
+
             healthManager = GetComponent<BossHealthManager>();
             player = FindObjectOfType<PlayerHealthManager>();
-            point = null;
-            airAttackPoint = null;
             dragonRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-            coolDown = 0f;
-            attackingFireball = false;
-            died = false;
-            phase = 1;
-            direction = -1f;
-            shoot = false;
-            fbCreated = false;
-            airStriking = false;
+
+            point = null;
             dragonFlying = false;
+
+            iceballCoolDown = 0f;
+            iceballTimeCoolDown = 0f;
+            fbCreated = false;
+
+            roarCoolDown = 0f;
+            roarTimeCoolDown = 0f;
+            roar = false;
+            roarForceDecrese = 0f;
+
+            airCoolDown = 0f;
+            airStrikeCount = 0;
+            airStriking = false;
+            airAttackPoint = null;
         }
 
         private void FixedUpdate()
@@ -93,6 +128,10 @@ namespace Yarn.Unity.Example
             if (died)
             {
                 //alterara a variavel que será usada na movimentação do boss, para ele mesmo, ou seja, ele vai parar aonde estiver
+                anim.SetBool("AirStriking", false);
+                anim.SetBool("StartFlying", false);
+                anim.SetBool("Flying", false);
+                anim.SetBool("FireballAttack", false);
                 anim.SetBool("Dead", true);
                 return;
             }
@@ -102,6 +141,7 @@ namespace Yarn.Unity.Example
             {
                 if (dragonFlying)
                 {
+                    moveSpeed = 5f;
                     transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
                     if (transform.position == point.position)
                     {
@@ -113,6 +153,7 @@ namespace Yarn.Unity.Example
                 }
                 if (airStriking)
                 {
+                    moveSpeed = 15f;
                     anim.SetBool("AirStriking", airStriking);
                     transform.position = Vector2.MoveTowards(transform.position, airAttackPoint.position, moveSpeed * Time.deltaTime);
                     if (transform.position == airAttackPoint.position)
@@ -142,14 +183,40 @@ namespace Yarn.Unity.Example
                     }
                     return;
                 }
-                if (attackingFireball)
+                if (attackingIceball)
                 {
                     transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, player.transform.position.y + 2f), moveSpeed * Time.deltaTime);
                 }
             }
             else if (phase == 3)
             {
+                if (dragonFlying)
+                {
+                    moveSpeed = 5f;
+                    transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
+                    if (transform.position == point.position)
+                    {
+                        point = null;
+                        dragonFlying = false;
+                        direction = player.transform.position.x - transform.position.x;
+                    }
+                    return;
+                }
 
+                if (airStriking)
+                {
+                    moveSpeed = 15f;
+                    anim.SetBool("AirStriking", airStriking);
+                    transform.position = Vector2.MoveTowards(transform.position, airAttackPoint.position, moveSpeed * Time.deltaTime);
+                    if (transform.position == airAttackPoint.position)
+                    {
+                        airAttackPoint = null;
+                        airStriking = false;
+                        anim.SetBool("AirStriking", airStriking);
+                        FlyToPoint(direction, true);
+                    }
+                    return;
+                }
             }
         }
 
@@ -162,15 +229,14 @@ namespace Yarn.Unity.Example
                 {
                     fbCreated = true;
                     direction = player.transform.position.x - transform.position.x;
-                    GameObject clone = (GameObject)Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
+                    GameObject clone = (GameObject)Instantiate(iceball, shootPoint.transform.position, Quaternion.identity);
                     clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 100);
                 }
                 anim.SetFloat("FacingX", direction);
                 return;
             }
             if (dragonFlying)
-            {
-                 
+            {    
                 return;
             }
 
@@ -179,12 +245,7 @@ namespace Yarn.Unity.Example
                 //boss ja vai estar voando por causa do dialogo então não precisa disso aqui
                 if (!airStriking)
                 {
-                    moveSpeed = 10f;
                     AirStrikePoint(direction);
-                }
-                else
-                {
-                    moveSpeed = 15f;
                 }
             }
             else if (phase == 2)
@@ -195,40 +256,112 @@ namespace Yarn.Unity.Example
                     return;
                 }
 
-                if (coolDown <= 0)
+                if (iceballCoolDown <= 0)
                 {
-                    attackingFireball = true;
-                    coolDown = attackCoolDown;
-                    attackTimeCoolDown = attackTime;
+                    attackingIceball = true;
+                    iceballCoolDown = iceballAttackCoolDown;
+                    iceballTimeCoolDown = iceballAttackTime;
                 }
 
-                if (coolDown > 0)
+                if (iceballCoolDown > 0)
                 {
-                    attackTimeCoolDown -= Time.deltaTime;
-                    coolDown -= Time.deltaTime;
+                    iceballTimeCoolDown -= Time.deltaTime;
+                    iceballCoolDown -= Time.deltaTime;
                 }
 
-                if (attackTimeCoolDown < 0)
+                if (iceballTimeCoolDown < 0)
                 {
-                    attackingFireball = false;
+                    attackingIceball = false;
                     fbCreated = false;
                 }
             }
             else if (phase == 3)
             {
+                if(airCoolDown > 0 && !airStriking)
+                {
+                    if (healthManager.takingDamage)
+                    {
+                        FlyToPoint(direction, false);
+                        return;
+                    }
+                }
+                //Caso o CD do Rasante tenha acabado e o contador de Rasantes seja 0, entaõ faça rasante
+                if (airCoolDown <= 0 && airStrikeCount == 0)
+                {
+                    airStrikeCount = airStrikeAttackCount;
+                }
+                //Caso o Rasante esteja em CD e o contador esteiver em 0 e o CD do Rugido tenha acabado, então faça o Rugido
+                else if (airCoolDown > 0 && airStrikeCount == 0 && roarCoolDown <= 0)
+                {
+                    roar = true;
+                    roarForceDecrese = roarForce;
+                    roarCoolDown = roarAttackCoolDown;
+                    roarTimeCoolDown = roarAttackTime;
+                }
+                //Caso o Rasante esteja em CD e o contador esteiver em 0 e o Rugido esteja em CD e ele não esteja fazendo o Rugido e o CD da IceBall tenha acabado, então faça o IceBall
+                else if (airCoolDown > 0 && airStrikeCount == 0 && roarCoolDown > 0 && roarTimeCoolDown < 0 && iceballCoolDown <= 0)
+                {
+                    attackingIceball = true;
+                    iceballCoolDown = iceballAttackCoolDown;
+                    iceballTimeCoolDown = iceballAttackTime;
+                }
 
+                if(airStrikeCount > 0 && !airStriking)
+                {
+                    airStrikeCount -= 1;
+                    AirStrikePoint(direction);
+                    if(airStrikeCount == 0)
+                    {
+                        airCoolDown = airAttackCoolDown;
+                    }
+                }
+
+                if (airCoolDown > 0)
+                {
+                    airCoolDown -= Time.deltaTime;
+                }
+
+                if (roarCoolDown > 0)
+                {
+                    roarTimeCoolDown -= Time.deltaTime;
+                    roarCoolDown -= Time.deltaTime;
+                }
+
+                if (iceballCoolDown > 0)
+                {
+                    iceballTimeCoolDown -= Time.deltaTime;
+                    iceballCoolDown -= Time.deltaTime;
+                }
+
+                if (roarTimeCoolDown < 0)
+                {
+                    roar = false;
+                }
+
+                if (iceballTimeCoolDown < 0)
+                {
+                    attackingIceball = false;
+                    fbCreated = false;
+                }
+            }
+            if (roar)
+            {
+                roarForceDecrese -= Time.deltaTime * 100;
+                direction = player.transform.position.x - transform.position.x;
+                player.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * roarForceDecrese);
             }
 
             if (shoot && !fbCreated)
             {
                 fbCreated = true;
                 direction = player.transform.position.x - transform.position.x;
-                GameObject clone = (GameObject)Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
+                GameObject clone = (GameObject)Instantiate(iceball, shootPoint.transform.position, Quaternion.identity);
                 clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 200);
             }
 
+            anim.SetBool("Roar", roar);
             anim.SetBool("AirStriking", airStriking);
-            anim.SetBool("FireballAttack", attackingFireball);
+            anim.SetBool("FireballAttack", attackingIceball);
             anim.SetFloat("FacingX", direction);
         }
 

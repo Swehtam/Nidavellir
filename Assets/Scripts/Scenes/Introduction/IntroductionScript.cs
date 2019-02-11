@@ -16,10 +16,13 @@ namespace Yarn.Unity.Example
 
         public CharactersInfo[] characters;
         public static int phase;
+        private LevelChanger levelChanger;
 
         void Start()
         {
-            if(phase == 1)
+            levelChanger = FindObjectOfType<LevelChanger>();
+
+            if (phase == 1)
             {
                 FindObjectOfType<DialogueRunner>().StartDialogue("Introduction.Phase1");
             }
@@ -78,7 +81,7 @@ namespace Yarn.Unity.Example
         [YarnCommand("loadNextScene")]
         public void LoadScene(string scene)
         {
-            LoadingScreenManager.LoadScene(scene);
+            levelChanger.FadeToLevel(scene);
         }
     }
 }

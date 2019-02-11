@@ -42,9 +42,9 @@ Volstagg:: Eles sabiam que eu ia querer matar esse grandalhão.
 Volstagg:: Calma Volstagg, pense no banquete em Valhalla.
 Volstagg:: Bom, o portão não abre porque tem uma tranca,
 Volstagg:: por aqui não dá pra sair agora, 
+<<Quests GameCanvas show>>
 Volstagg:: terei de explorar esse inferno!
 <<HUD GameCanvas show>>
-<<Quests GameCanvas show>>
 ===
 
 title: Phase1.Death1
@@ -80,10 +80,10 @@ Rök:: Hmmm, parece gostoso. Rök com fome.
 <<setAnimation Rök FaceUp>>
 <<setAnimation Rök Attack>>
 <<wait 1>>
+<<Quests GameCanvas show>>
 Volstagg:: Esquece...
 <<setAnimation Volstagg FaceDown>>
 <<HUD GameCanvas show>>
-<<Quests GameCanvas show>>
 ===
 
 title: Phase1.Death2

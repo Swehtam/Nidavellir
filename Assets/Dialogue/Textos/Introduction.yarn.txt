@@ -40,7 +40,8 @@ position: 485,211
 ---
 <<change Background Walking>>
 :: Depois de enfrentar todos os esqueletos, lobos, labirintos e os demais perigos que Nilfheim tinha separado para a dupla, Volstagg e Rök seguiram para a tão esperada saída.
-:: Era chegada a hora da subida dos heróis pela Yggdrasil, eles estavam certos de suas capacidades e mais confiantes do que nunca… Ou ao menos o anão estava. Rök ninguém nunca vai entender o que pensa. (Ou se ele pensa)
+:: Era chegada a hora da subida dos heróis pela Yggdrasil, eles estavam certos de suas capacidades e mais confiantes do que nunca… 
+:: Ou ao menos o anão estava. Rök ninguém nunca vai entender o que pensa. (Ou se ele pensa)
 <<change Background Attack>>
 :: Volstagg havia melhorado sua percepção dos inimigos, tinha visto que, de fato, ele era um guerreiro capaz de lutar por sua honra, não importando o quão pequenino ele fosse!
 <<change Background Gate>>

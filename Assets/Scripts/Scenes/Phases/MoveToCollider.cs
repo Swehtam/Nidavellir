@@ -12,7 +12,7 @@ namespace Yarn.Unity.Example
             if (col.isTrigger != true)
             {
                 //Quando Rök chegar no collider destruir o collider para ter menos objetos na cena
-                if (col.name.Equals("Rök") && gameObject.name.Equals("NearGate"))
+                if (col.name.Equals("Rök") && gameObject.name.Equals("NearRökNearGate"))
                 {
                     col.GetComponent<Rigidbody2D>().isKinematic = true;
                 }

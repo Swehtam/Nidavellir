@@ -7,7 +7,7 @@ namespace Yarn.Unity.Example
     public class BossHealthManager : MonoBehaviour
     {
         //variaveis para a vida do Boss
-        private int health;
+        private int health = 6;
         public int currentHealth;
 
         //Componentes do boss
@@ -24,7 +24,6 @@ namespace Yarn.Unity.Example
         // Use this for initialization
         void Start()
         {
-            health = 18;
             currentHealth = health;
             anim = GetComponent<Animator>();
             boss = GetComponent<BoneDragonController>();

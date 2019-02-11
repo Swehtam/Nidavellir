@@ -20,6 +20,7 @@ Rök:: De nada! Rök é um bom guerreiro!
 Volstagg:: Tô vendo! Bom demais…
 <<wait 0.3>>
 <<shake MainCamera>>
+<<wait 0.3>>
 <<setAnimation Rök FaceRight>>
 <<wait 0.3>>
 <<setAnimation Volstagg FaceRight>>
@@ -32,7 +33,7 @@ Rök:: Sim! Rök resolve!
 <<moveTo Rök RökFinalPoint>>
 <<wait 1>>
 <<setAnimation BoneDragon Fireball>>
-<<wait 1.5>>
+<<wait 2>>
 <<setAnimation BoneDragon StopFireball>>
 Volstagg:: Rök, ESPERA!
 BoneDragon:: Meros guerreiros… Pensando que seria fácil assim… 
@@ -45,10 +46,140 @@ BoneDragon:: Agora venha pequenino e vamos ver do que você é capaz.
 <<wait 1>>
 <<moveTo MainCamera Volstagg>>
 Volstagg:: Tô começando a pensar que o banquete não ta valendo a pena…
+<<Quests GameCanvas show>>
+<<moveTo Volstagg VolstaggFinalPoint>>
+<<wait 6>>
+<<ShowWall phase4 Left>>
+<<ShowWall phase4 Right>>
+<<HUD GameCanvas show>>
+===
+
+title: Phase4.Death1
+tags: 
+colorID: 0
+position: 540,260
+---
+<<HUD GameCanvas hide>>
+<<Quests GameCanvas hide>>
+<<moveTo Volstagg VolstaggInitialPoint>>
+<<moveTo Rök RökInitialPoint>>
+<<wait 3>>
+Volstagg:: Que sensação estranha é essa?
+Rök:: Deve ser gases. Rök tem muito.
+Volstagg:: ......
+<<setAnimation Rök FaceDown>>
+<<wait 0.3>>
+Rök:: Olha a ponte ali! Rök disse que seria fácil!
+<<setAnimation Volstagg FaceUp>>
+<<wait 0.3>>
+Volstagg:: Só tome cuidado, não estou gostando disso.
+Rök:: Medroso.
+<<wait 0.3>>
+<<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation Rök FaceRight>>
+<<wait 0.3>>
+<<setAnimation Volstagg FaceRight>>
+<<wait 0.3>>
+<<flyTo BoneDragon BossInitialPoint>>
+<<wait 3>>
+Volstagg:: Eu sabia!
+Rök:: Aqui vai Rök!
+<<setAnimation Rök RunningForAttack>>
+<<moveTo Rök RökFinalPoint>>
+<<wait 1>>
+<<setAnimation BoneDragon Fireball>>
+<<wait 2>>
+<<setAnimation BoneDragon StopFireball>>
+Volstagg:: Imbecil…
+BoneDragon:: Meros guerreiros… Pensando que seria fácil assim… 
+BoneDragon:: Eu, Nidogue, guardião dos tesouros das raízes da Yggdrasil fui mandado aqui. 
+BoneDragon:: É meu dever impedir a saída de vocês!
+Rök:: Frio… Frio… Volstagg!! Volstagg, ajuda Rök! 
+Volstagg:: De novo não…
+BoneDragon:: Agora venha pequenino e vamos ver do que você é capaz.
+<<flyTo BoneDragon Right>>
+<<wait 1>>
+<<moveTo MainCamera Volstagg>>
+Volstagg:: Você consegue Volstagg, só pensar na Hidromel.
+<<Quests GameCanvas show>>
 <<moveTo Volstagg VolstaggFinalPoint>>
 <<wait 4>>
 <<ShowWall phase4 Left>>
 <<ShowWall phase4 Right>>
 <<HUD GameCanvas show>>
+===
+
+title: Phase4.Death2
+tags: 
+colorID: 0
+position: 540,260
+---
+<<HUD GameCanvas hide>>
+<<Quests GameCanvas hide>>
+<<moveTo Volstagg VolstaggInitialPoint>>
+<<moveTo Rök RökInitialPoint>>
+<<wait 3>>
+<<shake MainCamera>>
+<<flyTo BoneDragon BossInitialPoint>>
+<<wait 3>>
+<<setAnimation Rök RunningForAttack>>
+<<moveTo Rök RökFinalPoint>>
+<<wait 1>>
+<<setAnimation BoneDragon Fireball>>
+Volstagg:: Parado em nome de Odin!
+<<wait 1>>
+<<setAnimation BoneDragon StopFireball>>
+Volstagg:: Hahahaha, até que isso é divertido.
+BoneDragon:: Meros guerreiros… Pensando que seria fácil assim… 
+BoneDragon:: Eu, Nidogue…
+Volstagg:: Blablalba, eu ja sei.
+Rök:: Frio…
+Volstagg:: Quieto.
+BoneDragon:: Grosso…
+<<flyTo BoneDragon Right>>
+<<wait 1>>
+<<moveTo MainCamera Volstagg>>
+Volstagg:: Agora a culpa é minha por eu estar de mau humor por causa da fome?
 <<Quests GameCanvas show>>
+<<moveTo Volstagg VolstaggFinalPoint>>
+<<wait 4>>
+<<ShowWall phase4 Left>>
+<<ShowWall phase4 Right>>
+<<HUD GameCanvas show>>
+===
+
+title: Phase4.Death3
+tags: 
+colorID: 0
+position: 540,260
+---
+<<HUD GameCanvas hide>>
+<<Quests GameCanvas hide>>
+<<moveTo Volstagg VolstaggInitialPoint>>
+<<moveTo Rök RökInitialPoint>>
+<<wait 3>>
+<<shake MainCamera>>
+<<flyTo BoneDragon BossInitialPoint>>
+<<wait 3>>
+<<setAnimation Rök RunningForAttack>>
+<<moveTo Rök RökFinalPoint>>
+<<wait 1>>
+<<setAnimation BoneDragon Fireball>>
+<<wait 2>>
+<<setAnimation BoneDragon StopFireball>>
+BoneDragon:: Meros guerreiros…
+Volstagg:: Shhhhhhhh.
+Rök:: Frio…
+Volstagg:: Quieto.
+BoneDragon:: Grosso…
+<<flyTo BoneDragon Right>>
+<<wait 1>>
+<<moveTo MainCamera Volstagg>>
+<<Quests GameCanvas show>>
+<<moveTo Volstagg VolstaggFinalPoint>>
+<<wait 4>>
+<<ShowWall phase4 Left>>
+<<ShowWall phase4 Right>>
+<<HUD GameCanvas show>>
 ===

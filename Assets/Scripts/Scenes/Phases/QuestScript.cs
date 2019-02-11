@@ -8,18 +8,35 @@ namespace Yarn.Unity.Example
 {
     public class QuestScript : MonoBehaviour
     {
+        //Onde o texto vai ser escrito
         public Text quest;
 
+        //Velocidade do texto apagando e escrevendo
         private readonly float textSpeed = 0.03f;
         private readonly float eraseSpeed = 0f;
+
+        //Variavel para saber se o texto ta sendo escrito ou apagado
         private bool runnig = false;
+
+        //Componentes usados caso esteja na primeira ou na quarta fase
         private KeyController keyController;
         private BoneDragonController boss;
 
+        //Variavel para aparece o tutorial do jogo na primeira fase
+        private int tutorial;
+
         private void Start()
         {
-            keyController = FindObjectOfType<KeyController>();
-            boss = FindObjectOfType<BoneDragonController>();
+            if (PlayerDeath.scene.Equals("Scene2D"))
+            {
+                tutorial = 1;
+                keyController = FindObjectOfType<KeyController>();
+            }
+            else if (PlayerDeath.scene.Equals("BossPhase"))
+            {
+                tutorial = 4;
+                boss = FindObjectOfType<BoneDragonController>();
+            }
         }
 
         void Update()
@@ -28,40 +45,82 @@ namespace Yarn.Unity.Example
             {
                 if (keyController)
                 {
-                    if (!keyController.gotKey)
+                    if (tutorial < 4)
                     {
-                        string newQuestText = "Encontre uma maneira de abrir o portão.\n\n Vou lhe dar uma dica: começa com 'c' e termina com 'have'.";
-                        StartCoroutine(NewQuest(newQuestText));
-                    }
-                    else if (keyController.gotKey && !keyController.open)
-                    {
-                        string newQuestText = "Opa, vejo que você tem companhia, é melhor se livrar deles.\n\n  Onda: " + keyController.onda + " de 5\n  Inimigos derrotados: " + keyController.killed +
-                                              " de " + keyController.needToKill;
-
-                        if (keyController.killed == 0 && quest.text != newQuestText)
+                        if(tutorial == 1)
                         {
+                            string newQuestText = "-------Tutorial-------\n\n Uso as setas do teclado ou os botões W,A,S,D para se movimentar.";
                             StartCoroutine(NewQuest(newQuestText));
+                            if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                            {
+                                tutorial = 2;
+                            }
                         }
-                        else if (keyController.killed > 0 && keyController.killed < 30)
+                        else if (tutorial == 2)
                         {
-                            StartCoroutine(UpdateQuest(newQuestText));
+                            string newQuestText = "-------Tutorial-------\n\n Segure qualquer um dos Shift's para correr.";
+                            StartCoroutine(NewQuest(newQuestText));
+                            if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                            {
+                                tutorial = 3;
+                            }
                         }
-                        else
+                        else if (tutorial == 3)
                         {
-                            return;
+                            string newQuestText = "-------Tutorial-------\n\n Aperte o botão esquerdo do mouse para atacar.";
+                            StartCoroutine(NewQuest(newQuestText));
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                                tutorial = 4;
+                            }
                         }
 
                     }
                     else
                     {
-                        string newQuestText = " Para um anão até que você não é ruim.\n\n Agora vá e passe pelo portão, você merece continuar sua jornada.";
-                        StartCoroutine(NewQuest(newQuestText));
+                        if (!keyController.gotKey)
+                        {
+                            string newQuestText = " Parabéns agora você não tem desculpa caso morra. Encontre uma maneira de abrir o portão.\n\n Vou lhe dar uma dica: começa com 'c' e termina com 'have'.";
+                            StartCoroutine(NewQuest(newQuestText));
+                        }
+                        else if (keyController.gotKey && !keyController.open)
+                        {
+                            string newQuestText = "Opa, vejo que você tem companhia, é melhor se livrar deles.\n\n  Onda: " + keyController.onda + " de 5\n  Inimigos derrotados: " + keyController.killed +
+                                                  " de " + keyController.needToKill;
+
+                            if (keyController.killed == 0 && quest.text != newQuestText)
+                            {
+                                StartCoroutine(NewQuest(newQuestText));
+                            }
+                            else if (keyController.killed > 0 && keyController.killed < 30)
+                            {
+                                StartCoroutine(UpdateQuest(newQuestText));
+                            }
+                            else
+                            {
+                                return;
+                            }
+
+                        }
+                        else
+                        {
+                            string newQuestText = " Para um anão até que você não é ruim.\n\n Agora vá e passe pelo portão, você merece continuar sua jornada.";
+                            StartCoroutine(NewQuest(newQuestText));
+                        }
                     }
                 }
-
-                if (boss)
+                else if (boss)
                 {
-
+                    if(boss.phase == 1)
+                    {
+                        string newQuestText = " Proteja-se!\n\n Ele vai te dar uma cabeçada!\n Cuiidado para não cair da ponte.";
+                        StartCoroutine(NewQuest(newQuestText));
+                    }
+                    else if (boss.phase == 2)
+                    {
+                        string newQuestText = "Agora você vai ter que lutar. Não se preocupe de ser congelado, sorte sua de ser peludo.";
+                        StartCoroutine(NewQuest(newQuestText));
+                    }
                 }
                 
             }

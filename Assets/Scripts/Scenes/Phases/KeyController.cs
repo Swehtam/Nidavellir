@@ -139,7 +139,7 @@ namespace Yarn.Unity.Example
                 onda = 0;
                 this.gameObject.transform.position = new Vector3(99f, 99f, -0.278f);
                 SoundManagerScript.PlaySound("pickupkey");
-                if (PlayerDeath.deaths == 1)
+                if (PlayerDeath.deaths == 0)
                 {
                     FindObjectOfType<DialogueRunner>().StartDialogue("Key");
                 }

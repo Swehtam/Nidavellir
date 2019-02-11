@@ -16,6 +16,7 @@ namespace Yarn.Unity.Example
 
         public GameObject player;
         public GameObject key;
+        public BoneDragonController boss;
 
         // Update is called once per frame
         void Update()
@@ -71,6 +72,23 @@ namespace Yarn.Unity.Example
                         cervaUI.sprite = cervaSprites[4];
                         break;
                     case 6:
+                        cervaUI.sprite = cervaSprites[5];
+                        break;
+                }
+            }
+
+            if (boss)
+            {
+                int honra = boss.phase;
+                switch (honra)
+                {
+                    case 1:
+                        cervaUI.sprite = cervaSprites[1];
+                        break;
+                    case 2:
+                        cervaUI.sprite = cervaSprites[3];
+                        break;
+                    case 3:
                         cervaUI.sprite = cervaSprites[5];
                         break;
                 }
