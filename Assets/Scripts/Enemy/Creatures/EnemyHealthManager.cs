@@ -60,6 +60,8 @@ namespace Yarn.Unity.Example
                 currentHealth -= damage;
                 if (isSkeleton)
                     SoundManagerScript.PlaySound("skeleton-bones");
+                if (!isSkeleton)
+                    SoundManagerScript.PlaySound("wolfHit");
                 StartCoroutine(Wait(0.5f));
             }
             else

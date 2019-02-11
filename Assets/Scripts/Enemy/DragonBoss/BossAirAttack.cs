@@ -21,6 +21,7 @@ namespace Yarn.Unity.Example
                 if (!col.isTrigger && col.CompareTag("Player") && col.name.Equals("Volstagg"))
                 {
                     player.HurtPlayer(1);
+                    SoundManagerScript.PlaySound("dragonFlyBy");
                     hitedPlayer = true;
                 }
             }
@@ -30,6 +31,7 @@ namespace Yarn.Unity.Example
         {
             if (!col.isTrigger && col.CompareTag("Player") && col.name.Equals("Volstagg"))
             {
+                SoundManagerScript.PlaySound("dragonFlyBy");
                 hitedPlayer = false;
             }
         }
