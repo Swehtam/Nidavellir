@@ -18,7 +18,7 @@ namespace Yarn.Unity.Example
         {
             if (!hitedPlayer)
             {
-                if (!col.isTrigger && col.CompareTag("Player"))
+                if (!col.isTrigger && col.CompareTag("Player") && col.name.Equals("Volstagg"))
                 {
                     player.HurtPlayer(1);
                     hitedPlayer = true;
@@ -28,7 +28,7 @@ namespace Yarn.Unity.Example
 
         void OnTriggerExit2D(Collider2D col)
         {
-            if (!col.isTrigger && col.CompareTag("Player"))
+            if (!col.isTrigger && col.CompareTag("Player") && col.name.Equals("Volstagg"))
             {
                 hitedPlayer = false;
             }

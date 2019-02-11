@@ -30,6 +30,7 @@ namespace Yarn.Unity.Example
             iceBlockHit = false;
             fireRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
+            SoundManagerScript.PlaySound("fireballLaunch");
             fbCreated = true;
             dragon = FindObjectOfType<BoneDragonController>();
             playerHealth = FindObjectOfType<PlayerHealthManager>();

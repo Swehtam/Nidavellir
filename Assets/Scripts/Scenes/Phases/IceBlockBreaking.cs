@@ -40,6 +40,8 @@ namespace Yarn.Unity.Example
                         direction = col.transform.position.x - gameObject.transform.position.x;
                         col.GetComponent<FireballScript>().iceBlockHit = true;
                         StartCoroutine(DestroyIceBlock());
+                        SoundManagerScript.PlaySound("fireballImpact");
+                        SoundManagerScript.PlaySound("icePillarBreaking");
                     }
                 }
             }

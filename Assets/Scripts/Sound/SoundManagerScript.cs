@@ -6,7 +6,7 @@ public class SoundManagerScript : MonoBehaviour
 {
 
     public static AudioClip skeletonAttack, volstaggAttack, skeletonDeath, volstaggDeath, volstaggHit, pickUpKey, gateOpening, pickUpHeart, rokAttackingGate, skeletonGrunt, floorFalling, icePillarBreaking;
-    public static AudioClip fireballImpact;
+    public static AudioClip fireballImpact, fireballLaunch;
     static AudioSource audioSrc;
     // Use this for initialization
     void Start()
@@ -24,6 +24,7 @@ public class SoundManagerScript : MonoBehaviour
         floorFalling = Resources.Load<AudioClip>("floorFalling");
         icePillarBreaking = Resources.Load<AudioClip>("icePillarBreaking");
         fireballImpact = Resources.Load<AudioClip>("fireballImpact");
+        fireballLaunch = Resources.Load<AudioClip>("fireballLaunch");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -71,6 +72,9 @@ public class SoundManagerScript : MonoBehaviour
                 break;
             case "fireballImpact":
                 audioSrc.PlayOneShot(fireballImpact);
+                break;
+            case "fireballLaunch":
+                audioSrc.PlayOneShot(fireballLaunch);
                 break;
         }
     }

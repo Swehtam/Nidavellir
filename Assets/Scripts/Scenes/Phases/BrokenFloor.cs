@@ -11,6 +11,7 @@ namespace Yarn.Unity.Example
         private PlayerHealthManager playerHealth;
         private BoneDragonController dragon;
         private bool isBroken;
+        private bool steped;
         private Animator anim;
 
         // Start is called before the first frame update
@@ -27,7 +28,11 @@ namespace Yarn.Unity.Example
             {
                 if (!isBroken)
                 {
-                    StartCoroutine(HoleAnimation());
+                    if(!steped)
+                    {
+                        StartCoroutine(HoleAnimation());
+                    }
+                    
                 }
                 else
                 {
@@ -38,6 +43,8 @@ namespace Yarn.Unity.Example
 
         public IEnumerator HoleAnimation()
         {
+            steped = true;
+            SoundManagerScript.PlaySound("floorFalling");
             anim.SetBool("FloorBreaking", true);
             yield return new WaitForSeconds(0.6f);
             anim.SetBool("FloorBreaking", false);
