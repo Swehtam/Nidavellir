@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 1
+  isSkeleton: 1
 --- !u!1 &1294994804398600
 GameObject:
   m_ObjectHideFlags: 0

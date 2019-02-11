@@ -61,6 +61,7 @@ namespace Yarn.Unity.Example
             if (!takingDamage)
             {
                 takingDamage = true;
+                SoundManagerScript.PlaySound("dragonHit");
                 currentHealth -= damage;
 
                 //Se o Boss levar dano do IceBlock então não fazer a animação de ter levado dano
