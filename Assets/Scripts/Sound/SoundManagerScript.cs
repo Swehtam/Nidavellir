@@ -5,7 +5,8 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
-    public static AudioClip skeletonAttack, volstaggAttack, skeletonDeath, volstaggDeath, volstaggHit, pickUpKey, gateOpening, pickUpHeart, rokAttackingGate;
+    public static AudioClip skeletonAttack, volstaggAttack, skeletonDeath, volstaggDeath, volstaggHit, pickUpKey, gateOpening, pickUpHeart, rokAttackingGate, skeletonGrunt, floorFalling, icePillarBreaking;
+    public static AudioClip fireballImpact;
     static AudioSource audioSrc;
     // Use this for initialization
     void Start()
@@ -19,6 +20,10 @@ public class SoundManagerScript : MonoBehaviour
         gateOpening = Resources.Load<AudioClip>("gate-opening");
         pickUpHeart = Resources.Load<AudioClip>("pickup-heart");
         rokAttackingGate = Resources.Load<AudioClip>("rokAttackingGate");
+        skeletonGrunt = Resources.Load<AudioClip>("skeletonGrunt");
+        floorFalling = Resources.Load<AudioClip>("floorFalling");
+        icePillarBreaking = Resources.Load<AudioClip>("icePillarBreaking");
+        fireballImpact = Resources.Load<AudioClip>("fireballImpact");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -54,6 +59,18 @@ public class SoundManagerScript : MonoBehaviour
                 break;
             case "rokAttackingGate":
                 audioSrc.PlayOneShot(rokAttackingGate);
+                break;
+            case "skeletonGrunt":
+                audioSrc.PlayOneShot(skeletonGrunt);
+                break;
+            case "floorFalling":
+                audioSrc.PlayOneShot(floorFalling);
+                break;
+            case "icePillarBreaking":
+                audioSrc.PlayOneShot(icePillarBreaking);
+                break;
+            case "fireballImpact":
+                audioSrc.PlayOneShot(fireballImpact);
                 break;
         }
     }

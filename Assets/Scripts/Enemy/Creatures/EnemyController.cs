@@ -199,6 +199,7 @@ namespace Yarn.Unity.Example
             if (animationName == "Scream")
             {
                 StartCoroutine(Scream());
+                SoundManagerScript.PlaySound("skeletonGrunt");
             }
         }
 

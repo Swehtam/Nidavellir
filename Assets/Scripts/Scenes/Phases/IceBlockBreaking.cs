@@ -32,6 +32,7 @@ namespace Yarn.Unity.Example
                         direction = col.transform.position.x - gameObject.transform.position.x;
                         col.GetComponent<BossHealthManager>().HurtEnemy(1, true);
                         StartCoroutine(DestroyIceBlock());
+                        SoundManagerScript.PlaySound("icePillarBreaking");
                     }
                     //Caso seja a fireball
                     else

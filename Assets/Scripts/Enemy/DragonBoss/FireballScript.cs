@@ -68,10 +68,12 @@ namespace Yarn.Unity.Example
                 playerHealth.HurtPlayer(damage);
                 playerHealth.SlowPlayer();
                 StartCoroutine(DestroyFireball());
+                SoundManagerScript.PlaySound("fireballImpact");
             }
             else if (!col.isTrigger && col.CompareTag("Player"))
             {
                 StartCoroutine(DestroyFireball());
+                SoundManagerScript.PlaySound("fireballImpact");
             }
         }
 
