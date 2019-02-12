@@ -7,7 +7,7 @@ namespace Yarn.Unity.Example
     public class BossHealthManager : MonoBehaviour
     {
         //variaveis para a vida do Boss
-        private int health = 6;
+        private readonly int health = 18;
         public int currentHealth;
 
         //Componentes do boss
@@ -50,6 +50,7 @@ namespace Yarn.Unity.Example
             else if (currentHealth <= 0)
             {
                 boss.died = true;
+                boss.phase = 4;
                 StartCoroutine(BossDeath());
             }
         }
@@ -96,7 +97,7 @@ namespace Yarn.Unity.Example
         public IEnumerator BossDeath()
         {
             anim.SetBool("Dead", true);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(5f);
             Destroy(gameObject);
         }
     }

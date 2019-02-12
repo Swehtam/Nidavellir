@@ -22,6 +22,7 @@ namespace Yarn.Unity.Example
 
         //variaveis referentes ao Rasante
         public float airAttackCoolDown;
+        public bool airStriking;
 
         //Variavel para saber a fase do boss
         public int phase;
@@ -52,7 +53,7 @@ namespace Yarn.Unity.Example
         private bool dragonFlying;
 
         //Variaveis referentes à Bola de Gelo
-        private readonly float iceballAttackTime = 1f;
+        private readonly float iceballAttackTime = 1.5f;
         private float iceballCoolDown;
         private float iceballTimeCoolDown;
         private bool fbCreated;
@@ -69,12 +70,11 @@ namespace Yarn.Unity.Example
         private readonly int airStrikeAttackCount = 3;
         private float airCoolDown;
         private int airStrikeCount;
-        private bool airStriking;
         private Transform airAttackPoint;
         
         void Start()
         {
-            direction = -1;
+            direction = 1;
 
             healthManager = GetComponent<BossHealthManager>();
             player = FindObjectOfType<PlayerHealthManager>();
@@ -198,6 +198,8 @@ namespace Yarn.Unity.Example
                     {
                         point = null;
                         dragonFlying = false;
+                        anim.SetBool("StartFlying", false);
+                        anim.SetBool("Flying", false);
                         direction = player.transform.position.x - transform.position.x;
                     }
                     return;
@@ -213,9 +215,20 @@ namespace Yarn.Unity.Example
                         airAttackPoint = null;
                         airStriking = false;
                         anim.SetBool("AirStriking", airStriking);
-                        FlyToPoint(direction, true);
+                        if(airStrikeCount == 0)
+                        {
+                            FlyToPoint(direction, false);
+                        }
+                        else
+                        {
+                            FlyToPoint(direction, true);
+                        }
                     }
                     return;
+                }
+                if (attackingIceball)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, player.transform.position.y + 2f), moveSpeed * Time.deltaTime);
                 }
             }
         }
@@ -286,12 +299,12 @@ namespace Yarn.Unity.Example
                     }
                 }
                 //Caso o CD do Rasante tenha acabado e o contador de Rasantes seja 0, entaõ faça rasante
-                if (airCoolDown <= 0 && airStrikeCount == 0)
+                if (airCoolDown <= 0 && airStrikeCount == 0 && !roar && !attackingIceball)
                 {
                     airStrikeCount = airStrikeAttackCount;
                 }
                 //Caso o Rasante esteja em CD e o contador esteiver em 0 e o CD do Rugido tenha acabado, então faça o Rugido
-                else if (airCoolDown > 0 && airStrikeCount == 0 && roarCoolDown <= 0)
+                else if (airCoolDown > 0 && airStrikeCount == 0 && !airStriking & roarCoolDown <= 0 && !attackingIceball)
                 {
                     roar = true;
                     roarForceDecrese = roarForce;
@@ -299,7 +312,7 @@ namespace Yarn.Unity.Example
                     roarTimeCoolDown = roarAttackTime;
                 }
                 //Caso o Rasante esteja em CD e o contador esteiver em 0 e o Rugido esteja em CD e ele não esteja fazendo o Rugido e o CD da IceBall tenha acabado, então faça o IceBall
-                else if (airCoolDown > 0 && airStrikeCount == 0 && roarCoolDown > 0 && roarTimeCoolDown < 0 && iceballCoolDown <= 0)
+                else if (airCoolDown > 0 && airStrikeCount == 0  && !airStriking && roarCoolDown > 0 && roarTimeCoolDown < 0  && !roar && iceballCoolDown <= 0)
                 {
                     attackingIceball = true;
                     iceballCoolDown = iceballAttackCoolDown;
@@ -356,7 +369,14 @@ namespace Yarn.Unity.Example
                 fbCreated = true;
                 direction = player.transform.position.x - transform.position.x;
                 GameObject clone = (GameObject)Instantiate(iceball, shootPoint.transform.position, Quaternion.identity);
-                clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 200);
+                if(phase == 3)
+                {
+                    clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 400);
+                }
+                else
+                {
+                    clone.GetComponent<Rigidbody2D>().AddForce(new Vector2((Mathf.Abs(direction)) / direction, 0.0f) * 200);
+                }
             }
 
             anim.SetBool("Roar", roar);
@@ -571,6 +591,14 @@ namespace Yarn.Unity.Example
             else if (command.Equals("StopFireball"))
             {
                 anim.SetBool("DialogFireball", false);
+            }
+            else if (command.Equals("Roar"))
+            {
+                anim.SetBool("Roar", true);
+            }
+            else if (command.Equals("StopRoar"))
+            {
+                anim.SetBool("Roar", false);
             }
         }
     }

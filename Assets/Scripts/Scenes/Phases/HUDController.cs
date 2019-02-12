@@ -83,12 +83,15 @@ namespace Yarn.Unity.Example
                 switch (honra)
                 {
                     case 1:
-                        cervaUI.sprite = cervaSprites[1];
+                        cervaUI.sprite = cervaSprites[0];
                         break;
                     case 2:
-                        cervaUI.sprite = cervaSprites[3];
+                        cervaUI.sprite = cervaSprites[2];
                         break;
                     case 3:
+                        cervaUI.sprite = cervaSprites[4];
+                        break;
+                    case 4:
                         cervaUI.sprite = cervaSprites[5];
                         break;
                 }

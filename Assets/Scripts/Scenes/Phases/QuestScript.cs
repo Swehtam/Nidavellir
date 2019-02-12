@@ -121,6 +121,16 @@ namespace Yarn.Unity.Example
                         string newQuestText = "Agora você vai ter que lutar. Não se preocupe de ser congelado, sorte sua de ser peludo.";
                         StartCoroutine(NewQuest(newQuestText));
                     }
+                    else if (boss.phase == 3)
+                    {
+                        string newQuestText = "IH....\n Agora deu ruim...\n Quer dizer, você vai se sair bem, só desvie de tudo.";
+                        StartCoroutine(NewQuest(newQuestText));
+                    }
+                    else if (boss.phase == 4)
+                    {
+                        string newQuestText = "Não acredito que você conseguiu... Meus parabéns.";
+                        StartCoroutine(NewQuest(newQuestText));
+                    }
                 }
                 
             }

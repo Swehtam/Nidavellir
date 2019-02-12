@@ -7764,36 +7764,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1155492095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1155492096}
-  m_Layer: 0
-  m_Name: VolstaggInitialPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1155492096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155492095}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.8666668, y: -5.060001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4553723938639109463}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186136128
 GameObject:
   m_ObjectHideFlags: 0
@@ -16138,6 +16108,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.0625, y: 0.0625}
   m_EdgeRadius: 0
+--- !u!1 &2158176585687190602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6525137663678067828}
+  m_Layer: 0
+  m_Name: VolstaggInitialPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6525137663678067828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158176585687190602}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.8666668, y: -5.060001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4553723938639109463}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2493090329311492032
 GameObject:
   m_ObjectHideFlags: 0
@@ -32065,6 +32065,7 @@ GameObject:
   - component: {fileID: 2061034710412991531}
   - component: {fileID: 4553723938633233557}
   - component: {fileID: 1842263885408866098}
+  - component: {fileID: 1271532631}
   m_Layer: 0
   m_Name: phase4
   m_TagString: Untagged
@@ -32093,7 +32094,7 @@ Transform:
   - {fileID: 4399825849233378645}
   - {fileID: 6117618380899982176}
   - {fileID: 492575765}
-  - {fileID: 1155492096}
+  - {fileID: 6525137663678067828}
   - {fileID: 199445509}
   - {fileID: 1080603891}
   - {fileID: 1292422994}
@@ -32153,6 +32154,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Properties: []
 --- !u!114 &1842263885408866098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553723938638741879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c039ebacd0fde94ca321690390b62a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftWall: {fileID: 5529475214213169529}
+  rightWall: {fileID: 7298065243309544687}
+--- !u!114 &1271532631
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35584,6 +35599,7 @@ GameObject:
   - component: {fileID: 7591411365637333184}
   - component: {fileID: 3260947493855225513}
   - component: {fileID: 704284243}
+  - component: {fileID: 8500518450548538666}
   m_Layer: 0
   m_Name: New Sprite (6)
   m_TagString: Untagged
@@ -35654,6 +35670,32 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &704284243
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843644035427507141}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.27465504}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.25}
+    oldSize: {x: 0.48, y: 0.96}
+    newSize: {x: 0.48, y: 0.96}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.48, y: 1.8538584}
+  m_EdgeRadius: 0
+--- !u!61 &8500518450548538666
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

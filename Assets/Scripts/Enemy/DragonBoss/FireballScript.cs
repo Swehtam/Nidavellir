@@ -19,7 +19,7 @@ namespace Yarn.Unity.Example
         private PlayerHealthManager playerHealth;
 
         //Variaveis de controle da Fireball
-        private readonly float timeToDestroy = 3f;
+        private float timeToDestroy = 5f;
         private float cooldown;
         private bool fbCreated;
         private readonly int damage = 1; 
@@ -41,6 +41,14 @@ namespace Yarn.Unity.Example
         {
             if (fbCreated)
             {
+                if(dragon.phase == 2)
+                {
+                    timeToDestroy = 10f;
+                }
+                else if (dragon.phase == 3)
+                {
+                    timeToDestroy = 5f;
+                }
                 cooldown = timeToDestroy;
                 fbCreated = false;
                 anim.SetFloat("FireballDirection", dragon.direction);
