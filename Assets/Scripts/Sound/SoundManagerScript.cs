@@ -6,7 +6,7 @@ public class SoundManagerScript : MonoBehaviour
 {
 
     public static AudioClip skeletonAttack, volstaggAttack, skeletonDeath, volstaggDeath, volstaggHit, pickUpKey, gateOpening, pickUpHeart, rokAttackingGate, skeletonGrunt, floorFalling, icePillarBreaking;
-    public static AudioClip fireballImpact, fireballLaunch, wolfHit, wolfAttack, dragonFlyBy, dragonHit;
+    public static AudioClip fireballImpact, fireballLaunch, wolfHit, wolfAttack, dragonFlyBy, dragonHit, dragonImpactRoar;
     static AudioSource audioSrc;
     // Use this for initialization
     void Start()
@@ -29,6 +29,7 @@ public class SoundManagerScript : MonoBehaviour
         wolfAttack = Resources.Load<AudioClip>("wolfAttack");
         dragonFlyBy = Resources.Load<AudioClip>("dragonFlyBy");
         dragonHit = Resources.Load<AudioClip>("dragonHit");
+        dragonImpactRoar = Resources.Load<AudioClip>("dragonImpactRoar");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -91,6 +92,9 @@ public class SoundManagerScript : MonoBehaviour
                 break;
             case "dragonHit":
                 audioSrc.PlayOneShot(dragonHit);
+                break;
+            case "dragonImpactRoar":
+                audioSrc.PlayOneShot(dragonImpactRoar);
                 break;
         }
     }

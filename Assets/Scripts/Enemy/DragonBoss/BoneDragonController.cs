@@ -595,6 +595,7 @@ namespace Yarn.Unity.Example
             else if (command.Equals("Roar"))
             {
                 anim.SetBool("Roar", true);
+                SoundManagerScript.PlaySound("dragonImpactRoar");
             }
             else if (command.Equals("StopRoar"))
             {

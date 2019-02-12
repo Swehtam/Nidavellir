@@ -19,7 +19,11 @@ Volstagg:: Anrram, claro, foi muito fácil! Você ajudou muito…
 Rök:: De nada! Rök é um bom guerreiro!
 Volstagg:: Tô vendo! Bom demais…
 <<wait 0.3>>
+<<setAnimation BoneDragon Roar>>
+<<wait 0.7>>
 <<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation BoneDragon StopRoar>>
 <<wait 0.3>>
 <<setAnimation Rök FaceRight>>
 <<wait 0.3>>
@@ -75,7 +79,11 @@ Rök:: Olha a ponte ali! Rök disse que seria fácil!
 Volstagg:: Só tome cuidado, não estou gostando disso.
 Rök:: Medroso.
 <<wait 0.3>>
+<<setAnimation BoneDragon Roar>>
+<<wait 0.7>>
 <<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation BoneDragon StopRoar>>
 <<wait 0.3>>
 <<setAnimation Rök FaceRight>>
 <<wait 0.3>>
@@ -120,7 +128,11 @@ position: 540,260
 <<moveTo Volstagg VolstaggInitialPoint>>
 <<moveTo Rök RökInitialPoint>>
 <<wait 3>>
+<<setAnimation BoneDragon Roar>>
+<<wait 0.7>>
 <<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation BoneDragon StopRoar>>
 <<flyTo BoneDragon BossInitialPoint>>
 <<wait 3>>
 <<setAnimation Rök RunningForAttack>>
@@ -159,7 +171,11 @@ position: 540,260
 <<moveTo Volstagg VolstaggInitialPoint>>
 <<moveTo Rök RökInitialPoint>>
 <<wait 3>>
+<<setAnimation BoneDragon Roar>>
+<<wait 0.7>>
 <<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation BoneDragon StopRoar>>
 <<flyTo BoneDragon BossInitialPoint>>
 <<wait 3>>
 <<setAnimation Rök RunningForAttack>>
