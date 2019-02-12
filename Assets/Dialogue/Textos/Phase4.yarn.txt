@@ -19,7 +19,11 @@ Volstagg:: Anrram, claro, foi muito fácil! Você ajudou muito…
 Rök:: De nada! Rök é um bom guerreiro!
 Volstagg:: Tô vendo! Bom demais…
 <<wait 0.3>>
+<<setAnimation BoneDragon Roar>>
+<<wait 0.7>>
 <<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation BoneDragon StopRoar>>
 <<wait 0.3>>
 <<setAnimation Rök FaceRight>>
 <<wait 0.3>>
@@ -75,7 +79,11 @@ Rök:: Olha a ponte ali! Rök disse que seria fácil!
 Volstagg:: Só tome cuidado, não estou gostando disso.
 Rök:: Medroso.
 <<wait 0.3>>
+<<setAnimation BoneDragon Roar>>
+<<wait 0.7>>
 <<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation BoneDragon StopRoar>>
 <<wait 0.3>>
 <<setAnimation Rök FaceRight>>
 <<wait 0.3>>
@@ -104,7 +112,7 @@ BoneDragon:: Agora venha pequenino e vamos ver do que você é capaz.
 Volstagg:: Você consegue Volstagg, só pensar na Hidromel.
 <<Quests GameCanvas show>>
 <<moveTo Volstagg VolstaggFinalPoint>>
-<<wait 4>>
+<<wait 6>>
 <<ShowWall phase4 Left>>
 <<ShowWall phase4 Right>>
 <<HUD GameCanvas show>>
@@ -120,7 +128,11 @@ position: 540,260
 <<moveTo Volstagg VolstaggInitialPoint>>
 <<moveTo Rök RökInitialPoint>>
 <<wait 3>>
+<<setAnimation BoneDragon Roar>>
+<<wait 0.7>>
 <<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation BoneDragon StopRoar>>
 <<flyTo BoneDragon BossInitialPoint>>
 <<wait 3>>
 <<setAnimation Rök RunningForAttack>>
@@ -143,7 +155,7 @@ BoneDragon:: Grosso…
 Volstagg:: Agora a culpa é minha por eu estar de mau humor por causa da fome?
 <<Quests GameCanvas show>>
 <<moveTo Volstagg VolstaggFinalPoint>>
-<<wait 4>>
+<<wait 6>>
 <<ShowWall phase4 Left>>
 <<ShowWall phase4 Right>>
 <<HUD GameCanvas show>>
@@ -159,7 +171,11 @@ position: 540,260
 <<moveTo Volstagg VolstaggInitialPoint>>
 <<moveTo Rök RökInitialPoint>>
 <<wait 3>>
+<<setAnimation BoneDragon Roar>>
+<<wait 0.7>>
 <<shake MainCamera>>
+<<wait 0.3>>
+<<setAnimation BoneDragon StopRoar>>
 <<flyTo BoneDragon BossInitialPoint>>
 <<wait 3>>
 <<setAnimation Rök RunningForAttack>>
@@ -178,7 +194,7 @@ BoneDragon:: Grosso…
 <<moveTo MainCamera Volstagg>>
 <<Quests GameCanvas show>>
 <<moveTo Volstagg VolstaggFinalPoint>>
-<<wait 4>>
+<<wait 6>>
 <<ShowWall phase4 Left>>
 <<ShowWall phase4 Right>>
 <<HUD GameCanvas show>>

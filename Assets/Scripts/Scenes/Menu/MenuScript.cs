@@ -22,6 +22,8 @@ namespace Yarn.Unity.Example
             audioMixer.SetFloat("soundEffectsVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundEffectsVolume", 0f)) * 20);
 
             levelChanger = FindObjectOfType<LevelChanger>();
+
+            PlayerDeath.scene = "Menu";
         }
 
         public void LoadIntroScene()

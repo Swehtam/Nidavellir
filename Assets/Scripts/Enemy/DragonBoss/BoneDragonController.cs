@@ -71,7 +71,10 @@ namespace Yarn.Unity.Example
         private float airCoolDown;
         private int airStrikeCount;
         private Transform airAttackPoint;
-        
+
+        private bool shrink;
+
+
         void Start()
         {
             direction = 1;
@@ -97,6 +100,8 @@ namespace Yarn.Unity.Example
             airStrikeCount = 0;
             airStriking = false;
             airAttackPoint = null;
+
+            shrink = false;
         }
 
         private void FixedUpdate()
@@ -109,8 +114,13 @@ namespace Yarn.Unity.Example
             {
                 if (point)
                 {
+                    airStriking = false;
                     anim.SetBool("StartFlying", true);
                     anim.SetBool("Flying", true);
+                    anim.SetBool("AirStriking", false);
+                    anim.SetBool("TakingDamage", false);
+                    anim.SetBool("Roar", false);
+                    anim.SetBool("FireballAttack", false);
                     transform.position = Vector2.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
                     if (transform.position == point.position)
                     {
@@ -120,20 +130,17 @@ namespace Yarn.Unity.Example
                         anim.SetBool("Flying", false);
                         direction = player.transform.position.x - transform.position.x;
                     }
+                    return;
                 }
-                return;
-            }
 
-            //Caso ele tenha morrido dê play na animação e pare tudo
-            if (died)
-            {
-                //alterara a variavel que será usada na movimentação do boss, para ele mesmo, ou seja, ele vai parar aonde estiver
-                anim.SetBool("AirStriking", false);
-                anim.SetBool("StartFlying", false);
-                anim.SetBool("Flying", false);
-                anim.SetBool("FireballAttack", false);
-                anim.SetBool("Dead", true);
-                return;
+                if (shrink)
+                {
+                    if(transform.localScale.x > 1)
+                    {
+                        transform.localScale -= new Vector3(1, 1, 0) * Time.deltaTime;
+                    }
+                    
+                }
             }
 
             //Caso esteja vivo e não esteja voando;
@@ -599,6 +606,18 @@ namespace Yarn.Unity.Example
             else if (command.Equals("StopRoar"))
             {
                 anim.SetBool("Roar", false);
+            }
+            else if (command.Equals("Shrink"))
+            {
+                shrink = true;
+            }
+            else if (command.Equals("Death"))
+            {
+                anim.SetBool("AirStriking", false);
+                anim.SetBool("StartFlying", false);
+                anim.SetBool("Flying", false);
+                anim.SetBool("FireballAttack", false);
+                anim.SetBool("Dead", true);
             }
         }
     }

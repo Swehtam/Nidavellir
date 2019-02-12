@@ -8742,6 +8742,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1322704035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1322704036}
+  m_Layer: 0
+  m_Name: "R\xF6kLastPoint"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1322704036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322704035}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.16, y: -5.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4553723938639109463}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1335908801
 GameObject:
   m_ObjectHideFlags: 0
@@ -14038,7 +14068,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &475721118153832650
 GameObject:
@@ -14579,7 +14609,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &806149336600660966
 GameObject:
@@ -15007,7 +15037,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &1192863028484817914
 GameObject:
@@ -15078,7 +15108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &1303236893653695666
 GameObject:
@@ -15300,7 +15330,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &1440603013919762813
 GameObject:
@@ -15371,7 +15401,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &1530567572805134113
 GameObject:
@@ -17017,7 +17047,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &3955289345037796837
 GameObject:
@@ -17088,7 +17118,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &4000779171612291178
 GameObject:
@@ -17317,7 +17347,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &4553723938638741697
 GameObject:
@@ -32065,7 +32095,6 @@ GameObject:
   - component: {fileID: 2061034710412991531}
   - component: {fileID: 4553723938633233557}
   - component: {fileID: 1842263885408866098}
-  - component: {fileID: 1271532631}
   m_Layer: 0
   m_Name: phase4
   m_TagString: Untagged
@@ -32099,6 +32128,7 @@ Transform:
   - {fileID: 1080603891}
   - {fileID: 1292422994}
   - {fileID: 394252231}
+  - {fileID: 1322704036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32154,20 +32184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Properties: []
 --- !u!114 &1842263885408866098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4553723938638741879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c039ebacd0fde94ca321690390b62a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftWall: {fileID: 5529475214213169529}
-  rightWall: {fileID: 7298065243309544687}
---- !u!114 &1271532631
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33811,7 +33827,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &6309016637076971178
 GameObject:
@@ -34803,7 +34819,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &7067847383016674194
 GameObject:
@@ -35015,7 +35031,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &7298065243309544687
 GameObject:
@@ -35372,7 +35388,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &7732480634529362376
 GameObject:
@@ -35515,7 +35531,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &8526069857791165119
 GameObject:
@@ -35586,7 +35602,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 1, y: 0.125}
   m_EdgeRadius: 0
 --- !u!1 &8843644035427507141
 GameObject:

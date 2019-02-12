@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 namespace Yarn.Unity.Example
 {
@@ -14,9 +15,16 @@ namespace Yarn.Unity.Example
         public GameObject hudMenu;
         public GameObject quest;
         private LevelChanger levelChanger;
-        
+        public AudioMixer audioMixer;
+
         void Start()
         {
+            audioMixer.SetFloat("masterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 0f)) * 20);
+
+            audioMixer.SetFloat("musicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0f)) * 20);
+
+            audioMixer.SetFloat("soundEffectsVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundEffectsVolume", 0f)) * 20);
+
             levelChanger = FindObjectOfType<LevelChanger>();
         }
 

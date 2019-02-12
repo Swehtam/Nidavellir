@@ -1,0 +1,30 @@
+title: Boss.Death
+tags: 
+colorID: 0
+position: 540,260
+---
+<<HUD GameCanvas hide>>
+<<flyTo BoneDragon Left>>
+<<moveTo MainCamera Boss>>
+<<wait 5>>
+<<HideWall phase4 Left>>
+<<HideWall phase4 Right>>
+<<wait 0.3>>
+<<setAnimation Rök UnFrozen>>
+<<wait 0.3>>
+<<setAnimation Rök FaceLeft>>
+<<wait 0.3>>
+<<setAnimation BoneDragon Shrink>>
+BoneDragon:: Ah, não! Não acredito nissoooooooo!
+Rök:: Fr-frio... Q-quem é esse?
+BoneDragon:: ......................................
+Rök:: Eu não to entendendo é nada que ele fala.
+<<setAnimation BoneDragon Death>>
+<<wait 1.5>>
+Rök:: Errn.. Ele não foi pareo para o Grande Rök.
+Rök:: Bom...
+Rök:: Vamos continuar a aventura.
+<<moveTo Rök RökLastPoint>>
+<<wait 2>>
+<<changeScene EventSystem WinScene>>
+===

@@ -21,5 +21,18 @@ namespace Yarn.Unity.Example
                 rightWall.SetActive(true);
             }
         }
+
+        [YarnCommand("HideWall")]
+        public void HideWall(string side)
+        {
+            if (side.Equals("Left"))
+            {
+                leftWall.SetActive(false);
+            }
+            else if (side.Equals("Right"))
+            {
+                rightWall.SetActive(false);
+            }
+        }
     }
 }

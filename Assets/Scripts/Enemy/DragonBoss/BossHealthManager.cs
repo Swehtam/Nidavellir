@@ -20,10 +20,13 @@ namespace Yarn.Unity.Example
 
         //variavel para saber se ele ta levando dano, para não levar 2 vezes
         public bool takingDamage;
+
+        private bool once;
         
         // Use this for initialization
         void Start()
         {
+            once = false;
             currentHealth = health;
             anim = GetComponent<Animator>();
             boss = GetComponent<BoneDragonController>();
@@ -47,9 +50,9 @@ namespace Yarn.Unity.Example
             {
                 boss.phase = 3;
             }
-            else if (currentHealth <= 0)
+            else if (currentHealth <= 0 && !once)
             {
-                boss.died = true;
+                once = true;
                 boss.phase = 4;
                 StartCoroutine(BossDeath());
             }
@@ -96,9 +99,8 @@ namespace Yarn.Unity.Example
 
         public IEnumerator BossDeath()
         {
-            anim.SetBool("Dead", true);
+            FindObjectOfType<DialogueRunner>().StartDialogue("Boss.Death");
             yield return new WaitForSeconds(5f);
-            Destroy(gameObject);
         }
     }
 }
